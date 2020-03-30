@@ -9,7 +9,7 @@
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">Admin</div>
   </a>
 
   <!-- Divider -->
@@ -82,8 +82,11 @@
       <i class="fas fa-fw fa-cog"></i>
       <span>Setting Akun</span></a>
   </li>
-
-  
+  <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('auth/logout') ?>" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span></a>
+        </li>
 
   
 
