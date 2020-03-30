@@ -15,7 +15,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Login Page</h1>
                                 </div>
                                 <?= $this->session->flashdata('message') ?>
-                                <form class="user" method="POST" action="<?= base_url('auth') ?>">
+                                <form class="user" method="POST" action="<?= base_url('auth/login') ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address..." value="<?= set_value('email') ?>">
                                         <?php echo form_error('email', '<small class="text-danger pl-3">', '</small>') ?>
@@ -25,7 +25,7 @@
                                         <?php echo form_error('password', '<small class="text-danger pl-3">', '</small>') ?>
                                     </div>
 
-                                    <button type="submit" href="index.html" class="btn btn-primary btn-user btn-block">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Login
                                     </button>
 

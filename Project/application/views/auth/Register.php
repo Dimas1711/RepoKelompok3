@@ -29,7 +29,7 @@
 
                                 </div>
                             </div>
-                            <button type="submit" href="login.html" class="btn btn-primary btn-user btn-block">
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Register Account
                             </button>
 
