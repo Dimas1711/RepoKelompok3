@@ -1,0 +1,32 @@
+[
+        {
+        "nama" : "Ryan Hartadi",
+        "umur" : 20,
+        "NIM" : "E41180111",
+        "Jurusan" : "Teknologi Informasi",
+        "hobby" : [
+            "coding",
+            "programming"
+        ],
+        "pembimbing" : {
+            "Pembimbing1" : "Pak Aji",
+            "Pembimbing2" : "Pak ery"
+        },
+        "Doi" : "Agastya Amaranthine"
+    },
+    {
+        "nama" : "Ryan Hartadi",
+        "umur" : 20,
+        "NIM" : "E41180111",
+        "Jurusan" : "Teknologi Informasi",
+        "hobby" : [
+            "coding",
+            "programming"
+        ],
+        "pembimbing" : {
+            "Pembimbing1" : "Pak Aji",
+            "Pembimbing2" : "Pak ery"
+        },
+        "Doi" : "Agastya Amaranthine"
+    }
+]
