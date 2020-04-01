@@ -54,7 +54,7 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= base_url("panti/verifikasi")?>">
+    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
       <i class="fas fa-fw fa-clipboard"></i>
       <span>Verifikasi Akun Panti</span></a>
   </li>
