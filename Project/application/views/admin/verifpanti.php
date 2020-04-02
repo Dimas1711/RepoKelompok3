@@ -29,17 +29,25 @@
                       </tr>
                     </thead>
                     <tbody>
-               
+                    <?php
+                    $no = 1;
+                     foreach($verif as $row){
+                     ?>
                       <tr>
-                        <td></td>
-                        <td></td>
+                        <td><?= $no++?></td>
+                        <td><?= $row['nama_panti']?></td>
                         <!-- <td><img src="<?= base_url('uploads/') . $p->LOGO; ?>" alt="" style="width:140px"></td> -->
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?= $row['no_telp']?></td>
+                        <td><?= $row['email']?></td>
+                        <td><?= $row['alamat_panti']?></td>
+                        <td><?php if ($row['status'] == 0) {
+                          echo '<div class="badge badge-primary badge-pill">Pending</div>';
+                        } elseif ($row['status'] == 1) {
+                          echo '<div class="badge badge-warning badge-pill">Aktif</div>';
+                        }
+                         ?></td>
                         <td>
-                          <a href="<?php echo site_url("admin/komunitas/detail/");?>"
+                          <a href="<?php echo base_url("admin/detail/" .$row['id_panti']);?>"
                              class="btn btn-sm btn-primary btn-circle">
                             <i class="fas fa-plus"></i>
                           </a>
@@ -55,6 +63,7 @@
                           </a>
                         </td>
                       </tr>
+                      <?php }?>
                     </tbody>
                   </table>
                   <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog"

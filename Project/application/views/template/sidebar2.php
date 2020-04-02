@@ -5,11 +5,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= site_url("admin/tampil")?>">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= site_url("panti")?>">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">Admin</div>
+    <div class="sidebar-brand-text mx-3">Panti</div>
   </a>
 
   <!-- Divider -->
@@ -17,7 +17,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="<?= site_url("admin/tampil")?>">
+    <a class="nav-link" href="<?= site_url("panti")?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -29,47 +29,23 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
-      <i class="fas fa-fw fa-table"></i>
-      <span>List User</span></a>
+    <a class="nav-link" href="#">
+      <i class="fas fa-fw fa-plus"></i>
+      <span>Tambah Kasus</span></a>
   </li>
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
-      <i class="fas fa-fw fa-table"></i>
-      <span>List Donasi</span></a>
-  </li>
-  <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
-      <i class="fas fa-fw fa-table"></i>
-      <span>List Panti</span></a>
-  </li>
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Permintaan
-  </div>
-  <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
-      <i class="fas fa-fw fa-clipboard"></i>
-      <span>Verifikasi Akun Panti</span></a>
-  </li>
-  <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
-      <i class="fas fa-fw fa-clipboard"></i>
-      <span>Verifikasi Donasi</span></a>
-  </li>
-  <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
-      <i class="fas fa-fw fa-clipboard"></i>
-      <span>Top Up Dana</span></a>
-  </li>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-table"></i>
+          <span>List Kasus</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="#">List Pendonasi</a>
+          </div>
+        </div>
+    </li>
   <!-- Divider -->
   <hr class="sidebar-divider">
   <!-- Heading -->
@@ -78,9 +54,14 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
+    <a class="nav-link" href="#">
       <i class="fas fa-fw fa-cog"></i>
       <span>Setting Akun</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">
+      <i class="fas fa-fw fa-user-edit"></i>
+      <span>Edit Akun</span></a>
   </li>
   <li class="nav-item">
             <a class="nav-link" href="<?= base_url('auth/logout') ?>" data-toggle="modal" data-target="#logoutModal">
