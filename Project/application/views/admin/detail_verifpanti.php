@@ -5,130 +5,134 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+        <form action="" method="post">
+        
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Detail Panti</h1>
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <a href="#" class="btn btn-sm btn-info btn-icon-split shadow-sm">
-                <span class="icon text-white-50">
-                  <i class="fas fa-check"></i>
-                </span>
-                <span class="text">Setujui</span>
-              </a>
-              <a href="#" class="btn btn-sm btn-danger btn-icon-split shadow-sm">
-                <span class="icon text-white-50">
-                  <i class="fas fa-times"></i>
-                </span>
-                <span class="text">Tolak</span>
-              </a>
+              <button class="btn btn-sm btn-info btn-icon-split shadow-sm" type="submit" name="setuju" id="setuju">
+              <span class="icon text-white-50"><i class="fas fa-check"></i></span><span class="text">Setujui</span></button>
+              
+              <button class="btn btn-sm btn-danger btn-icon-split shadow-sm" type="submit" name="tolak" id="tolak">
+              <span class="icon text-white-50"><i class="fas fa-times"></i></span><span class="text">Tolak</span></button>
             </div>
           <div class="card shadow mb-4">
-          
+          <?php foreach ($panti as $row) {
+          ?>
+          <input type="hidden" name="id_panti" value="<?= $row['id_panti']?>">
             <div class="card-body">
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Judul Event:</p>
+                  <p>Nama Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>Main brawl Star akwkowkwokwwko</p>
+                  <p><?= $row['nama_panti'] ?></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Penyelenggara:</p>
+                  <p>Kota</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>nekad</p>
+                  <p><?= $row['kota'] ?></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Nama Penanggung Jawab:</p>
+                  <p>Provinsi</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>bambank</p>
+                  <p><?= $row['provinsi'] ?></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Ruangan:</p>
+                  <p>No Telp</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>lapangan bal balan</p>
+                  <p><?= $row['no_telp'] ?></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Tanggal Mulai:</p>
+                  <p>Nama Yayasan Induk</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>Setelah ashar</p>
+                  <p><?= $row['nama_yayasanInduk'] ?></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Tanggal Selesai:</p>
+                  <p>Tanggal Berdiri</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>gak maghrib gak leren akwokwokwok</p>
+                  <p><?= $row['tanggal_berdiri'] ?></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Waktu:</p>
+                  <p>Foto</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>15.00-17.30</p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-sm-2">
-                  <p>Nama Pengisi Acara:</p>
-                </div>
-                <div class="my-auto col-sm-9">
-                  <p>Andre</p>
-                  <p>Yudha</p>
-                  <p>Ryan</p>
-                  <p>Andre</p>
+                  <img src="<?= $row['foto'] ?>" alt="fotoe">
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Asal peserta:</p>
+                  <p>Nama Rekening</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>SMA/SMK se lapangan :v</p>
+                  <p><?= $row['nama_rekening'] ?></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Jumlah Peserta:</p>
+                  <p>Nama Bank</p>
                 </div>
-                <div class="my-auto col-sm-1">
-                  <p>4</p>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['nama_bank'] ?></p>
                 </div>
-                <p>orang</p>
               </div>
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Keterangan Event:</p>
+                  <p>Nomer Rekening</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p>kalah belikan minum</p>
+                  <p><?= $row['no_rekening'] ?></p>
                 </div>
               </div>
-              <a href="<?php echo site_url('panti/verifikasi') ?>" class="btn btn-danger btn-icon-split">
+              
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Email</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['email'] ?></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Deskripsi</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['deskripsi'] ?></p>
+                </div>
+              </div>
+          <?php }?>
+
+              <a href="<?php echo base_url('panti/verifikasi') ?>" class="btn btn-danger btn-icon-split">
                 <span class="icon text-white-50">
                   <i class="fas fa-reply"></i>
                 </span>
@@ -137,7 +141,7 @@
             </div>
           </div>
           <!-- /.card -->
-          
+        </form>
         </div>
         <!-- /.container-fluid -->
 

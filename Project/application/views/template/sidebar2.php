@@ -17,7 +17,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="<?= site_url("panti")?>">
+    <a class="nav-link" href="<?= base_url("panti")?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -29,7 +29,7 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="<?= base_url("panti/addKasus")?>">
       <i class="fas fa-fw fa-plus"></i>
       <span>Tambah Kasus</span></a>
   </li>
