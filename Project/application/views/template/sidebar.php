@@ -29,11 +29,7 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-<<<<<<< HEAD
     <a class="nav-link" href="<?= site_url("ListUser/listuser")?>">
-=======
-    <a class="nav-link" href="#">
->>>>>>> 5a0e70d65991043d6aabb0f358b4af1b46fbe829
       <i class="fas fa-fw fa-table"></i>
       <span>List User</span></a>
   </li>
