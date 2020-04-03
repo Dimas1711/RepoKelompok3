@@ -7,8 +7,8 @@ class listuser extends CI_Controller {
             'user' => $this->dede->get()
         );
         $this->load->view("template/sidebar");
-        $this->load->view("template/header");
-        $this->load->view("ListUser/listuser", $data);
+        $this->load->view("template/header",$data);
+        $this->load->view("ListUser/listuser",$data);
         $this->load->view("template/footer");
     }
 
@@ -22,8 +22,8 @@ class listuser extends CI_Controller {
             }
         $data["user"] = $data["user"][0];
         $this->load->view("template/sidebar");
-        $this->load->view("template/header");
-        $this->load->view("ListUser/detail", $data);
+        $this->load->view("template/header",$data);
+        $this->load->view("ListUser/detail",$data);
         $this->load->view("template/footer");
     }
 
