@@ -1,6 +1,6 @@
 <?php
 class Dede extends CI_Model 
-{
+{ 
     public function get() 
     {
         $this->load->database();
