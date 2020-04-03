@@ -54,8 +54,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         ];
                         $this->session->set_userdata($data);
                         if ($user['role_id'] == 2) {
-                            // redirect('admin');
-                            echo "panti";
+                            redirect('panti');
+                            // echo "panti";
                         } 
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">

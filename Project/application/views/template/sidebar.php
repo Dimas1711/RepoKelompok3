@@ -5,7 +5,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= site_url("admin/tampil")?>">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("admin")?>">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
@@ -17,7 +17,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="<?= site_url("admin/tampil")?>">
+    <a class="nav-link" href="<?= base_url("admin")?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -29,20 +29,24 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
+<<<<<<< HEAD
     <a class="nav-link" href="<?= site_url("ListUser/listuser")?>">
+=======
+    <a class="nav-link" href="#">
+>>>>>>> 5a0e70d65991043d6aabb0f358b4af1b46fbe829
       <i class="fas fa-fw fa-table"></i>
       <span>List User</span></a>
   </li>
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
+    <a class="nav-link" href="<?= base_url("admin/kasus")?>">
       <i class="fas fa-fw fa-table"></i>
       <span>List Donasi</span></a>
   </li>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
+    <a class="nav-link" href="<?= base_url("tampilPanti")?>">
       <i class="fas fa-fw fa-table"></i>
       <span>List Panti</span></a>
   </li>
@@ -54,7 +58,7 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
+    <a class="nav-link" href="<?= base_url("panti/verifikasi")?>">
       <i class="fas fa-fw fa-clipboard"></i>
       <span>Verifikasi Akun Panti</span></a>
   </li>
