@@ -6,5 +6,8 @@ class Panti_model extends CI_Model
         $this->load->database();
         return $this->db->insert("panti" , $data);
     }
+    public function data_panti(){
+        
+    }
 }
 ?>
