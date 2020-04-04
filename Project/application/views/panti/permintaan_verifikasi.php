@@ -85,7 +85,7 @@
                        name="alamat"
                        class="form-control border-dark small mb-3"
                        placeholder="Masukkan Alamat"
-                       value="<?php echo set_value('alamat_')?>"
+                       value="<?php echo set_value('alamat')?>"
                        aria-describedby="basic-addon2"></textarea>
               </div>
               <?= form_error('alamat', '<small class="text-danger">', '</small>')?> 
@@ -102,6 +102,22 @@
               <?= form_error('deskripsi_panti', '<small class="text-danger">', '</small>')?> 
 
               <div class="row">
+              <div class="col-sm-6">
+                  <p>Tanggal Terbentuk</p>
+                  <div class="input-group">
+                    <input type="date"
+                          id="tgl"
+                          name="tgl"
+                          class="form-control border-dark small mb-3"
+                          placeholder="Masukkan Tanggal Selesai"
+                          aria-describedby="basic-addon2"
+                                value="<?php echo set_value('tgl')?>"
+                          >
+                  </div>
+                  
+                  <?= form_error('tgl', '<small class="text-danger">', '</small>')?> 
+                </div>
+                
                 <div class="col-sm-6">
                   <p>Telepon/Whatsapp</p>
                   <div class="input-group">
@@ -116,20 +132,20 @@
                   </div>
                   <?= form_error('no_telp', '<small class="text-danger">', '</small>')?> 
                 </div>
-                <div class="col-sm-6">
-                  <p>Email</p>
+            </div>
+              <div class="row">
+            
+                 
                   <div class="input-group">
-                    <input type="text"
+                    <input type="hidden"
                     id="email"
                     name="email"
                            class="form-control border-dark small mb-3"
                            placeholder="Masukkan Email"
-                           value="<?php echo set_value('email')?>"
-                           aria-describedby="basic-addon2">
-                  </div>
+                           value="<?= $registrasi['email']?>"
+                           aria-describedby="basic-addon2"
+                           >
                 </div>
-            </div>
-              <div class="row">
                 <div class="col-sm-6">
                   <p>Upload Logo Komunitas</p>
                   <div class="input-group">
@@ -140,9 +156,9 @@
                            aria-describedby="basic-addon2"
                            >
                   </div>
-                  <?= form_error('foto', '<small class="text-danger">', '</small>')?> 
                 </div>
-              </div>
+                
+                </div>
               <hr>
               <p>Finansial</p>
               <div class="row">
