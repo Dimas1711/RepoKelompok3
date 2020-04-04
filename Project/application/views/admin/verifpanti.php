@@ -45,7 +45,7 @@
                         } elseif ($row['status'] == 1) {
                           echo '<div class="badge badge-warning badge-pill">Aktif</div>';
                         }elseif ($row['status'] == 2) {
-                          echo '<div class="badge badge-warning badge-pill">Cancel</div>';
+                          echo '<div class="badge badge-danger badge-pill">Cancel</div>';
                         }
                          ?></td>
                         <td>

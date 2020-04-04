@@ -38,7 +38,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         if ($user['role_id'] == 1) {
                             redirect('admin');
                         } else {
-                            redirect('panti');
+                            if ($user['status'] == 1) {
+                                redirect('panti');
+                            }else {
+                                redirect('panti/permintaan_verifikasi');
+                            }
                         }
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
@@ -47,22 +51,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         redirect('auth/login');
                     }
                 }   else if ($user['is_actived'] == 0) {
-                    if (password_verify($password, $user['password'])) {
-                        $data = [
-                            'email' => $user['email'],
-                            'role_id' => $user['role_id'],
-                        ];
-                        $this->session->set_userdata($data);
-                        if ($user['role_id'] == 2) {
-                            redirect('panti');
-                            // echo "panti";
-                        } 
-                    } else {
-                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                        Wrong password !
-                        </div>');
-                        redirect('auth/login');
-                    }
+                    // if (password_verify($password, $user['password'])) {
+                    //     $data = [
+                    //         'email' => $user['email'],
+                    //         'role_id' => $user['role_id'],
+                    //     ];
+                    //     $this->session->set_userdata($data);
+                    //     if ($user['role_id'] == 2) {
+                    //         redirect('panti');
+                    //         // echo "panti";
+                    //     } 
+                    // } else {
+                    //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    //     Wrong password !
+                    //     </div>');
+                    //     redirect('auth/login');
+                    // }
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    This email has not been activated!
+                    </div>');
+                    redirect('auth/login');
                 }
                 else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">

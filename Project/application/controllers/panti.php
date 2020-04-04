@@ -10,6 +10,7 @@
         }
         $this->load->model('Verif_model');
         $this->load->model('Panti_model');
+        $this->load->model('Lokasi');
     }
 
         public function index()
@@ -45,5 +46,34 @@
             $this->load->view("panti/tambah_kasus",$data_panti);
             $this->load->view("template/footer");
         }
+
+        //panel panti
+        public function permintaan_verifikasi(){
+            $this->form_validation->set_rules('nomor_rekening','No Rekening','required');
+		
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+            $data['data']=$this->Lokasi->getprovinsi();
+
+            if ($this->form_validation->run() == false) {
+                $this->load->view("template/sidebar2");
+                $this->load->view("template/header",$data);
+                $this->load->view("panti/permintaan_verifikasi",$data);
+                $this->load->view("template/footer");
+            }else {
+                
+            }
+        }
+    
+           //panel panti
+        function get_subkategori(){
+            $id=$this->input->post('id_prov');
+            $data=$this->Lokasi->getkabupaten($id);
+            echo json_encode($data);
+        }
+
+        //add data
+      
+        
 }
 ?>

@@ -54,9 +54,9 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="<?= base_url('panti/permintaan_verifikasi') ?>">
       <i class="fas fa-fw fa-cog"></i>
-      <span>Setting Akun</span></a>
+      <span>Permintaan Verifikasi</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">
