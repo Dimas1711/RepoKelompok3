@@ -1,5 +1,16 @@
 <div class="container-fluid">
 
+<?php if ($registrasi['status'] == 1) {?>
+<div class="col mt-3">
+    <div class="alert alert-success" role="alert">
+                            Data Panti Telah Disetujui Oleh Admin
+    </div>
+</div>
+<?php }  else if ($registrasi['status'] == 0) {?>
+     <div class="alert alert-danger" role="alert">
+    Maaf Panti Anda Tidak Disetujui Oleh Admin . Silahkan Anda Hubungi Admin 
+</div>
+<?php }else {?>
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Permintaan Verifikasi Panti</h1>
 
@@ -230,6 +241,7 @@
 
         </form>
       </div>
+                            <?php } ?>
       <script type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap.js'?>"></script>
       <script type="text/javascript" src="<?php echo base_url().'assets/js/script.js'?>"></script>
 
