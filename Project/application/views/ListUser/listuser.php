@@ -22,8 +22,7 @@
                 <td><?php echo $row->email; ?></td>
                 <td><?php echo $row->no_telp; ?></td>
                 <td>
-                    <a href="<?php echo site_url("ListUser/detail/". $row->id_user);?>"class="btn btn-info">
-                    Detail</a>
+                    <a href="<?php echo site_url("ListUser/detail/". $row->id_user);?>"class="btn btn-info">Detail</a>
                     <a href="<?php echo site_url("index.php/listuser/delete/". $row->id_user);?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus ini?')">Hapus</a>
                 </td>
             </tr>

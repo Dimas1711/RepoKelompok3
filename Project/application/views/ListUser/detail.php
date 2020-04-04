@@ -120,6 +120,11 @@
             <td>
                 <a href="mailto: <?php echo $user->email; ?>" class="btn btn-danger">
                 <i class="glyphicon glyphicon-envelope"></i>Kirim Email</a>
+                <a href="<?php echo base_url('listuser') ?>" class="btn btn-danger ">
+                <span class="icon text-white-50">
+                  <i class="fas fa-reply"></i>
+                </span>
+                <span class="text">Kembali</span>
             </td>
         </tr>
     </table>
