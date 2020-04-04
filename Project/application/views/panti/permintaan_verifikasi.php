@@ -6,7 +6,7 @@
                             Data Panti Telah Disetujui Oleh Admin
     </div>
 </div>
-<?php }  else if ($registrasi['status'] == 0) {?>
+<?php }  else if ($registrasi['status'] == 2) {?>
      <div class="alert alert-danger" role="alert">
     Maaf Panti Anda Tidak Disetujui Oleh Admin . Silahkan Anda Hubungi Admin 
 </div>
@@ -69,7 +69,7 @@
                             value="">
                             <?php foreach($data->result() as $row):?>
                             
-                                <option value="<?php echo $row->id_prov;?>"><?php echo $row->nama;?></option>
+                                <option value="<?php echo $row->id_provinsi;?>"><?php echo $row->nama_provinsi;?></option>
                             <?php endforeach;?>
                      
                     </select>
@@ -248,18 +248,18 @@
       <script type="text/javascript">
       $(document).ready(function() {
           $('#provinsi').change(function() {
-              var id_prov=$(this).val();//id provinsi
-              console.log(id_prov);
+              var id_provinsi=$(this).val();//id provinsi
+              console.log(id_provinsi);
               $.ajax({
                   url:"<?= base_url();?>panti/get_subkategori",
                   method:"POST",
-                  data : {id_prov: id_prov},
+                  data : {id_provinsi: id_provinsi},
                   async : false,
                   dataType:"json",
                   success : function (data) {
                     var html = '';
                     for(i=0; i<data.length; i++){
-                        html += '<option value="'+data[i].id_kab+'">'+data[i].nama+'</option>';
+                        html += '<option value="'+data[i].id_kabupaten+'">'+data[i].nama_kabupaten+'</option>';
                     }
                     $('#kabupaten').html(html);
                     console.log(html);

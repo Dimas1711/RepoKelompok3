@@ -31,7 +31,7 @@
                     <tbody>
                     <?php
                     $no = 1;
-                     foreach($verif as $row){
+                     foreach($verif_pending as $row){
                      ?>
                       <tr>
                         <td><?= $no++?></td>
@@ -52,10 +52,6 @@
                           <a href="<?php echo base_url("admin/detail/" .$row['id_panti']);?>"
                              class="btn btn-sm btn-primary btn-circle">
                             <i class="fas fa-plus"></i>
-                          </a>
-                          <a href="<?php echo site_url('admin/komunitas/ubahdata/')?>"
-                             class="btn btn-sm btn-info btn-circle">
-                            <i class="fa fa-pencil-alt"></i>
                           </a>
                           <a href="#"
                              onclick="confirm_modal('<?php echo 'komunitas/hapus/' ?>')"

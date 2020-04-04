@@ -22,6 +22,7 @@
           <?php foreach ($panti as $row) {
           ?>
           <input type="hidden" name="id_panti" value="<?= $row['id_panti']?>">
+          <input type="hidden" name="id_regis" value="<?= $row['id_registrasi']?>">
             <div class="card-body">
               <div class="row">
                 <div class="my-auto col-sm-2">
@@ -37,7 +38,7 @@
                   <p>Kota</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p><?= $row['kota'] ?></p>
+                  <p><?= $row['nama_kabupaten'] ?></p>
                 </div>
               </div>
 
@@ -46,7 +47,7 @@
                   <p>Provinsi</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p><?= $row['provinsi'] ?></p>
+                  <p><?= $row['nama_provinsi'] ?></p>
                 </div>
               </div>
 
@@ -132,7 +133,7 @@
               </div>
           <?php }?>
 
-              <a href="<?php echo base_url('panti/verifikasi') ?>" class="btn btn-danger btn-icon-split">
+              <a href="<?php echo base_url('admin') ?>" class="btn btn-danger btn-icon-split">
                 <span class="icon text-white-50">
                   <i class="fas fa-reply"></i>
                 </span>

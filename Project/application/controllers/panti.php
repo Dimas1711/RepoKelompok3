@@ -23,15 +23,37 @@
             $this->load->view("template/footer");
         }
         //buat panel admin
-        public function verifikasi()
+        public function verifikasi_acc()
         {
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
             
-            $verif_panti['verif'] = $this->Verif_model->verif_data_panti();
+            $verif_panti_acc['verif_acc'] = $this->Verif_model->verif_data_panti_acc();
             $this->load->view("template/sidebar");
             $this->load->view("template/header",$data);
-            $this->load->view("admin/verifpanti",$verif_panti);
+            $this->load->view("admin/verifpanti_acc",$verif_panti_acc);
+            $this->load->view("template/footer");
+        }
+        public function verifikasi_pending()
+        {
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+            
+            $verif_panti_pending['verif_pending'] = $this->Verif_model->verif_data_panti_pending();
+            $this->load->view("template/sidebar");
+            $this->load->view("template/header",$data);
+            $this->load->view("admin/verifpanti_pending",$verif_panti_pending);
+            $this->load->view("template/footer");
+        }
+        public function verifikasi_cancel()
+        {
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+            
+            $verif_panti_cancel['verif_cancel'] = $this->Verif_model->verif_data_panti_cancel();
+            $this->load->view("template/sidebar");
+            $this->load->view("template/header",$data);
+            $this->load->view("admin/verifpanti_cancel",$verif_panti_cancel);
             $this->load->view("template/footer");
         }
 
@@ -116,7 +138,7 @@
     
            //panel panti
         function get_subkategori(){
-            $id=$this->input->post('id_prov');
+            $id=$this->input->post('id_provinsi');
             $data=$this->Lokasi->getkabupaten($id);
             echo json_encode($data);
         }
