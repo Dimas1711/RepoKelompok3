@@ -21,7 +21,7 @@ class Verif_model extends CI_Model
 	public function ubah_status_tolak($id)
 	{
 		$this->db->where('id_panti', $this->input->post('id_panti'));
-		$this->db->update('panti', ['status' => 0]);
+		$this->db->update('panti', ['status' => 2]);
     }
 }
 ?>
