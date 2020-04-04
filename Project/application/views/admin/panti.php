@@ -11,14 +11,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $no = 1;
-                     foreach($panti as $row){
-                     ?>
                     <tr>
-                        <td><?= $no++?></td>
-                        <td><?= $row['nama_panti']?></td>
-                        <td><?= $row['alamat_panti']?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
                         <a href="<?php echo site_url("admin/komunitas/detail/");?>"
                              class="btn btn-sm btn-primary btn-circle">
@@ -26,7 +22,6 @@
                         </a>
                         </td>
                     </tr>
-                     <?php }?>
                 </tbody>
             </table>
         </div>
