@@ -43,7 +43,7 @@
                         <td><?= $b['tanggal_berita'];?></td>
                         <td><?= $b['gambar'];?></td>
                         <td>
-                        <a href="<?php echo site_url("admin/komunitas/detail/");?>"
+                        <a href="<?php echo base_url("berita/detailberita/".$b['id_berita']);?>"
                              class="btn btn-sm btn-primary btn-circle">
                             <i class="fas fa-plus"></i>
                         </a>

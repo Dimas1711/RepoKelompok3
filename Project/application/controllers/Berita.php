@@ -18,12 +18,20 @@ class Berita extends CI_Controller {
             $this->load->view("admin/berita/berita" ,$data);
             $this->load->view("template/footer");
         }
+        public function detailberita($id){
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+            $berita['berita'] = $this->b->detail($id);
+            $this->load->view("template/sidebar");
+            $this->load->view("template/header",$data);
+            $this->load->view("admin/berita/detail_berita" ,$berita);
+            $this->load->view("template/footer");
+        }
         public function tambahberita(){
            
             
             $this->form_validation->set_rules('judul','Judul','required');
             $this->form_validation->set_rules('isi','Isi','required');
-            $this->form_validation->set_rules('tgl','Tanggal','required');
           
             if ($this->form_validation->run() == false) {
                 $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
