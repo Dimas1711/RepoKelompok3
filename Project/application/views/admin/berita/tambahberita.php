@@ -17,6 +17,7 @@
                                 value="<?php echo set_value('tgl')?>"
                                 aria-describedby="basic-addon2">
                         </div>
+                        <?= form_error('tgl', '<small class="text-danger">', '</small>')?> 
             </div>
         </div>
         <div class="row">
@@ -39,13 +40,13 @@
               <div class="col">
                 <p>Isi Berita</p>
                   <div class="input-group">
-                    <input type="text"
+                    <textarea type="text"
                     id="isi"
                     name="isi"
                            class="form-control border-dark small mb-3"
                            placeholder="Masukkan Isi Berita"
                            value="<?php echo set_value('isi')?>"
-                           aria-describedby="basic-addon2">
+                           aria-describedby="basic-addon2"></textarea>
                   </div>
                   <?= form_error('isi', '<small class="text-danger">', '</small>')?> 
                 </div>
