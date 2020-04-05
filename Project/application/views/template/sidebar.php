@@ -16,7 +16,7 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
+  <li class="nav-item">
     <a class="nav-link" href="<?= base_url("admin")?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
@@ -24,6 +24,15 @@
   <!-- Divider -->
   <hr class="sidebar-divider">
   <!-- Heading -->
+
+  <div class="sidebar-heading">
+    Konten
+  </div>
+  <li class="nav-item">
+    <a class="nav-link" href="<?= base_url("berita")?>">
+      <i class="fas fa-fw fa-table"></i>
+      <span>Berita</span></a>
+  </li>
   <div class="sidebar-heading">
     List
   </div>
