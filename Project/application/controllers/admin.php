@@ -12,6 +12,7 @@ class Admin extends CI_Controller
         }
 
         $this->load->model('Verif_model');
+        $this->load->model('Kasus_model');
     }
 
 	public function index()
@@ -28,9 +29,55 @@ class Admin extends CI_Controller
     {
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['kasus'] = $this->Kasus_model->tampil_kasus();
+
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
-        $this->load->view("admin/kasus");
+        $this->load->view("admin/kasus",$data);
+        $this->load->view("template/footer");
+    }
+
+    public function verif_kasus()
+    {
+        $data['registrasi'] = $this->db->get_where('registrasi',
+        ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['kasus'] = $this->Kasus_model->tampil_verif_kasus();
+
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/verif_kasus",$data);
+        $this->load->view("template/footer");
+    }
+
+    public function verif_kasus_detail($id)
+    {
+        $data['registrasi'] = $this->db->get_where('registrasi',
+        ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['kasus'] = $this->Verif_model->verif_kasus_detail($id);
+
+        if(isset($_POST['setuju']))
+        {
+            $this->Verif_model->ubah_status_setuju_kasus($id);
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Persetujuan kasus donasi diterima !
+            </div>');
+            redirect('admin/verif_kasus');
+        }
+        else if(isset($_POST['tolak']))
+        {
+            $this->Verif_model->ubah_status_tolak_kasus($id);
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                        Persetujuan kasus donasi ditolak !
+                        </div>');
+            redirect('admin/verif_kasus');
+        }
+
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/kasus_detail",$data);
         $this->load->view("template/footer");
     }
 

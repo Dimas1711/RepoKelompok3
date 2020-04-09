@@ -1,7 +1,7 @@
 <div class="well well-lg">
     <div class="container">
-        <h2>List Donasi</h2>
-        <span>Halaman yang berisi list hasil donasi </span>
+        <h2>List Verifikasi Donasi</h2>
+        <span>Halaman yang berisi list verifikasi donasi panti yang butuh donasi</span>
     </div>
 </div>
 <div class="card shadow mb-4">
@@ -19,11 +19,8 @@
                         <th>No</th>
                         <th>Nama Panti</th>
                         <th>Kategori</th>
-                        <th>Tanggal Permohonan</th>
-                        <th>Tenggat Waktu</th>
-                        <th>Tujuan Dana</th>
-                        <th>Jumlah Pendonasi</th>
-                        <th>Jumlah Uang Terkumpul</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +32,20 @@
                         <td><?= $no++?></td>
                         <td><?= $row['nama_panti']?></td>
                         <td><?= $row['kategori']?></td>
-                        <td><?= $row['tanggal']?></td>
-                        <td><?= $row['tenggat_waktu']?></td>
-                        <td><?= $row['tujuan_dana']?></td>
-                        <td><?= $row['jumlah_pendonasi']?></td>
-                        <td><?= $row['jumlah_uang_terkumpul']?></td>
+                        <td><?php if ($row['status'] == 0) {
+                          echo '<div class="badge badge-primary badge-pill">Pending</div>';
+                        } elseif ($row['status'] == 1) {
+                          echo '<div class="badge badge-warning badge-pill">Aktif</div>';
+                        }elseif ($row['status'] == 2) {
+                          echo '<div class="badge badge-danger badge-pill">Cancel</div>';
+                        }
+                         ?></td>
+                        <td>
+                        <a href="<?php echo base_url("admin/verif_kasus_detail/" .$row['id_kasus']);?>"
+                             class="btn btn-sm btn-primary btn-circle">
+                            <i class="fas fa-plus"></i>
+                          </a>
+                        </td>
                     </tr>
                      <?php }?>
                 </tbody>

@@ -38,7 +38,7 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("listuser")?>">
+    <a class="nav-link" href="<?= base_url("listuser")?>">
       <i class="fas fa-fw fa-table"></i>
       <span>List User</span></a>
   </li>
@@ -85,7 +85,7 @@
     </li>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
+    <a class="nav-link" href="<?= base_url("admin/verif_kasus")?>">
       <i class="fas fa-fw fa-clipboard"></i>
       <span>Verifikasi Donasi</span></a>
   </li>

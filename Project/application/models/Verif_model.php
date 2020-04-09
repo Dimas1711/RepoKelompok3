@@ -36,6 +36,23 @@ class Verif_model extends CI_Model
 		$this->db->update('panti', ['status' => 2]);
 		$this->db->where('id_registrasi', $this->input->post('id_regis'));
 		$this->db->update('registrasi', ['status' => 0]);
-    }
+	}
+	
+	public function verif_kasus_detail($id)
+	{
+		return $query = $this->db->query("SELECT * FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kasus.id_kategori AND kasus.id_kasus = $id")->result_array();
+	}
+
+	public function ubah_status_setuju_kasus($id)
+	{
+		$this->db->where('id_kasus', $this->input->post('id_kasus'));
+		$this->db->update('kasus', ['status' => 1]);
+	}
+
+	public function ubah_status_tolak_kasus($id)
+	{
+		$this->db->where('id_kasus', $this->input->post('id_kasus'));
+		$this->db->update('kasus', ['status' => 2]);
+	}
 }
 ?>
