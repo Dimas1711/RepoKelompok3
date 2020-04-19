@@ -33,6 +33,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         $data = [
                             'email' => $user['email'],
                             'role_id' => $user['role_id'],
+                            'id_registrasi' => $user['id_registrasi'],
                         ];
                         $this->session->set_userdata($data);
                         if ($user['role_id'] == 1) {

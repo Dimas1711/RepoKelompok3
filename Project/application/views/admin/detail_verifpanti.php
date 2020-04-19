@@ -133,7 +133,7 @@
               </div>
           <?php }?>
 
-              <a href="<?php echo base_url('admin') ?>" class="btn btn-danger btn-icon-split">
+              <a href="<?php echo base_url('admin/verifikasi_panti') ?>" class="btn btn-danger btn-icon-split">
                 <span class="icon text-white-50">
                   <i class="fas fa-reply"></i>
                 </span>

@@ -102,9 +102,7 @@
                 <div class="my-auto col-sm-9">
                   <img src="<?= $row['gambar'] ?>" alt="fotoe">
                 </div>
-              </div>
-
-              
+              </div>  
           <?php }?>
 
               <a href="<?php echo base_url('admin/verif_kasus') ?>" class="btn btn-danger btn-icon-split">

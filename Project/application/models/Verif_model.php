@@ -2,17 +2,9 @@
  
 class Verif_model extends CI_Model
 {
-	public function verif_data_panti_acc()
+	public function verif_data_panti()
 	{
 		return $query = $this->db->query("SELECT * FROM panti WHERE status = 1")->result_array();
-	}
-	public function verif_data_panti_pending()
-	{
-		return $query = $this->db->query("SELECT * FROM panti WHERE status = 0")->result_array();
-	}
-	public function verif_data_panti_cancel()
-	{
-		return $query = $this->db->query("SELECT * FROM panti WHERE status = 2")->result_array();
 	}
 	
 	public function verif_data_detail($id)
@@ -40,7 +32,7 @@ class Verif_model extends CI_Model
 	
 	public function verif_kasus_detail($id)
 	{
-		return $query = $this->db->query("SELECT * FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kasus.id_kategori AND kasus.id_kasus = $id")->result_array();
+		return $query = $this->db->query("SELECT * FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.id_kasus = $id")->result_array();
 	}
 
 	public function ubah_status_setuju_kasus($id)

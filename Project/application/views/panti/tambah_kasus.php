@@ -1,46 +1,46 @@
 <div class="container">
-    <form action="" method="POST">
-    <input type="hidden" name="id_kasus" value="">
-    <input type="hidden" name="id_panti" value="">
+    <form action="" method="POST" enctype="multipart/form-data">
+    <div>
+    <input type="hidden" name="id_panti" value="<?= $panti['id_panti']?>">
+    </div>
     <div class="form-group">
         <label>Kategori</label>
         <br>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">1</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">2</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
-            <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
-        </div>
+        <input type="text" name="id_kategori" value="2">
     </div>
     
     <div class="form-group">
-        <label for="exampleInputEmail1">Tujuan Dana</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="tujuan_dana">Tujuan Dana</label>
+        <input type="text" class="form-control" id="tujuan_dana" name="tujuan_dana" aria-describedby="emailHelp" value="<?php echo set_value('tujuan_dana')?>">
+        <?= form_error('tujuan_dana', '<small class="text-danger">', '</small>')?>
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Tanggal</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="tanggal">Tanggal</label>
+        <input type="date" class="form-control" id="tanggal" name="tanggal">
+        <?= form_error('tanggal', '<small class="text-danger">', '</small>')?>
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Tenggat Waktu</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="tenggat_waktu">Tenggat Waktu</label>
+        <input type="date" class="form-control" id="tenggat_waktu" name="tenggat_waktu">
+        <?= form_error('tenggat_waktu', '<small class="text-danger">', '</small>')?>
     </div>
     <div class="form-group">
-        <label for="exampleFormControlTextarea1">Deskripsi</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="deskripsi">Deskripsi</label>
+        <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3" value="<?php echo set_value('deskripsi')?>"></textarea>
+        <?= form_error('deskripsi', '<small class="text-danger">', '</small>')?>
     </div>
     <div class="form-group">
-        <label for="exampleFormControlFile1">Foto</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <label for="foto">Foto</label>
+        <input type="file" class="form-control-file" name="foto" id="foto">
     </div>
-    
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form> 
 
+    <button type="submit" name="submit" href="<?php echo base_url('panti/addKasus') ?>" class="btn btn-info btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+        </span>
+        <span class="text">Kirim Data</span>
+    </button>
+    </form> 
 </div>
+
+

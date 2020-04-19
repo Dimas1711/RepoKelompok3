@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <div class="well well-lg">
     <div class="container">
         <h2>List Verifikasi Donasi</h2>
@@ -10,47 +11,60 @@
                   <?php echo $this->session->flashdata('pesan')?>
                 </div>
 </div>
-<div class="container-fluid">
     <div class="card-body">
+      <div class="col-md-3">
+      <select name="" id="status" class="form-control">
+          <option value="3">Show All</option>
+          <option value="0">Pending</option>
+          <option value="1">Aktif</option>
+          <option value="2">Cancel</option>
+        </select>
+      </div>
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered mt-3" id="tabel_verif">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama Panti</th>
                         <th>Kategori</th>
                         <th>Status</th>
-                        <th>Aksi</th>
+                        <th>foto</th>
+                        <th>Aksi</th> 
                     </tr>
                 </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                     foreach($kasus as $row){
-                     ?>
-                    <tr>
-                        <td><?= $no++?></td>
-                        <td><?= $row['nama_panti']?></td>
-                        <td><?= $row['kategori']?></td>
-                        <td><?php if ($row['status'] == 0) {
-                          echo '<div class="badge badge-primary badge-pill">Pending</div>';
-                        } elseif ($row['status'] == 1) {
-                          echo '<div class="badge badge-warning badge-pill">Aktif</div>';
-                        }elseif ($row['status'] == 2) {
-                          echo '<div class="badge badge-danger badge-pill">Cancel</div>';
-                        }
-                         ?></td>
-                        <td>
-                        <a href="<?php echo base_url("admin/verif_kasus_detail/" .$row['id_kasus']);?>"
-                             class="btn btn-sm btn-primary btn-circle">
-                            <i class="fas fa-plus"></i>
-                          </a>
-                        </td>
-                    </tr>
-                     <?php }?>
+                <tbody> 
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+      $(document).ready(function() {
+        status();
+          $('#status').change(function() {
+              status();
+          });
+      });
+
+      function status()
+      {
+        var status = $("#status").val();
+        $.ajax({
+          url: "<?= base_url('admin/get_status_donasi')?>",
+          data: "status=" + status,
+          success: function(data)
+          {
+            $('#tabel_verif tbody').html(data);
+            // console.log(data);
+            //$("#table_verif tbody").html('<tr><td colspan="4" align="center">tidak ada data</td></tr>')
+          } 
+        });
+      }
+</script>
+
+
+
 

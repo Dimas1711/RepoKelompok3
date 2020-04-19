@@ -61,28 +61,11 @@
   <div class="sidebar-heading">
     Permintaan
   </div>
-  <!-- Nav Item - Tables -->
   <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-clipboard"></i>
-          <span>Verifikasi Akun Panti</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url("panti/verifikasi_acc")?>">Akun Panti Accept</a>
-          </div>
-        </div>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url("panti/verifikasi_pending")?>">Akun Panti Pending</a>
-          </div>
-        </div>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url("panti/verifikasi_cancel")?>">Akun Panti Cancel</a>
-          </div>
-        </div>
-    </li>
+    <a class="nav-link" href="<?= base_url("admin/verifikasi_panti")?>">
+      <i class="fas fa-fw fa-clipboard"></i>
+      <span>Verifikasi Akun Panti</span></a>
+  </li>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
     <a class="nav-link" href="<?= base_url("admin/verif_kasus")?>">

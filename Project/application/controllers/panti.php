@@ -22,51 +22,67 @@
             $this->load->view("template/dashboard_panti");
             $this->load->view("template/footer");
         }
-        //buat panel admin
-        public function verifikasi_acc()
-        {
-            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
-            $this->session->userdata('email')])->row_array();
-            
-            $verif_panti_acc['verif_acc'] = $this->Verif_model->verif_data_panti_acc();
-            $this->load->view("template/sidebar");
-            $this->load->view("template/header",$data);
-            $this->load->view("admin/verifpanti_acc",$verif_panti_acc);
-            $this->load->view("template/footer");
-        }
-        public function verifikasi_pending()
-        {
-            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
-            $this->session->userdata('email')])->row_array();
-            
-            $verif_panti_pending['verif_pending'] = $this->Verif_model->verif_data_panti_pending();
-            $this->load->view("template/sidebar");
-            $this->load->view("template/header",$data);
-            $this->load->view("admin/verifpanti_pending",$verif_panti_pending);
-            $this->load->view("template/footer");
-        }
-        public function verifikasi_cancel()
-        {
-            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
-            $this->session->userdata('email')])->row_array();
-            
-            $verif_panti_cancel['verif_cancel'] = $this->Verif_model->verif_data_panti_cancel();
-            $this->load->view("template/sidebar");
-            $this->load->view("template/header",$data);
-            $this->load->view("admin/verifpanti_cancel",$verif_panti_cancel);
-            $this->load->view("template/footer");
-        }
 
         public function addKasus()
         {
+            
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
 
-            $data_panti['data'] = $this->Panti_model->data_panti();
-            $this->load->view("template/sidebar2");
-            $this->load->view("template/header",$data);
-            $this->load->view("panti/tambah_kasus",$data_panti);
-            $this->load->view("template/footer");
+            $data_panti['panti'] = $this->db->get_where('panti, kategori',['id_registrasi' => 
+            $this->session->userdata('id_registrasi')])->row_array();
+
+            $this->form_validation->set_rules('tujuan_dana','Tujuan dana','required|trim');
+            $this->form_validation->set_rules('tanggal','Tanggal','required|trim');
+            $this->form_validation->set_rules('tenggat_waktu','Tenggat waktu','required|trim');
+            $this->form_validation->set_rules('deskripsi','Deskripsi','required|trim');
+
+            if ($this->form_validation->run() == false) 
+            {
+                $this->load->view("template/sidebar2");
+                $this->load->view("template/header",$data);
+                $this->load->view("panti/tambah_kasus",$data_panti);
+                $this->load->view("template/footer");
+            }
+            else
+            {
+                $foto = $_FILES['foto']['name'];
+
+                $config['allowed_types'] = 'jpg|png|gif|jpeg';
+                $config['max_size'] = '2048';
+                $config['upload_path'] = './uploads/panti';
+        
+                $this->load->library('upload' , $config);
+                if ($this->upload->do_upload('foto')) {
+                    $dataPost = array(
+                        'id_panti' =>$this->input->post('id_panti'),
+                        'id_kategori' => $this->input->post('id_kategori'),
+                        'gambar' => $foto,
+                        'tujuan_dana' => $this->input->post('tujuan_dana'),
+                        'tenggat_waktu' => $this->input->post('tenggat_waktu'),
+                        'tanggal' => $this->input->post('tanggal'),
+                        'status' => 0
+                        
+                    );
+                    if ($this->Panti_model->insertkasus($dataPost)) {
+                        $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                        Data Kasus Berhasil Dikirim , Silahkan Tunggu Konfirmasi Dari Admin
+                        </div>');
+                        redirect('panti');
+                    }else{
+                        $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">GAGAL</div>');
+                        redirect('panti');
+                    }					
+                }
+                else{
+                    $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">'
+                        . $this->upload->display_errors() .
+                        '</div>');
+                        redirect('panti');
+                }
+
+            }
+
         }
 
         //panel panti
