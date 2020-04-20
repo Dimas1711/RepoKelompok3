@@ -2,7 +2,7 @@
 <div class="well well-lg">
     <div class="container">
         <h2>List Verifikasi Donasi</h2>
-        <span>Halaman yang berisi list verifikasi donasi panti yang butuh donasi</span>
+        <span>Halaman yang berisi list panti yang butuh donasi</span>
     </div>
 </div>
 <div class="card shadow mb-4">

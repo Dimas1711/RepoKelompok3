@@ -100,7 +100,7 @@
                   <p>Foto</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <img src="<?= $row['gambar'] ?>" alt="fotoe">
+                  <img src="<?=base_url('uploads/panti/') . $row['gambar'] ?>" alt="fotoe" width="150">
                 </div>
               </div>  
           <?php }?>
