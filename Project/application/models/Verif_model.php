@@ -46,5 +46,22 @@ class Verif_model extends CI_Model
 		$this->db->where('id_kasus', $this->input->post('id_kasus'));
 		$this->db->update('kasus', ['status' => 2]);
 	}
+
+	public function verif_topup_detail($id)
+	{
+		return $query = $this->db->query("SELECT * FROM dompet, user WHERE user.id_user = dompet.id_user AND dompet.id_dompet = $id")->result_array();
+	}
+
+	public function ubah_status_setuju_topup($id)
+	{
+		$this->db->where('id_dompet', $this->input->post('id_dompet'));
+		$this->db->update('dompet', ['status' => 1]);
+	}
+
+	public function ubah_status_tolak_topup($id)
+	{
+		$this->db->where('id_dompet', $this->input->post('id_dompet'));
+		$this->db->update('dompet', ['status' => 2]);
+	}
 }
 ?>
