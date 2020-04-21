@@ -74,7 +74,7 @@
   </li>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
+    <a class="nav-link" href="<?= site_url("admin/verif_topup")?>">
       <i class="fas fa-fw fa-clipboard"></i>
       <span>Top Up Dana</span></a>
   </li>

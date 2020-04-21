@@ -41,24 +41,6 @@ class listuser extends CI_Controller {
         $this->load->view("template/footer");
         
     }
-
-    // public function detail($id_user = 0)
-    // {
-    //     $data['registrasi'] = $this->db->get_where('registrasi',
-    //     ['email' => $this->session->userdata('email')])->row_array();
-    //     $this->load->model("dede");
-    //     $data = array('user' => $this->dede->detail($id_user));
-    //     if (count($data["user"])<1)
-    //         {
-    //             redirect("listuser");
-    //         }
-    //     $data["user"] = $data["user"][0];
-    //     $this->load->view("template/sidebar");
-    //     $this->load->view("template/header",$data);
-    //     $this->load->view("ListUser/detail",$data);
-    //     $this->load->view("template/footer");
-    // }
-
     public function delete($id_user)
     {
         $data['registrasi'] = $this->db->get_where('registrasi',

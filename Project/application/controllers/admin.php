@@ -13,6 +13,7 @@ class Admin extends CI_Controller
 
         $this->load->model('Verif_model');
         $this->load->model('Kasus_model');
+        $this->load->model('topup_model');
     }
 
 	public function index()
@@ -51,6 +52,19 @@ class Admin extends CI_Controller
         $this->load->view("template/footer");
     }
 
+    public function verif_topup()
+    {
+        $data['registrasi'] = $this->db->get_where('registrasi',
+        ['email' => $this->session->userdata('email')])->row_array();
+
+        $dataa['dompet'] = $this->topup_model->tampil_verif_topup();
+
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/veriftopup",$dataa);
+        $this->load->view("template/footer");
+    }
+
     public function verif_kasus_detail($id)
     {
         $data['registrasi'] = $this->db->get_where('registrasi',
@@ -78,6 +92,36 @@ class Admin extends CI_Controller
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
         $this->load->view("admin/kasus_detail",$data);
+        $this->load->view("template/footer");
+    }
+
+    public function verif_topup_detail($id)
+    {
+        $data['registrasi'] = $this->db->get_where('registrasi',
+        ['email' => $this->session->userdata('email')])->row_array();
+
+        $dataa['dompet'] = $this->Verif_model->verif_topup_detail($id);
+
+        if(isset($_POST['setuju']))
+        {
+            $this->Verif_model->ubah_status_setuju_topup($id);
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Persetujuan top up donatur diterima !
+            </div>');
+            redirect('admin/verif_topup');
+        }
+        else if(isset($_POST['tolak']))
+        {
+            $this->Verif_model->ubah_status_tolak_topup($id);
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                        Persetujuan top up donatur ditolak !
+                        </div>');
+            redirect('admin/verif_topup');
+        }
+
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/topup_detail",$dataa);
         $this->load->view("template/footer");
     }
 
@@ -210,6 +254,52 @@ class Admin extends CI_Controller
                 <td><img src="<?=base_url('uploads/panti/') . $row['gambar']?>" alt="gambar" width="100"></td>
                 <td>
                 <a href="<?php echo base_url("admin/verif_kasus_detail/" .$row['id_kasus']);?>"
+                     class="btn btn-sm btn-primary btn-circle">
+                    <i class="fas fa-plus"></i>
+                  </a>
+                </td>
+            </tr>
+             <?php }?> <?php  
+        }
+        else
+        {
+            ?>
+                <tr><td colspan="6" align="center">Tidak ada data</td></tr>
+            <?php
+        }  
+    }
+
+    function get_status_topup()
+    {
+        $status = $_GET['status'];
+        if($status == 3)
+        {
+            $data = $this->db->query("SELECT id_dompet, nama_user, jumlah_inginkan, status, foto FROM dompet, user WHERE dompet.id_user = user.id_user")->result_array();
+        }
+        else
+        {
+            $data = $this->db->query("SELECT id_dompet, nama_user, jumlah_inginkan, status, foto FROM dompet, user WHERE dompet.id_user = user.id_user AND dompet.status = '$status'")->result_array();
+        }
+        if(!empty($data))
+        {
+            $no = 1;
+             foreach($data as $row){
+             ?>
+            <tr>
+                <td><?= $no++?></td>
+                <td><?= $row['nama_user']?></td>
+                <td><?= $row['jumlah_inginkan']?></td>
+                <td><?php if ($row['status'] == 0) {
+                  echo '<div class="badge badge-primary badge-pill">Pending</div>';
+                } elseif ($row['status'] == 1) {
+                  echo '<div class="badge badge-warning badge-pill">Aktif</div>';
+                }elseif ($row['status'] == 2) {
+                  echo '<div class="badge badge-danger badge-pill">Cancel</div>';
+                }
+                 ?></td>
+                <td><img src="<?=base_url('uploads/topup/') . $row['foto']?>" alt="foto" width="100"></td>
+                <td>
+                <a href="<?php echo base_url("admin/verif_topup_detail/" .$row['id_dompet']);?>"
                      class="btn btn-sm btn-primary btn-circle">
                     <i class="fas fa-plus"></i>
                   </a>
