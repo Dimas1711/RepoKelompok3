@@ -124,6 +124,7 @@ class Admin extends CI_Controller
             $this->load->view("template/footer");
         }
 
+
     function get_status_verifpanti()
     {
         $status = $_GET['status'];

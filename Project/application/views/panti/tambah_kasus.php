@@ -8,10 +8,11 @@
         <div class="col-md-3">
             <!-- <input type="text" name="id_kategori" value="2"> -->
             <select class="form-control" name="id_kategori" id="">
-                <option value="1">tes</option>
-                <option value="2">tes 2</option>
-                <option value="3">tes 3</option>
+            <?php foreach ($kategori as $row){?>
+                <option value="<?= $row ['id_kategori']?>"><?= $row ['kategori']?></option>
+            <?php }?>
             </select>
+            
         </div>
     </div>
     <div class="form-group">

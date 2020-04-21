@@ -29,8 +29,10 @@
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
 
-            $data_panti['panti'] = $this->db->get_where('panti, kategori',['id_registrasi' => 
+            $data['panti'] = $this->db->get_where('panti',['id_registrasi' => 
             $this->session->userdata('id_registrasi')])->row_array();
+
+            $data['kategori'] = $this->db->query('SELECT * FROM kategori')->result_array();
 
             $this->form_validation->set_rules('tujuan_dana','Tujuan dana','required|trim');
             $this->form_validation->set_rules('tanggal','Tanggal','required|trim');
@@ -41,7 +43,7 @@
             {
                 $this->load->view("template/sidebar2");
                 $this->load->view("template/header",$data);
-                $this->load->view("panti/tambah_kasus",$data_panti);
+                $this->load->view("panti/tambah_kasus",$data);
                 $this->load->view("template/footer");
             }
             else
