@@ -20,6 +20,6 @@ class Panti_model extends CI_Model
     public function update($data= array(),$id){
         $this->load->database();
         return $this->db->update("panti",$data , ["id_panti"=>$id]);
-     }
+    }
 }
 ?>

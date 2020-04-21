@@ -23,6 +23,35 @@
             $this->load->view("template/footer");
         }
 
+        public function listKasusPanti()
+        {
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+
+            $id_registrasi = $this->session->userdata('id_registrasi');
+
+            $data['kasus'] = $this->db->query("SELECT kasus.id_kasus, nama_panti, judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu FROM panti, kasus WHERE panti.id_panti = kasus.id_panti AND panti.id_registrasi = $id_registrasi")->result_array();
+
+            $this->load->view("template/sidebar2");
+            $this->load->view("template/header",$data);
+            $this->load->view("panti/list_kasus",$data);
+            $this->load->view("template/footer");
+            
+        }
+
+        public function kasus_detail($id)
+        {
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+
+            $data['kasus'] = $this->db->query("SELECT kasus.judul, user.nama_user, donasi.jumlah_donasi, donasi.tanggal FROM kasus, user, donasi WHERE kasus.id_kasus = donasi.id_kasus AND user.id_user = donasi.id_user AND kasus.id_kasus = $id")->result_array();
+
+            $this->load->view("template/sidebar2");
+            $this->load->view("template/header",$data);
+            $this->load->view("panti/list_kasus_detail",$data);
+            $this->load->view("template/footer");
+        }
+
         public function addKasus()
         {
             

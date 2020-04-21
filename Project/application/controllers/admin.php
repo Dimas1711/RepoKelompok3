@@ -194,7 +194,7 @@ class Admin extends CI_Controller
                <td><?php if ($row['status'] == 0) {
                  echo '<div class="badge badge-primary badge-pill">Pending</div>';
                } elseif ($row['status'] == 1) {
-                 echo '<div class="badge badge-warning badge-pill">Aktif</div>';
+                 echo '<div class="badge badge-success badge-pill">Aktif</div>';
                }elseif ($row['status'] == 2) {
                  echo '<div class="badge badge-danger badge-pill">Cancel</div>';
                }
@@ -246,7 +246,7 @@ class Admin extends CI_Controller
                 <td><?php if ($row['status'] == 0) {
                   echo '<div class="badge badge-primary badge-pill">Pending</div>';
                 } elseif ($row['status'] == 1) {
-                  echo '<div class="badge badge-warning badge-pill">Aktif</div>';
+                  echo '<div class="badge badge-success badge-pill">Aktif</div>';
                 }elseif ($row['status'] == 2) {
                   echo '<div class="badge badge-danger badge-pill">Cancel</div>';
                 }
@@ -292,7 +292,7 @@ class Admin extends CI_Controller
                 <td><?php if ($row['status'] == 0) {
                   echo '<div class="badge badge-primary badge-pill">Pending</div>';
                 } elseif ($row['status'] == 1) {
-                  echo '<div class="badge badge-warning badge-pill">Aktif</div>';
+                  echo '<div class="badge badge-success badge-pill">Aktif</div>';
                 }elseif ($row['status'] == 2) {
                   echo '<div class="badge badge-danger badge-pill">Cancel</div>';
                 }
