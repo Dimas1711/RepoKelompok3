@@ -50,6 +50,56 @@ class Admin extends CI_Controller
         $this->load->view("admin/setting/akun_bank" , $data);
         $this->load->view("template/footer");
     }
+    public function insertdata(){
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_rekening', 'Nama Rekening' , 'required');
+        $this->form_validation->set_rules('no_rekening', 'Nomor Rekening' , 'required');
+        $this->form_validation->set_rules('nama_bank', 'Nama Bank' , 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view("template/sidebar");
+            $this->load->view("template/header",$data);
+            $this->load->view("admin/setting/tambah_finansial" , $data);
+            $this->load->view("template/footer");
+        }else{
+
+            $data = $this->Verif_model->insertdata(array(
+                'id_admin' => '5',
+                'nama_rekening' => $this->input->post('nama_rekening'),
+                'no_rekening' => $this->input->post('no_rekening'),
+                'nama_bank' => $this->input->post('nama_bank')
+            ));
+            if ($data) {
+                $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                Berita Berhasil Ditambahkan
+                </div>');
+                redirect('admin/data_bank');
+            }else{
+                $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                Berita Berhasil Ditambahkan
+                </div>');
+                redirect('admin/data_bank');
+            }
+        }
+       
+    }
+    public function hapus($id){
+        $data = $this->Verif_model->hapusdata($id);
+
+        if ($data) {
+            $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                    Data Berhasil Dihapus
+            </div>');
+            redirect('admin/data_bank');
+        }else {
+            $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">
+                    Data Gagal Dihapus
+            </div>');
+            redirect('admin/data_bank');
+        }
+    }
     public function edit_bank($id){
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();

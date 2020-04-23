@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="table-responsive">
         <div class="card-header py-3">
-        <a href="<?= base_url('Berita/tambahberita') ?>"
+        <a href="<?= base_url('admin/insertdata') ?>"
                    class="btn btn-sm btn-info btn-icon-split shadow-sm">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
@@ -41,16 +41,12 @@
                         <td><?= $b['no_rekening'];?></td>
                         <td><?= $b['nama_bank'];?></td>
                         <td>
-                        <a href="<?php echo base_url("admin/detail_setting/".$b['id_admin']);?>"
-                             class="btn btn-sm btn-primary btn-circle">
-                            <i class="fas fa-plus"></i>
-                        </a>
                         <a href="<?php echo base_url("admin/edit_bank/".$b['id_akun']);?>"
                              class="btn btn-sm btn-success btn-circle">
                             <i class="fas fa-pen"></i>
                         </a>
                         <a href="#"
-                             onclick="confirm_modal('<?= 'berita/hapus/'.$b['id_admin'] ?>')"
+                             onclick="confirm_modal('<?= 'hapus/'.$b['id_akun'] ?>')"
                              class="btn btn-sm btn-danger btn-circle"
                              data-toggle="modal" data-target="#hapusModal">
                             <i class="fa fa-trash"></i>

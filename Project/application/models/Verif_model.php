@@ -13,6 +13,13 @@ class Verif_model extends CI_Model
 		$query = $this->db->query("SELECT * FROM panti, kabupaten, provinsi WHERE kabupaten.id_kabupaten = panti.id_kabupaten AND provinsi.id_provinsi = panti.id_provinsi AND kabupaten.id_provinsi = provinsi.id_provinsi AND panti.id_panti = $id")->result_array();
 		return $query;
 	}
+	public function insertdata($data = array()){
+		return $this->db->insert('akun_bank' , $data);
+	}
+	public function hapusdata($id){
+		$this->db->where('id_akun' , $id);
+		return $this->db->delete('akun_bank');
+	}
 	public function databank(){
 		return $this->db->get('akun_bank')->result_array();
 	}

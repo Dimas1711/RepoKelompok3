@@ -140,7 +140,7 @@ class Berita extends CI_Controller {
            
         }
         public function hapus($id){
-            $data = $this->b->hapusdata($id);
+            $data = $this->->hapusdata($id);
 
             if ($data) {
                 $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
