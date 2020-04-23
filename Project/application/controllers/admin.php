@@ -228,11 +228,11 @@ class Admin extends CI_Controller
         $status = $_GET['status'];
         if($status == 3)
         {
-            $data = $this->db->query("SELECT kasus.id_kasus, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori")->result_array();
+            $data = $this->db->query("SELECT kasus.id_kasus, kasus.judul, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori")->result_array();
         }
         else
         {
-            $data = $this->db->query("SELECT kasus.id_kasus, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.status = '$status'")->result_array();
+            $data = $this->db->query("SELECT kasus.id_kasus, kasus.judul, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.status = '$status'")->result_array();
         }
         if(!empty($data))
         {
@@ -242,6 +242,7 @@ class Admin extends CI_Controller
             <tr>
                 <td><?= $no++?></td>
                 <td><?= $row['nama_panti']?></td>
+                <td><?= $row['judul']?></td>
                 <td><?= $row['kategori']?></td>
                 <td><?php if ($row['status'] == 0) {
                   echo '<div class="badge badge-primary badge-pill">Pending</div>';
