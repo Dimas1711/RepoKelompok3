@@ -9,7 +9,7 @@
   <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Detail Komunitas</h1>
+    <h1 class="h3 mb-2 text-gray-800">Detail Berita</h1>
     <?php foreach ($berita as $berita):?>
     <div class="card shadow mb-4">
       <div class="card-header py-3">
