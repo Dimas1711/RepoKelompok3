@@ -26,6 +26,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Panti</th>
+                        <th>Judul</th>
                         <th>Kategori</th>
                         <th>Status</th>
                         <th>foto</th>
