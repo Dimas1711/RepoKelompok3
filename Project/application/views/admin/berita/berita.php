@@ -28,7 +28,6 @@
                         <th>Tanggal</th>
                         <th>Judul</th>
                         <th>Isi</th>
-                        <th>Gambar</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -42,7 +41,6 @@
                         <td><?= $b['tanggal_berita'];?></td>
                         <td><?= $b['judul'];?></td>
                         <td><?= $b['isi'];?></td>
-                        <td><?= $b['gambar'];?></td>
                         <td>
                         <a href="<?php echo base_url("berita/detailberita/".$b['id_berita']);?>"
                              class="btn btn-sm btn-primary btn-circle">
