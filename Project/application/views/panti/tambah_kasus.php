@@ -4,6 +4,13 @@
     <input type="hidden" name="id_panti" value="<?= $panti['id_panti']?>">
     </div>
     <div class="form-group">
+        <label for="tujuan_dana">Judul</label>
+        <div class="col-md-5">
+            <input type="text" class="form-control" id="judul" name="judul" aria-describedby="emailHelp" value="<?php echo set_value('judul')?>">
+            <?= form_error('judul', '<small class="text-danger">', '</small>')?>
+        </div>
+    </div>
+    <div class="form-group">
         <label>Kategori</label>
         <div class="col-md-3">
             <!-- <input type="text" name="id_kategori" value="2"> -->

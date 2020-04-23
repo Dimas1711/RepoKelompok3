@@ -8,6 +8,9 @@ class Panti_model extends CI_Model
     public function insertdata($data = array()){
         return $this->db->insert('panti' , $data);
     }
+    public function insertkasus($data = array()){
+        return $this->db->insert('kasus' , $data);
+    }
     public function detail($id){
         return $this->db->get_where("panti" , [
             'id_panti' => $id
