@@ -86,9 +86,14 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url("admin/kasus")?>">
+    <a class="nav-link" href="<?= site_url("admin/settingakun")?>">
       <i class="fas fa-fw fa-cog"></i>
       <span>Setting Akun</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?= site_url("admin/data_bank")?>">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>Akun Bank</span></a>
   </li>
   <li class="nav-item">
             <a class="nav-link" href="<?= base_url('auth/logout') ?>" data-toggle="modal" data-target="#logoutModal">

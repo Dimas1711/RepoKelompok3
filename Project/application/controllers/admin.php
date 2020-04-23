@@ -26,6 +26,76 @@ class Admin extends CI_Controller
         $this->load->view("template/footer");
     }
 
+    public function settingakun(){
+
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->index_admin();
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/setting" , $data);
+        $this->load->view("template/footer");
+    }
+    public function data_bank(){
+
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->databank();
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/akun_bank" , $data);
+        $this->load->view("template/footer");
+    }
+    public function edit_bank($id){
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_rekening', 'Nama Rekening' , 'required');
+        $this->form_validation->set_rules('no_rekening', 'Nomor Rekening' , 'required');
+        $this->form_validation->set_rules('nama_bank', 'Nama Bank' , 'required');
+
+        if ($this->form_validation->run() == false) {
+            $data['admin'] = $this->Verif_model->detail_finansial($id);
+            $this->load->view("template/sidebar");
+            $this->load->view("template/header",$data);
+            $this->load->view("admin/setting/edit_finansial" , $data);
+            $this->load->view("template/footer");
+        }else {
+            $update = $this->Verif_model->update_finansial(array(
+                'nama_rekening' => $this->input->post('nama_rekening'),
+                'no_rekening' => $this->input->post('no_rekening'),
+                'nama_bank' => $this->input->post('nama_bank')
+            ),$id);
+            if ($update) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+			    Berhasil Mengubah Data!
+			    </div>');
+			    redirect('admin/data_bank');
+            }else{
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+			    Gagal Mengubah Data!
+			    </div>');
+			    redirect('admin/data_bank');
+            }
+        }
+       
+    }
+
+    public function detail_setting($id){
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->detail_admin($id);
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/detail_setting" , $data);
+        $this->load->view("template/footer");
+    }
     public function kasus()
     {
         $data['registrasi'] = $this->db->get_where('registrasi',
