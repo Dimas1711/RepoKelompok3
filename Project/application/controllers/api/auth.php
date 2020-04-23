@@ -30,8 +30,21 @@ class Auth extends REST_Controller{
             $this->response($message, REST_Controller::HTTP_NOT_FOUND);
         }else {
             $output = $this->UserModel->user_login($this->input->post('email'),$this->input->post('password'));
-            
+
             if (!empty($output) AND $output != FALSE) {
+
+                //load token
+                $this->load->library('Authorization_Token');
+                //generate
+                $token_data['id_registrasi'] = $output->id_registrasi;
+                $token_data['email'] = $output->email;
+                $token_data['role_id'] = $output->role_id;
+                $token_data['is_actived'] = $output->is_actived;
+                $token_data['nama'] = $output->nama;
+                $token_data['create_at'] = $output->create_at;
+                $token_data['status'] = $output->status;
+
+                $tokenku = $this->authorization_token->generateToken($token_data);
                 $return_data = [
                     'id_registrasi' => $output->id_registrasi,
                     'email' => $output->email,
@@ -40,6 +53,7 @@ class Auth extends REST_Controller{
                     'nama' => $output->nama,
                     'create_at' => $output->create_at,
                     'status' => $output->status,
+                    'token' => $tokenku
                 ];
 
                 $message = [
@@ -50,7 +64,7 @@ class Auth extends REST_Controller{
             }else {
                 $message = [
                     'status' => false,
-                    'message' => "Login Gagal"
+                    'message' => "Invalid Username / Password"
                 ];
                 $this->response($message, REST_Controller::HTTP_NOT_FOUND);
             }
