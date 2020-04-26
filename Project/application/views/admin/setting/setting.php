@@ -1,22 +1,13 @@
 <div class="well well-lg">
     <div class="container">
-        <h2>Berita</h2>
-        <span>Halaman yang berisi Berita Terkini </span>
+        <h2>Admin</h2>
+        <span>Halaman yang berisi Data Admin </span>
     </div>
 </div>
 <div class="container-fluid">
     <div class="card-body">
         <div class="table-responsive">
         <div class="card-header py-3">
-                <a href="<?= base_url('Berita/tambahberita') ?>"
-                   class="btn btn-sm btn-info btn-icon-split shadow-sm">
-                  <span class="icon text-white-50">
-                    <i class="fas fa-plus"></i>
-                  </span>
-                  <span class="text">Tambah Berita</span>
-                </a>
-
-               
                 <div class="col mt-4">
                 <?php echo $this->session->flashdata('pesan')?>
                 </div>
@@ -25,37 +16,28 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Judul</th>
-                        <th>Isi</th>
+                        <th>Nama</th>
+                        <th>Level</th>
+                        <th>Tanggal Bergabung</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php 
                     $no = 1;
-                    foreach ($berita as $b) {
+                    foreach ($admin as $b) {
                 ?>
                     <tr>
                         <td><?= $no++?></td>
-                        <td><?= $b['tanggal_berita'];?></td>
-                        <td><?= $b['judul'];?></td>
-                        <td><?= $b['isi'];?></td>
+                        <td><?= $b['nama'];?></td>
+                        <td><?= $b['level'];?></td>
+                        <td><?= $b['tanggal_bergabung'];?></td>
                         <td>
-                        <a href="<?php echo base_url("berita/detailberita/".$b['id_berita']);?>"
+                        <a href="<?php echo base_url("admin/detail_setting/".$b['id_admin']);?>"
                              class="btn btn-sm btn-primary btn-circle">
                             <i class="fas fa-plus"></i>
                         </a>
-                        <a href="<?php echo base_url("berita/editdata/".$b['id_berita']);?>"
-                             class="btn btn-sm btn-success btn-circle">
-                            <i class="fas fa-pen"></i>
-                        </a>
-                        <a href="#"
-                             onclick="confirm_modal('<?= 'berita/hapus/'.$b['id_berita'] ?>')"
-                             class="btn btn-sm btn-danger btn-circle"
-                             data-toggle="modal" data-target="#hapusModal">
-                            <i class="fa fa-trash"></i>
-                          </a>
+                        
                         </td>
                     </tr>
                     <?php  } ?>

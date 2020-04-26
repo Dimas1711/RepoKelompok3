@@ -26,6 +26,126 @@ class Admin extends CI_Controller
         $this->load->view("template/footer");
     }
 
+    public function settingakun(){
+
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->index_admin();
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/setting" , $data);
+        $this->load->view("template/footer");
+    }
+    public function data_bank(){
+
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->databank();
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/akun_bank" , $data);
+        $this->load->view("template/footer");
+    }
+    public function insertdata(){
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_rekening', 'Nama Rekening' , 'required');
+        $this->form_validation->set_rules('no_rekening', 'Nomor Rekening' , 'required');
+        $this->form_validation->set_rules('nama_bank', 'Nama Bank' , 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view("template/sidebar");
+            $this->load->view("template/header",$data);
+            $this->load->view("admin/setting/tambah_finansial" , $data);
+            $this->load->view("template/footer");
+        }else{
+
+            $data = $this->Verif_model->insertdata(array(
+                'id_admin' => '5',
+                'nama_rekening' => $this->input->post('nama_rekening'),
+                'no_rekening' => $this->input->post('no_rekening'),
+                'nama_bank' => $this->input->post('nama_bank')
+            ));
+            if ($data) {
+                $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                Berita Berhasil Ditambahkan
+                </div>');
+                redirect('admin/data_bank');
+            }else{
+                $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                Berita Berhasil Ditambahkan
+                </div>');
+                redirect('admin/data_bank');
+            }
+        }
+       
+    }
+    public function hapus($id){
+        $data = $this->Verif_model->hapusdata($id);
+
+        if ($data) {
+            $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                    Data Berhasil Dihapus
+            </div>');
+            redirect('admin/data_bank');
+        }else {
+            $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">
+                    Data Gagal Dihapus
+            </div>');
+            redirect('admin/data_bank');
+        }
+    }
+    public function edit_bank($id){
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama_rekening', 'Nama Rekening' , 'required');
+        $this->form_validation->set_rules('no_rekening', 'Nomor Rekening' , 'required');
+        $this->form_validation->set_rules('nama_bank', 'Nama Bank' , 'required');
+
+        if ($this->form_validation->run() == false) {
+            $data['admin'] = $this->Verif_model->detail_finansial($id);
+            $this->load->view("template/sidebar");
+            $this->load->view("template/header",$data);
+            $this->load->view("admin/setting/edit_finansial" , $data);
+            $this->load->view("template/footer");
+        }else {
+            $update = $this->Verif_model->update_finansial(array(
+                'nama_rekening' => $this->input->post('nama_rekening'),
+                'no_rekening' => $this->input->post('no_rekening'),
+                'nama_bank' => $this->input->post('nama_bank')
+            ),$id);
+            if ($update) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+			    Berhasil Mengubah Data!
+			    </div>');
+			    redirect('admin/data_bank');
+            }else{
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+			    Gagal Mengubah Data!
+			    </div>');
+			    redirect('admin/data_bank');
+            }
+        }
+       
+    }
+
+    public function detail_setting($id){
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->detail_admin($id);
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/detail_setting" , $data);
+        $this->load->view("template/footer");
+    }
     public function kasus()
     {
         $data['registrasi'] = $this->db->get_where('registrasi',
@@ -161,10 +281,11 @@ class Admin extends CI_Controller
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
             
-            $verif_panti_acc['verif_acc'] = $this->Verif_model->verif_data_panti();
+            $data['verif_acc'] = $this->Verif_model->verif_data_panti();
+
             $this->load->view("template/sidebar");
             $this->load->view("template/header",$data);
-            $this->load->view("admin/verifpanti",$verif_panti_acc);
+            $this->load->view("admin/verifpanti",$data);
             $this->load->view("template/footer");
         }
 
@@ -228,11 +349,11 @@ class Admin extends CI_Controller
         $status = $_GET['status'];
         if($status == 3)
         {
-            $data = $this->db->query("SELECT kasus.id_kasus, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori")->result_array();
+            $data = $this->db->query("SELECT kasus.id_kasus, kasus.judul, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori")->result_array();
         }
         else
         {
-            $data = $this->db->query("SELECT kasus.id_kasus, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.status = '$status'")->result_array();
+            $data = $this->db->query("SELECT kasus.id_kasus, kasus.judul, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.status = '$status'")->result_array();
         }
         if(!empty($data))
         {
@@ -242,6 +363,7 @@ class Admin extends CI_Controller
             <tr>
                 <td><?= $no++?></td>
                 <td><?= $row['nama_panti']?></td>
+                <td><?= $row['judul']?></td>
                 <td><?= $row['kategori']?></td>
                 <td><?php if ($row['status'] == 0) {
                   echo '<div class="badge badge-primary badge-pill">Pending</div>';

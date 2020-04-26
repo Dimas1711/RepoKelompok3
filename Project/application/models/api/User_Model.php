@@ -21,4 +21,11 @@ class User_Model extends CI_Model
             return FALSE;
         }
     }
+    public function insert($tabel, $arr)
+    {
+        $cek = $this->db->insert($tabel, $arr);
+        return $cek;
+        
+    }
+
 }

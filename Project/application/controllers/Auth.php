@@ -29,7 +29,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
            
             if ($user) { //jika user active
                 if ($user['is_actived'] == 1) {
-                    if (password_verify($password, $user['password'])) {
+                    if (md5($password, $user['password'])) {
                         $data = [
                             'email' => $user['email'],
                             'role_id' => $user['role_id'],
@@ -104,7 +104,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }else {
                 $data = [
                     'email' => $this->input->post('email'),
-                    'password' => password_hash($this->input->post('pass1'), PASSWORD_DEFAULT),
+                    'password' => md5($this->input->post('pass1')),
                     'role_id' => 2,
                     'is_actived' => 0,
                     'nama' => $this->input->post('name'),
@@ -127,5 +127,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>');
             redirect('auth/login');
         }
+        
     }
     ?>

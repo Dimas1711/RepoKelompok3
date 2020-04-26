@@ -26,6 +26,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Panti</th>
+                        <th>Judul</th>
                         <th>Kategori</th>
                         <th>Status</th>
                         <th>foto</th>
@@ -58,8 +59,6 @@
           success: function(data)
           {
             $('#tabel_verif tbody').html(data);
-            // console.log(data);
-            //$("#table_verif tbody").html('<tr><td colspan="4" align="center">tidak ada data</td></tr>')
           } 
         });
       }

@@ -34,6 +34,15 @@
 
               <div class="row">
                 <div class="my-auto col-sm-2">
+                  <p>Judul</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['judul'] ?></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
                   <p>Kategori</p>
                 </div>
                 <div class="my-auto col-sm-9">

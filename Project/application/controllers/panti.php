@@ -30,7 +30,7 @@
 
             $id_registrasi = $this->session->userdata('id_registrasi');
 
-            $data['kasus'] = $this->db->query("SELECT kasus.id_kasus, nama_panti, judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu FROM panti, kasus WHERE panti.id_panti = kasus.id_panti AND panti.id_registrasi = $id_registrasi")->result_array();
+            $data['kasus'] = $this->db->query("SELECT kasus.id_kasus, nama_panti, judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu, kasus.status FROM panti, kasus WHERE panti.id_panti = kasus.id_panti AND panti.id_registrasi = $id_registrasi AND kasus.status = 1")->result_array();
 
             $this->load->view("template/sidebar2");
             $this->load->view("template/header",$data);
@@ -44,7 +44,7 @@
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
 
-            $data['kasus'] = $this->db->query("SELECT kasus.judul, user.nama_user, donasi.jumlah_donasi, donasi.tanggal FROM kasus, user, donasi WHERE kasus.id_kasus = donasi.id_kasus AND user.id_user = donasi.id_user AND kasus.id_kasus = $id")->result_array();
+            $data['kasus'] = $this->db->query("SELECT kasus.judul, kasus.tujuan_dana, kasus.jumlah_uang_terkumpul, kasus.tenggat_waktu, user.nama_user, donasi.jumlah_donasi, donasi.tanggal FROM kasus, user, donasi WHERE kasus.id_kasus = donasi.id_kasus AND user.id_user = donasi.id_user AND kasus.id_kasus = $id")->result_array();
 
             $this->load->view("template/sidebar2");
             $this->load->view("template/header",$data);
@@ -63,6 +63,7 @@
 
             $data['kategori'] = $this->db->query('SELECT * FROM kategori')->result_array();
 
+            $this->form_validation->set_rules('judul','Judul','required|trim');
             $this->form_validation->set_rules('tujuan_dana','Tujuan dana','required|trim');
             $this->form_validation->set_rules('tanggal','Tanggal','required|trim');
             $this->form_validation->set_rules('tenggat_waktu','Tenggat waktu','required|trim');
@@ -89,6 +90,7 @@
                         'id_panti' =>$this->input->post('id_panti'),
                         'id_kategori' => $this->input->post('id_kategori'),
                         'gambar' => $foto,
+                        'judul'=> $this->input->post('judul'),
                         'tujuan_dana' => $this->input->post('tujuan_dana'),
                         'tenggat_waktu' => $this->input->post('tenggat_waktu'),
                         'tanggal' => $this->input->post('tanggal'),
