@@ -154,13 +154,28 @@
                 <p>Foto</p>
                   <div class="input-group">
                     <input type="file"
-                    id="gambar"
-                    name="gambar"
+                    id="foto"
+                    name="foto"
                            class="form-control border-dark small mb-3"
-                           value="<?php echo set_value('gambar')?>"
+                           value="<?php echo set_value('foto')?>"
                            aria-describedby="basic-addon2">
                   </div>
                  </div>
+                </div> 
+
+                <div class="row">
+              <div class="col">
+                <p>Surat Pengesahan</p>
+                  <div class="input-group">
+                    <input type="file"
+                    id="surat_pengesahan"
+                    name="surat_pengesahan"
+                           class="form-control border-dark small mb-3"
+                           value="<?php echo set_value('surat_pengesahan')?>"
+                           aria-describedby="basic-addon2">
+                  </div>
+                 </div>
+                 <?= form_error('surat_pengesahan', '<small class="text-danger">', '</small>')?>
                 </div>
 
               <button type="submit" href="<?= base_url('berita/tambahberita') ?>" class="btn btn-info btn-icon-split">
