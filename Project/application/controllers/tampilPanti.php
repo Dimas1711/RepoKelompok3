@@ -27,14 +27,14 @@ class tampilPanti extends CI_Controller {
 
     public function editdata($id){
                   
-        $this->form_validation->set_rules('nama_panti','nama_panti','required');
-        $this->form_validation->set_rules('alamat_panti','alamat_panti','required');
-        $this->form_validation->set_rules('no_telp','no_telp','required');
-        $this->form_validation->set_rules('nama_yayasanInduk','nama_yayasanInduk','required');
-        $this->form_validation->set_rules('nama_rekening','nama_rekening','required');
-        $this->form_validation->set_rules('no_rekening','no_rekening','required');
-        $this->form_validation->set_rules('nama_bank','nama_bank','required');
-        $this->form_validation->set_rules('email','email','required');
+        $this->form_validation->set_rules('nama_panti','Nama Panti','required');
+        $this->form_validation->set_rules('alamat_panti','Alamat Panti','required');
+        $this->form_validation->set_rules('no_telp','No Telepon','required');
+        $this->form_validation->set_rules('nama_yayasanInduk','Nama Yayasan Induk','required');
+        $this->form_validation->set_rules('nama_rekening','Nama Rekening','required');
+        $this->form_validation->set_rules('no_rekening','No Rekening','required');
+        $this->form_validation->set_rules('nama_bank','Nama Bank','required');
+        $this->form_validation->set_rules('email','Email','required');
       
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();
@@ -61,32 +61,56 @@ class tampilPanti extends CI_Controller {
 
            if ($update) {
                
-            $ubahfoto = $_FILES['gambar']['name'];
+            $ubahfoto = $_FILES['foto']['name'];
+            $ubahpdf = $_FILES['surat_pengesahan']['name'];
 
             if ($ubahfoto) {
-                $config['allowed_types'] = 'jpg|png|gif|jpeg';
+                $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
                 $config['max_size'] = '2048';
                 $config['upload_path'] = './uploads/listpanti/';
 
                 $this->load->library('upload', $config);
 
-                if ($this->upload->do_upload('gambar')) {
-                    $user = $this->db->get_where('listpanti', ['id_panti'=>$id])->row_array();
-                    $fotolama = $user['gambar'];
+                if ($this->upload->do_upload('foto')) {
+                    $user = $this->db->get_where('panti', ['id_panti'=>$id])->row_array();
+                    $fotolama = $user['foto'];
                     if ($fotolama) {
                         unlink(FCPATH . '/uploads/listpanti/' . $fotolama);
                     }
                     $fotobaru = $this->upload->data('file_name');
-                    $this->db->set('gambar', $fotobaru);
+                    $this->db->set('foto', $fotobaru);
                     $this->db->where('id_panti', $id);
-                    $this->db->update('listpanti');
+                    $this->db->update('panti');
                 } else {
                     $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">'
                     . $this->upload->display_errors() .
                     '</div>');
                     redirect('tampilPanti');
                 }
-        }
+        }elseif ($ubahpdf) {
+            $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
+            $config['max_size'] = '2048';
+            $config['upload_path'] = './uploads/listpanti/';
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('surat_pengesahan')) {
+                $user = $this->db->get_where('panti', ['id_panti'=>$id])->row_array();
+                $fotolama = $user['surat_pengesahan'];
+                if ($fotolama) {
+                    unlink(FCPATH . '/uploads/listpanti/' . $fotolama);
+                }
+                $fotobaru = $this->upload->data('file_name');
+                $this->db->set('surat_pengesahan', $fotobaru);
+                $this->db->where('id_panti', $id);
+                $this->db->update('panti');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">'
+                . $this->upload->display_errors() .
+                '</div>');
+                redirect('tampilPanti');
+            }
+            }
         $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
         Berhasil Mengubah Data!
         </div>');
@@ -102,14 +126,16 @@ class tampilPanti extends CI_Controller {
 
     public function tambahpanti(){
        
-        $this->form_validation->set_rules('nama_panti','nama_panti','required');
-        $this->form_validation->set_rules('alamat_panti','alamat_panti','required');
-        $this->form_validation->set_rules('no_telp','no_telp','required');
-        $this->form_validation->set_rules('nama_yayasanInduk','nama_yayasanInduk','required');
-        $this->form_validation->set_rules('nama_rekening','nama_rekening','required');
-        $this->form_validation->set_rules('no_rekening','no_rekening','required');
-        $this->form_validation->set_rules('nama_bank','nama_bank','required');
-        $this->form_validation->set_rules('email','email','required');
+        $this->form_validation->set_rules('nama_panti','Nama Panti','required');
+        $this->form_validation->set_rules('alamat_panti','Alamat Panti','required');
+        $this->form_validation->set_rules('no_telp','No Telepon','required');
+        $this->form_validation->set_rules('nama_yayasanInduk','Nama Yayasan Induk','required');
+        $this->form_validation->set_rules('nama_rekening','Nama Rekening','required');
+        $this->form_validation->set_rules('no_rekening','No Rekening','required');
+        $this->form_validation->set_rules('nama_bank','Nama Bank','required');
+        $this->form_validation->set_rules('email','Email','required');
+        $this->form_validation->set_rules('surat_pengesahan','Surat Pengesahan','trim');
+        $this->form_validation->set_rules('foto','Foto','trim');
       
         if ($this->form_validation->run() == false) {
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
@@ -119,16 +145,18 @@ class tampilPanti extends CI_Controller {
             $this->load->view("ListPanti/tambah_panti");
             $this->load->view("template/footer");
         }else {
-            $gambar = $_FILES['gambar']['name'];
+            $foto = $_FILES['foto']['name'];
+        
 
-            $config['allowed_types'] = 'jpg|png|gif|jpeg';
+            $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
             $config['max_size'] = '2048';
-            $config['upload_path'] = './uploads/listpanti';
-
+            $config['upload_path'] = './uploads/listpanti/';
+            $pdf = $FILES['surat_pengesahan']['name'];
             
             $this->load->library('upload' , $config);
+           
 
-            if ($this->upload->do_upload('gambar')) {
+            if ($this->upload->do_upload('foto') && $this->upload->do_upload('surat_pengesahan') ) {
                 $insert = array(
                     'nama_panti' => $this->input->post('nama_panti'),
                     'alamat_panti' => $this->input->post('alamat_panti'),
@@ -139,7 +167,8 @@ class tampilPanti extends CI_Controller {
                     'nama_bank' => $this->input->post('nama_bank'),
                     'email' => $this->input->post('email'),
                     'tanggal_berdiri' => $this->input->post('tanggal_berdiri'),
-                    'gambar' => $gambar
+                    'foto' => $foto,
+                    'surat_pengesahan' => trim($pdf)
                 );
                 if ($this->b->insertdata($insert)) {
                     $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
