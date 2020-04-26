@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-<h1 class="h3 mb-2 text-gray-800">Edit Berita</h1>
+<h1 class="h3 mb-2 text-gray-800">Edit Panti</h1>
  <form action="" method="post" enctype="multipart/form-data">
 
 <div class="card shadow mb-4">
@@ -144,15 +144,31 @@
                 <p>Foto</p>
                   <div class="input-group">
                     <input type="file"
-                    id="gambar"
-                    name="gambar"
+                    id="foto"
+                    name="foto"
                            class="form-control border-dark small mb-3"
-                           value="<?php echo set_value('gambar')?>"
+                           value="<?php echo set_value('foto')?>"
                            aria-describedby="basic-addon2">
                   </div>
                  </div>
                 
                 </div>
+
+                <div class="row">
+              <div class="col">
+                <p>Surat Pengesahan</p>
+                  <div class="input-group">
+                    <input type="file"
+                    id="surat_pengesahan"
+                    name="surat_pengesahan"
+                           class="form-control border-dark small mb-3"
+                           value="<?php echo set_value('surat_pengesahan')?>"
+                           aria-describedby="basic-addon2">
+                  </div>
+                  <?= form_error('surat_pengesahan', '<small class="text-danger">', '</small>')?>
+                 </div>
+                </div>
+
         <?php } ?>
               <button type="submit"  class="btn btn-info btn-icon-split">
                 <span class="icon text-white-50">

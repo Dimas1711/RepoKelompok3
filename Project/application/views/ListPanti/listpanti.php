@@ -40,7 +40,7 @@
                         <td><?= $b['id_panti'];?></td>
                         <td><?= $b['nama_panti'];?></td>
                         <td><?= $b['alamat_panti'];?></td>
-                        <td><?= $b['gambar'];?></td>
+                        <td><?= $b['foto'];?></td>
                         <td>
                         <a href="<?php echo base_url("tampilPanti/detailpanti/".$b['id_panti']);?>"
                              class="btn btn-sm btn-primary btn-circle">
