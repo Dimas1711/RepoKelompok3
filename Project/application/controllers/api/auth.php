@@ -53,18 +53,20 @@ class Auth extends REST_Controller{
                     'nama' => $output->nama,
                     'create_at' => $output->create_at,
                     'status' => $output->status,
-                    'token' => $tokenku
+                    'token' => $tokenku,
+                    'pesan' => 'Selamat Datang di Aplikasi Donasi',
                 ];
 
                 $message = [
                     'status' => true,
                     'data' => $return_data,
+                  
                 ];
                 $this->response($message, REST_Controller::HTTP_OK);
             }else {
                 $message = [
                     'status' => false,
-                    'message' => "Invalid Username / Password"
+                    'pesan' => "Invalid Username / Password"
                 ];
                 $this->response($message, REST_Controller::HTTP_NOT_FOUND);
             }
