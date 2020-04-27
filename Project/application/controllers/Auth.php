@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         {
             parent::__construct();
             $this->load->library('form_validation');
+            $this->load->model('Verif_model' , 'v');
         }
         public function login(){
             $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
@@ -96,6 +97,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 'min_length' => 'Password too short'
             ]);
             $this->form_validation->set_rules('pass2', 'Password', 'required|trim|matches[pass1]');
+            $kode = $this->v->buat_kode();
             if ($this->form_validation->run() == false) {
                     $data['title'] = "Registration";
                     $this->load->view('templates/auth_header',$data);
@@ -103,6 +105,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     $this->load->view('templates/auth_footer');
             }else {
                 $data = [
+                    'id_registrasi' => $kode,
                     'email' => $this->input->post('email'),
                     'password' => md5($this->input->post('pass1')),
                     'role_id' => 2,

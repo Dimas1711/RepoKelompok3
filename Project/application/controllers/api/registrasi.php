@@ -20,7 +20,7 @@ class Registrasi extends REST_Controller{
         $nama = $this->input->post('nama');
 
         $cek = $this->db->get_where('registrasi', ['email' => $email])->row_array();
-
+        $kode = $this->UserModel->buat_kode();
         if ($cek > 0) {
             $response = [
                 'status' => false,
@@ -28,6 +28,7 @@ class Registrasi extends REST_Controller{
             ];
         }else {
             $arr = [
+                'id_registrasi' => $kode,
                 'email' => $email,
                 'password' => $password,
                 'role_id' => $role_id,
@@ -36,7 +37,24 @@ class Registrasi extends REST_Controller{
                 'create_at' => time(),
                 'status' => 1,
             ];
+            $user = [
+                'id_registrasi' => $kode,
+                'nama_user' => $nama,
+                'alamat' => '',
+                'no_telp' => '',
+                'email' => $email,
+                'no_rekening' => '',
+                'nama_rekening' => '',
+                'nama_bank' => '',
+                'tanggal_lahir' => '',
+                'jenis_kelamin' => '',
+                'tempat_lahir' => '',
+                'nik' => '',
+                'pekerjaan' => '',
+                'finansial' => 0,
+            ];
             $cek = $this->UserModel->insert('registrasi', $arr);
+            $cek = $this->UserModel->insert('user', $user);
 
             $response = [
                 'status' => true,

@@ -43,7 +43,23 @@ class Verif_model extends CI_Model
     {
         return $query = $this->db->query("SELECT * FROM kategori")->result_array();
     }
-	
+	public function buat_kode(){
+        $this->db->select('RIGHT(registrasi.id_registrasi,3) as kode',FALSE);
+        $this->db->order_by('id_registrasi', 'DESC');
+        $this->db->limit(1);
+
+        $query=$this->db->get('registrasi');
+
+        if ($query->num_rows()<>0) {
+            $data=$query->row();
+            $kode=intval($data->kode)+1;
+        }else{
+            $kode=1;
+        }
+        $kode_max=str_pad($kode,3,"0",STR_PAD_LEFT);
+        $kode_jadi="AxDGajfuY".$kode_max;
+        return $kode_jadi;
+    }
 	public function ubah_status_setuju($id)
 	{
 		$this->db->where('id_panti', $this->input->post('id_panti'));
