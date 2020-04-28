@@ -16,18 +16,21 @@ class data_user extends REST_Controller{
     }
     public function index_get()
     {
-        $user = $this->user->index();
-
+        $id = $this->get('id_registrasi');
+        
+     
+        $user = $this->user->index($id);
         if ($user) {
             $this->response([
+                'status' => TRUE,
                 'data' => $user
-                
             ], REST_Controller::HTTP_OK);
         }else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'user Tidak Ditemukan'
+                'message' => 'User Tidak Ditemukan'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
+    
 }
