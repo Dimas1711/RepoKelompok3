@@ -20,8 +20,8 @@ class data_user extends REST_Controller{
 
         if ($user) {
             $this->response([
-                'status' => TRUE,
                 'data' => $user
+                
             ], REST_Controller::HTTP_OK);
         }else {
             $this->response([
