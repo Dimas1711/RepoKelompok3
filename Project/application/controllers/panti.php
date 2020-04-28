@@ -30,7 +30,7 @@
 
             $id_registrasi = $this->session->userdata('id_registrasi');
 
-            $data['kasus'] = $this->db->query("SELECT kasus.id_kasus, nama_panti, judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu, kasus.status FROM panti, kasus WHERE panti.id_panti = kasus.id_panti AND panti.id_registrasi = $id_registrasi AND kasus.status = 1")->result_array();
+            $data['kasus'] = $this->db->query("SELECT kasus.id_kasus, nama_panti, judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu, kasus.status FROM panti, kasus WHERE panti.id_panti = kasus.id_panti AND panti.id_registrasi = '$id_registrasi' AND kasus.status = 1")->result_array();
 
             $this->load->view("template/sidebar2");
             $this->load->view("template/header",$data);
