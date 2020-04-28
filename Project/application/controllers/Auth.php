@@ -138,7 +138,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             $config = [
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.googlemail.com',
-                'smtp_user' => 'Ryanhartadi999@gmail.com',
+                'smtp_user' => 'donasiyatimk3@gmail.com',
                 'smtp_pass' => 'IbanezRG',
                 'smtp_port' => 465,
                 'mailtype' => 'html',
@@ -147,7 +147,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             ];
             // $this->load->library('email' , $config);
             $this->email->initialize($config);
-            $this->email->from('Ryanhartadi999@gmail.com','Donasi Panti');//pengirim
+            $this->email->from('donasiyatimk3@gmail.com','Donasi Panti');//pengirim
             $this->email->to($this->input->post('email'));//ditujukann
             if ($type == 'verify') {
 
