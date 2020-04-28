@@ -23,14 +23,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
         private function _login()
         {
             $email = $this->input->post('email');
-            $password = $this->input->post('password');
+            $password = md5($this->input->post('password'));
     
             //lakukan pengecekan apakah email dari user ada
             $user = $this->db->get_where('registrasi', ['email' => $email])->row_array();
            
             if ($user) { //jika user active
                 if ($user['is_actived'] == 1) {
-                    if (md5($password, $user['password'])) {
+                    if ($password === $user['password']) {
                         $data = [
                             'email' => $user['email'],
                             'role_id' => $user['role_id'],
