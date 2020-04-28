@@ -187,7 +187,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         $this->db->delete('token', ['email' => $email]);
 
                         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-                        '.$email.'Has Been Activated Please Login !.
+                        '. $email .'Has Been Activated Please Login !.
                         </div>');
                         redirect('auth/login');
 
