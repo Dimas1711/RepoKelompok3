@@ -281,7 +281,7 @@ class Admin extends CI_Controller
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
             
-            $data['verif_acc'] = $this->Verif_model->verif_data_panti();
+            // $data['verif_acc'] = $this->Verif_model->verif_data_panti();
 
             $this->load->view("template/sidebar");
             $this->load->view("template/header",$data);
