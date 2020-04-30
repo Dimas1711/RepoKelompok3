@@ -77,7 +77,15 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php foreach($hasil1 as $row1){?>
+                          <?php foreach($hasil2 as $row2){?>
+                            <?php foreach($hasil3 as $row3){?>
+                        <?=$row1+$row2+$row3?> 
+                        <?php }?>
+                        <?php }?>
+                        <?php }?>
+                      </div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>

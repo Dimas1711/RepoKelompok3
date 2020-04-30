@@ -20,9 +20,12 @@ class Admin extends CI_Controller
 	{
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();
+        $data['hasil1'] = $this->db->query("SELECT Count(status) from kasus where status='0'")->row_array();
+        $data['hasil2'] = $this->db->query("SELECT Count(status) from panti where status='0'")->row_array();
+        $data['hasil3'] = $this->db->query("SELECT Count(status) from dompet where status='0'")->row_array();
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
-        $this->load->view("template/dashboard");
+        $this->load->view("template/dashboard",$data);
         $this->load->view("template/footer");
     }
 
