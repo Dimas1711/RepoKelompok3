@@ -1,9 +1,12 @@
 package com.example.donasiyatim;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.donasiyatim.configfile.AppController;
 import com.example.donasiyatim.configfile.ServerApi;
 import com.example.donasiyatim.configfile.Util;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,53 +39,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        nama_user = findViewById(R.id.tv_namauser);
-        saldo = findViewById(R.id.tv_saldo);
-        btn_dompet = findViewById(R.id.btn_dompet);
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListenener);
 
-        String jenenge = getIntent().getStringExtra("jeneng");
-        id_regis = getIntent().getStringExtra("id_registrasi");
-
-        nama_user.setText(jenenge);
-        loaddetail();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 
-    private void loaddetail()//ini buat nampilin saldo
-    {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JSONObject res = null;
-                try {
-                    res = new JSONObject(response);
-                    Log.e("responnya ",""+response);
-                    JSONArray arr = res.getJSONArray("data");
-                    JSONObject arr1 = arr.getJSONObject(0);
-                    saldo.setText(arr1.getString("finansial"));
-                    saldoku = arr.getString(14);
-                    Log.e("saldo", ""+saldoku);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.e("erronya ",""+e);
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("volley", "errornya : " + error.getMessage());
+    private BottomNavigationView.OnNavigationItemSelectedListener navListenener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+
+                    switch (item.getItemId())
+                    {
+                        case R.id.nav_home :
+                            selectedFragment = new HomeFragment();
+                            break;
+                        case R.id.nav_donasi :
+                            selectedFragment = new DonasiFragment();
+                            break;
+                        case R.id.nav_riwayat :
+                            selectedFragment = new RiwayatFragment();
+                            break;
+                        case R.id.nav_akun :
+                            selectedFragment = new AkunFragment();
+                            break;
                     }
-                }) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
-            @Override
-            public Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("id_registrasi", id_regis);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-
-        requestQueue.add(senddata);
-    }
+                    return true;
+                }
+            };
 }
