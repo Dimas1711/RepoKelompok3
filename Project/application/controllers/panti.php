@@ -30,7 +30,8 @@
 
             $id_registrasi = $this->session->userdata('id_registrasi');
 
-            $data['kasus'] = $this->db->query("SELECT kasus.id_kasus, nama_panti, judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu, kasus.status FROM panti, kasus WHERE panti.id_panti = kasus.id_panti AND panti.id_registrasi = '$id_registrasi' AND kasus.status = 1")->result_array();
+            $data['kasus'] = $this->db->query("SELECT kasus.id_kasus, nama_panti, judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu, kasus.status, kasus.is_active FROM panti, kasus WHERE panti.id_panti = kasus.id_panti AND panti.id_registrasi = '$id_registrasi' AND kasus.status = 1")->result_array();
+
 
             $this->load->view("template/sidebar2");
             $this->load->view("template/header",$data);
@@ -44,7 +45,9 @@
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
 
-            $data['kasus'] = $this->db->query("SELECT kasus.judul, kasus.tujuan_dana, kasus.jumlah_uang_terkumpul, kasus.tenggat_waktu, user.nama_user, donasi.jumlah_donasi, donasi.tanggal FROM kasus, user, donasi WHERE kasus.id_kasus = donasi.id_kasus AND user.id_user = donasi.id_user AND kasus.id_kasus = $id")->result_array();
+            $data['donasi'] = $this->db->query("SELECT kasus.judul, kasus.tujuan_dana, kasus.jumlah_uang_terkumpul, kasus.tenggat_waktu, user.nama_user, donasi.jumlah_donasi, donasi.tanggal FROM kasus, user, donasi WHERE kasus.id_kasus = donasi.id_kasus AND user.id_user = donasi.id_user AND kasus.id_kasus = $id")->result_array();
+
+            $data['kasus'] = $this->db->query("SELECT judul, tujuan_dana, jumlah_uang_terkumpul, tenggat_waktu FROM kasus WHERE id_kasus = $id")->result_array();
 
             $this->load->view("template/sidebar2");
             $this->load->view("template/header",$data);
@@ -94,7 +97,9 @@
                         'tujuan_dana' => $this->input->post('tujuan_dana'),
                         'tenggat_waktu' => $this->input->post('tenggat_waktu'),
                         'tanggal' => $this->input->post('tanggal'),
-                        'status' => 0
+                        'deskripsi' =>$this->input->post('deskripsi'),
+                        'status' => 0,
+                        'is_active' => 1
                         
                     );
                     if ($this->Panti_model->insertkasus($dataPost)) {
