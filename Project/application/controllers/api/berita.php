@@ -18,17 +18,16 @@ use Restserver\Libraries\REST_Controller;
         public function index_get(){
 
             $id = $this->get('id_berita');
-
+            // $output = $this->berita->getBerita();
             if ($id === null){
                 $berita = $this->berita->getBerita();
             }else{
                 $berita = $this->berita->getBerita($id);
             }
-
             if ($berita) {
                 $this->response([
                     'status' => TRUE,
-                    'data' => $berita
+                    'data' => $berita,
                 ], REST_Controller::HTTP_OK);
             }else {
                 $this->response([
@@ -40,7 +39,7 @@ use Restserver\Libraries\REST_Controller;
 
         public function index_delete(){
             $id = $this->delete('id_berita');
-
+           
             if ($id === null) {
 
                 $this->response([

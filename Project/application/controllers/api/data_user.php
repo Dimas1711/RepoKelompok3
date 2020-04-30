@@ -20,6 +20,7 @@ class data_user extends REST_Controller{
         
      
         $user = $this->user->index($id);
+ 
         if ($user) {
             $this->response([
                 'status' => TRUE,
