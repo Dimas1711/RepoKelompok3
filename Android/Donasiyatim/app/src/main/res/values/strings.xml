@@ -3,4 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lupa_kata_sandi" />
+    <string name="kalimat_kata_sandi" />
+    <string name="email" />
+    <string name="masukan_email_anda" />
+    <string name="submit" />
 </resources>
