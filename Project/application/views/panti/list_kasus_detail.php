@@ -52,7 +52,7 @@
                 <tbody> 
                     <?php 
                     $no = 1;
-                    foreach ($kasus as $row){  
+                    foreach ($donasi as $row){  
                     ?>
                         <tr>
                             <td><?= $no++?></td>
