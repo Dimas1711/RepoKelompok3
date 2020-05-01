@@ -60,6 +60,43 @@
               </div>
 
               <div class="row">
+      <div class="col-sm-6">
+        <p>No.KTP Ketua Panti</p>
+        <div class="input-group">
+        <input type="hidden"
+              name="id"
+              id="id"
+                 class="form-control border-dark small mb-3"
+                 placeholder="Masukkan Nama Panti"
+                 aria-describedby="basic-addon2"
+                 value="<?= $registrasi['id_registrasi']?>"
+                 >
+          <input type="text"
+              name="nama_panti"
+              id="nama_panti"
+                 class="form-control border-dark small mb-3"
+                 placeholder="Masukkan Nama Panti"
+                 aria-describedby="basic-addon2"
+                 value="<?php echo set_value('nama_panti')?>"
+                 >
+        </div>
+                 <?= form_error('nama_panti', '<small class="text-danger">', '</small>')?>
+      </div>
+      <div class="col-sm-6">
+                  <p>Upload KTP Ketua Panti</p>
+                  <div class="input-group">
+                    <input name="foto" id="foto"
+                           type="file"
+                           class="form-control border-dark small mb-3"
+                           placeholder=""
+                           aria-describedby="basic-addon2"
+                           >
+                  </div>
+                </div>
+                
+                </div>
+
+              <div class="row">
                 <div class="col-sm-6">
                 <p>Pilih Provinsi</p>
                   <div class="input-group">
