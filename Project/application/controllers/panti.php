@@ -9,7 +9,7 @@
             redirect("auth/login");
         }
         $this->load->model('Verif_model');
-        $this->load->model('Panti_model');
+        $this->load->model('Panti_model', 'b');
         $this->load->model('Lokasi');
     }
 
@@ -150,7 +150,7 @@
                 $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
                 $config['max_size'] = '2048';
                 $config['upload_path'] = './uploads/panti/';
-                $pdf = $FILES['surat_pengesahan']['name'];
+                $pdf = $_FILES['surat_pengesahan']['name'];
                 
                 $this->load->library('upload' , $config);
                
