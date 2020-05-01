@@ -8,14 +8,6 @@
     <div class="card-body">
         <div class="table-responsive">
         <div class="card-header py-3">
-                <a href="<?= base_url('tampilPanti/tambahpanti') ?>"
-                   class="btn btn-sm btn-info btn-icon-split shadow-sm">
-                  <span class="icon text-white-50">
-                    <i class="fas fa-plus"></i>
-                  </span>
-                  <span class="text">Tambah Panti</span>
-                </a>
-
                
                 <div class="col mt-4">
                 <?php echo $this->session->flashdata('pesan')?>
