@@ -12,7 +12,7 @@ class="btn btn-sm btn-info btn-icon-split shadow-sm">
         <div class="col-md-3 col-sm-6 col-xs-6">           
 			<div class="panel panel-back noti-box">
                 <div class="text-box" >
-                <img src="<?= base_url("uploads/panti/kasus.png")?>" width="120px">
+                <img src="<?= base_url("uploads/panti/images.png")?>" width="120px">
                 <br><br>
                     <p class="text-muted">Jumlah Kasus</p>
                     <!-- <p class="main-text"><?php //echo "$d";?></p>-->
