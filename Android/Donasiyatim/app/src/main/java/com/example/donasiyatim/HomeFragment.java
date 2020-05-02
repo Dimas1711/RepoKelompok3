@@ -28,8 +28,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.donasiyatim.configfile.ServerApi;
 import com.example.donasiyatim.configfile.Util;
 import com.example.donasiyatim.configfile.authdata;
-//import com.example.moeidbannerlibrary.banner.BannerLayout;
-//import com.example.moeidbannerlibrary.banner.BaseBannerAdapter;
+import com.example.moeidbannerlibrary.banner.BannerLayout;
+import com.example.moeidbannerlibrary.banner.BaseBannerAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -59,16 +59,22 @@ public class HomeFragment extends Fragment {
         btn_dompet = v.findViewById(R.id.btn_dompet);
         rv = v.findViewById(R.id.rv);
         img = v.findViewById(R.id.img_kasus);
-       // BannerLayout banner= v.findViewById(R.id.Banner);
+        BannerLayout banner= v.findViewById(R.id.Banner);
 
         List<String> urls = new ArrayList<>();
         urls.add("https://upload.wikimedia.org/wikipedia/en/2/26/Amazing_World_of_Gumball_Wattersons.png");
         urls.add("https://img.tek.id/img/content/2020/02/27/26087/caption-instagram-dari-serial-animasi-adventure-time-RibV8P7U9V.jpg");
         urls.add("https://static.miraheze.org/toxicfandomsandhatedomswiki/thumb/b/b4/Chowder-cartoon.jpg/300px-Chowder-cartoon.jpg");
         urls.add("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTVZNZ4xt26RhB7guvwLNStEtB3TYCGbZqYzl5B0bTGAE0g6biU&usqp=CAU");
-       // BaseBannerAdapter webBannerAdapter = new BaseBannerAdapter(getActivity().getApplicationContext(), urls);
-       // webBannerAdapter.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
-       //
+        BaseBannerAdapter webBannerAdapter = new BaseBannerAdapter(getActivity().getApplicationContext(), urls);
+        webBannerAdapter.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+            banner.setAdapter(webBannerAdapter);
+
         //String jenenge = getActivity().getIntent().getStringExtra("jeneng");
 //        id_regis = getActivity().getIntent().getStringExtra("id_registrasi");
 //        Log.e("id_register" ,""+ id_regis);
