@@ -62,9 +62,9 @@ public class HomeFragment extends Fragment {
         BannerLayout banner= v.findViewById(R.id.Banner);
 
         List<String> urls = new ArrayList<>();
-        urls.add("https://upload.wikimedia.org/wikipedia/en/2/26/Amazing_World_of_Gumball_Wattersons.png");
-        urls.add("https://img.tek.id/img/content/2020/02/27/26087/caption-instagram-dari-serial-animasi-adventure-time-RibV8P7U9V.jpg");
-        urls.add("https://static.miraheze.org/toxicfandomsandhatedomswiki/thumb/b/b4/Chowder-cartoon.jpg/300px-Chowder-cartoon.jpg");
+        urls.add("https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/10/DONASI-PALU-1068x601.jpg");
+        urls.add("https://blog.kitabisa.com/wp-content/uploads/2019/09/Featured-Images-770x515-2019-09-10T135137.593.jpg");
+        urls.add("https://siteniagaweb.co.id/amanah-takaful/wp-content/uploads/2019/07/donasi-sekarang-1.png");
         urls.add("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTVZNZ4xt26RhB7guvwLNStEtB3TYCGbZqYzl5B0bTGAE0g6biU&usqp=CAU");
         BaseBannerAdapter webBannerAdapter = new BaseBannerAdapter(getActivity().getApplicationContext(), urls);
         webBannerAdapter.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
