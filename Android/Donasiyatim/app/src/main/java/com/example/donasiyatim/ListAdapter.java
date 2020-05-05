@@ -14,47 +14,47 @@ import com.example.donasiyatim.configfile.ServerApi;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
-
-    private ArrayList<ModelData> dataArrayList;
-
-    public ListAdapter(ArrayList<ModelData> dataArrayList)
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.HolderData> {
+    private List<ModelData> mItems;
+    private Context context;
+    public ListAdapter(Context context, List<ModelData> modelDataList)
     {
-        this.dataArrayList = dataArrayList;
+        this.context = context;
+        this.mItems = modelDataList;
     }
-
-
-
     @NonNull
     @Override
-    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.list_item_kasus, parent,false);
-        return new ListViewHolder(view);
+    public HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+       View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_kasus, parent,false);
+       ListAdapter.HolderData holderData = new ListAdapter.HolderData(layout);
+       return holderData;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        holder.judul.setText(dataArrayList.get(position).getJudul());
-        holder.tujuan_dana.setText(dataArrayList.get(position).getTujuan());
-        //Picasso.get().load(ServerApi.IPServer + dataArrayList.get(position)).into(holder.image);
+    public void onBindViewHolder(@NonNull final HolderData holder, int position) {
+        ModelData me = mItems.get(position);
 
+        holder.judul.setText(me.getJudul());
+        holder.tujuan_dana.setText(me.getTujuan());
+        Picasso.get().load(ServerApi.IPServer + "../" + "uploads/panti/" + me.getImage()).into(holder.image);
     }
 
     @Override
     public int getItemCount() {
-        return (dataArrayList != null) ? dataArrayList.size() : 0;
+        return mItems.size();
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder {
-        private TextView judul,tujuan_dana;
-        private ImageView image;
-        public ListViewHolder(@NonNull View itemView) {
+    public class HolderData extends RecyclerView.ViewHolder {
+        TextView judul,tujuan_dana;
+        ImageView image;
+        public HolderData(@NonNull View itemView) {
             super(itemView);
             judul = itemView.findViewById(R.id.tv_judul);
             tujuan_dana = itemView.findViewById(R.id.tv_tujuan_dana);
             image = itemView.findViewById(R.id.img_kasus);
         }
     }
+
 }

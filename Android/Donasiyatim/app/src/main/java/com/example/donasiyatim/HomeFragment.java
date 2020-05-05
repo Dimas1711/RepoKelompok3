@@ -1,5 +1,6 @@
 package com.example.donasiyatim;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,7 +49,7 @@ public class HomeFragment extends Fragment {
     String id_regis;
     String saldoku;
     RecyclerView rv;
-    ArrayList<ModelData> dataModelArrayList;
+    List<ModelData> modelDataList;
     ListAdapter listAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class HomeFragment extends Fragment {
                 try {
                     JSONObject obj  = new JSONObject(response);
 
-                    dataModelArrayList = new ArrayList<>();
+                    modelDataList = new ArrayList<>();
                     JSONArray data = obj.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++)
                     {
@@ -105,8 +106,9 @@ public class HomeFragment extends Fragment {
 
                         playerModel.setJudul(dataobj.getString("judul"));
                         playerModel.setTujuan(Util.setformatrupiah(dataobj.getString("tujuan_dana")));
+                        playerModel.setImage(dataobj.getString("gambar"));
 
-                        dataModelArrayList.add(playerModel);
+                        modelDataList.add(playerModel);
                     }
                     setupListView();
 
@@ -131,7 +133,7 @@ public class HomeFragment extends Fragment {
 
     private void setupListView()
     {
-        listAdapter = new ListAdapter(dataModelArrayList);
+        listAdapter = new ListAdapter(getContext(), modelDataList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(listAdapter);
