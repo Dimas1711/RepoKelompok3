@@ -102,7 +102,7 @@
                         'is_active' => 1
                         
                     );
-                    if ($this->Panti_model->insertkasus($dataPost)) {
+                    if ($this->b->insertkasus($dataPost)) {
                         $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
                         Data Kasus Berhasil Dikirim , Silahkan Tunggu Konfirmasi Dari Admin
                         </div>');
@@ -234,7 +234,7 @@
                         'status' => 0
                         
                     );
-                    if ($this->Panti_model->insertdata($dataPost)) {
+                    if ($this->b->insertdata($dataPost)) {
                         $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
                         Data Berhasil Dikirim , Silahkan Tunggu Konfirmasi Dari Admin
                         </div>');
