@@ -1,19 +1,14 @@
 package com.example.donasiyatim;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,126 +32,119 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button buttonlogin;
-    TextView daftar_masuk, belumpunyaakun, lupapass;
-    EditText email , pass;
-    ProgressBar progress;
+    EditText email , password;
+    Button login;
+    ProgressBar pd;
     ProgressDialog progressDialog;
-    private static String URL_LOGIN = "";
-    Boolean CheckEditText;
+    String nama_user;
+    TextView dftr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        progressDialog = new ProgressDialog(this);
+        pd = new ProgressBar(LoginActivity.this);
+        pd.setVisibility(View.GONE);
         email = findViewById(R.id.edt_email);
-        pass = findViewById(R.id.edt_password_login);
-        daftar_masuk = findViewById(R.id.tvDaftarSekarang);
-        progressDialog = new ProgressDialog(LoginActivity.this);
-        progress = findViewById(R.id.progressbar);
-        belumpunyaakun = findViewById(R.id.tvBelumPunyaAkun);
-        lupapass = findViewById(R.id.tvLupaPassword);
-
-        daftar_masuk.setOnClickListener(new View.OnClickListener() {
+        password = findViewById(R.id.edt_password_login);
+        login = findViewById(R.id.buttonLogin);
+//        pb = findViewById(R.id.progressbar);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog.setMessage("Tunggu Beberapa Saat");
+                progressDialog.show();
+                pd.setVisibility(View.VISIBLE);
+                if (email.getText().toString().isEmpty()){
+                    Toast.makeText(LoginActivity.this, "Email Tidak Boleh Kosong", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }else if (password.getText().toString().isEmpty()){
+                    Toast.makeText(LoginActivity.this, "Password Tidak Boleh Kosong", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }else {
+                    login();
+                }
+            }
+        });
+        dftr = findViewById(R.id.tvDaftarSekarang);
+        dftr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent regis = new Intent(LoginActivity.this , RegistrasiActivity.class);
                 startActivity(regis);
-
             }
         });
 
-        buttonlogin = findViewById(R.id.buttonLogin);
-        buttonlogin.setOnClickListener(new View.OnClickListener() {
+
+    }
+    public void login(){
+
+
+        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.URL_LOGIN, new Response.Listener<String>() {
             @Override
-            public void onClick(View v) {
-                Intent masuk = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(masuk);
-
-//                progressDialog.setMessage("Authenticating...");
-//                progressDialog.setCancelable(false);
-//                progressDialog.show();
-                if (email.getText().toString().isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Email Tidak Boleh Kosong", Toast.LENGTH_LONG).show();
+            public void onResponse(String response) {
+                try {
                     progressDialog.dismiss();
+                    JSONObject res = new JSONObject(response);
+
+                    JSONObject respon = res.getJSONObject("data");
+                    Toast.makeText(LoginActivity.this, respon.getString("pesan"), Toast.LENGTH_SHORT).show();
+                    JSONObject datalogin = res.getJSONObject("data");
+                    Log.e("ser", datalogin.getString("token"));
+                    authdata.getInstance(getApplicationContext()).setdatauser(
+                            datalogin.getString("status"),
+                            datalogin.getString("id_registrasi"),
+                            datalogin.getString("nama"),
+                            datalogin.getString("token")
+                    );
+                    nama_user = datalogin.getString("nama");
+                    Log.e("Nama" , "user" + nama_user);
+                    pd.setVisibility(View.GONE);
+                    if (datalogin.getString("role_id").equals("3")) {
+                        Log.e("ser", "sep gan");
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Aplikasi Hanya Untuk User . Silahkan Login Via Website YukDonasi" , Toast.LENGTH_SHORT).show();
+
+                    }
+//                    } else {
+//                        Toast.makeText(LoginActivity.this, respon.getString("pesan"), Toast.LENGTH_SHORT).show();
 //
-                } else if (pass.getText().toString().isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Password Tidak Boleh Kosong", Toast.LENGTH_LONG).show();
-//                    pd.dismiss();
+//                    }
 
-                } else {
-                    StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.URL_LOGIN, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject res = new JSONObject(response);
+//                                pd.dismiss();
 
-                                JSONObject respon = res.getJSONObject("respon");
-                                if (respon.getBoolean("status")) {
-                                    Toast.makeText(LoginActivity.this, respon.getString("pesan"), Toast.LENGTH_SHORT).show();
-                                    JSONObject datalogin = res.getJSONObject("datauser");
-                                    JSONObject dataauth = res.getJSONObject("dataauth");
-                                    Log.e("ser", datalogin.getString("akses_data"));
-                                    authdata.getInstance(getApplicationContext()).setdatauser(
-                                            datalogin.getString("level"),
-                                            datalogin.getString("kode_user"),
-                                            datalogin.getString("nama_user"),
-                                            datalogin.getString("akses_data"),
-                                            datalogin.getString("token")
-                                    );
-//                                    Intent masuk = new Intent(ActivityMasuk.this , ActivityBeranda.class);
-//                                    startActivity(masuk);
-                                    if (datalogin.getString("l").equals("3")) {
-                                        Log.e("ser", "sep gan");
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(intent);
-
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Aplikasi Hanya Untuk User. Silahkan Login Via Website " + ServerApi.IPServer, Toast.LENGTH_SHORT).show();
-
-                                    }
-                                } else {
-                                    Toast.makeText(LoginActivity.this, respon.getString("pesan"), Toast.LENGTH_SHORT).show();
-                                }
-                                //                 progressDialog.dismiss();
-
-                            } catch (JSONException e) {
-                                //                               e.printStackTrace();
-                                Log.e("errorgan", e.getMessage());
-                            }
-
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
+                } catch (JSONException e) {
+//                                e.printStackTrace();
+                    progressDialog.dismiss();
+                    Log.e("errorgan", e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 //                            pd.cancel();
-
-                                Log.e("errornyaa ", "" + error);
-                                Toast.makeText(LoginActivity.this, "Gagal Login, " + error, Toast.LENGTH_SHORT).show();
-                            }
-
-                        }) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> params = new HashMap<>();
-                            params.put("emailnya", email.getText().toString());
-                            params.put("passwordnya", pass.getText().toString());
-
-                            return params;
-                        }
-                    };
-                    AppController.getInstance().addToRequestQueue(senddata);
-                }
-
-                }
-            });
+                progressDialog.dismiss();
+                Log.e("errornyaa ", "" + error);
+                Toast.makeText(LoginActivity.this, "Gagal Login, " + error, Toast.LENGTH_SHORT).show();
 
 
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", email.getText().toString());
+                params.put("password", password.getText().toString());
 
+                return params;
+            }
+        };
 
+        RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+
+        requestQueue.add(senddata);
+    }
 }
-    private void login (String email, String password) {
-
-
-    }
-    }
