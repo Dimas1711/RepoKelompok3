@@ -46,6 +46,7 @@ import java.util.Map;
 
 public class HomeFragment extends Fragment implements ListAdapter.OnItemClickListener {
     public static final String EXTRA_ID = "id_kasus";
+    public static final String EXTRA_ID_PANTI = "id_panti";
     TextView nama_user, saldo;
     ImageView img;
     Button btn_dompet;
@@ -110,6 +111,7 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
                         playerModel.setID_Kasus(dataobj.getString("id_kasus"));
                         playerModel.setTujuan(Util.setformatrupiah(dataobj.getString("tujuan_dana")));
                         playerModel.setImage(dataobj.getString("gambar"));
+                        playerModel.setID_Panti(dataobj.getString("id_panti"));
 
                         modelDataList.add(playerModel);
                     }
@@ -193,6 +195,7 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
 
 //        detailIntent.putExtra(EXTRA_IMG, clickItem.getImage());
         detailIntent.putExtra(EXTRA_ID, clickItem.getID_Kasus());
+        detailIntent.putExtra(EXTRA_ID_PANTI, clickItem.getID_Panti());
 
         startActivity(detailIntent);
 

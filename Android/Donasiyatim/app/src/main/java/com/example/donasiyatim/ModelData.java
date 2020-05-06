@@ -5,6 +5,7 @@ public class ModelData {
     private String Judul;
     private String Image;
     private String ID_Kasus;
+    private String ID_Panti;
 
     public String getTujuan() {
         return Tujuan;
@@ -36,5 +37,13 @@ public class ModelData {
 
     public void setID_Kasus(String ID_Kasus) {
         this.ID_Kasus = ID_Kasus;
+    }
+
+    public String getID_Panti() {
+        return ID_Panti;
+    }
+
+    public void setID_Panti(String ID_Panti) {
+        this.ID_Panti = ID_Panti;
     }
 }
