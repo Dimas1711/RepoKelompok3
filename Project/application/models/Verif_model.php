@@ -78,7 +78,7 @@ class Verif_model extends CI_Model
 	
 	public function verif_kasus_detail($id)
 	{
-		return $query = $this->db->query("SELECT * FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.id_kasus = $id")->result_array();
+		return $query = $this->db->query("SELECT kasus.id_kasus, panti.nama_panti, kasus.judul, kategori.kategori, kasus.tujuan_dana, kasus.tanggal, kasus.tenggat_waktu, kasus.jumlah_pendonasi, kasus.jumlah_uang_terkumpul, kasus.deskripsi, kasus.gambar FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.id_kasus = $id")->result_array();
 	}
 
 	public function ubah_status_setuju_kasus($id)
