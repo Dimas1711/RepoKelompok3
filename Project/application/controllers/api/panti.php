@@ -14,17 +14,43 @@ class Panti extends REST_Controller{
         parent::__construct();
         $this->load->model('api/Model_Panti' , 'panti');
     }
-    public function index_get(){
-        $panti = $this->panti->index();
-        if ($panti) {
+    // public function index_get(){
+    //     $id = $this->get('id_panti');
+    //     $panti = $this->panti->index();
+    //     if ($panti) {
+    //         $this->response([
+    //             'status' => TRUE,
+    //             'data' => $panti
+    //         ], REST_Controller::HTTP_OK);
+    //     }else {
+    //         $this->response([
+    //             'status' => FALSE,
+    //             'message' => 'Panti Tidak Ditemukan'
+    //         ], REST_Controller::HTTP_NOT_FOUND);
+    //     }
+    // }
+
+    public function index_get()
+    {
+        $id = $this->get('id_panti');
+        if($id === null)
+        {
+            $panti = $this->panti->index();
+        }
+        else
+        {
+            $panti = $this->panti->index($id);
+        }
+        if ($panti) 
+        {
             $this->response([
-                'status' => TRUE,
-                'data' => $panti
+            'status' => TRUE,
+            'data' => $panti
             ], REST_Controller::HTTP_OK);
         }else {
             $this->response([
-                'status' => FALSE,
-                'message' => 'Panti Tidak Ditemukan'
+            'status' => FALSE,
+            'message' => 'Panti Tidak Ditemukan'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }

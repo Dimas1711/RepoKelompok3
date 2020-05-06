@@ -32,7 +32,7 @@
                         <td><?= $b['id_panti'];?></td>
                         <td><?= $b['nama_panti'];?></td>
                         <td><?= $b['alamat_panti'];?></td>
-                        <td><img src="<?= base_url('uploads/listpanti/') . $b['foto'];?>" alt="Logo Komunitas" class="logo-komunitas mx-auto d-block mb-5" style="width:100"></td>
+                        <td><img src="<?= base_url('uploads/panti/') . $b['foto'];?>" alt="Logo Komunitas" class="logo-komunitas mx-auto d-block mb-5" style="width:100"></td>
                         <td>
                         <a href="<?php echo base_url("tampilPanti/detailpanti/".$b['id_panti']);?>"
                              class="btn btn-sm btn-primary btn-circle">
