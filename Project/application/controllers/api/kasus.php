@@ -14,19 +14,40 @@ class kasus extends REST_Controller{
         parent::__construct();
         $this->load->model('api/Model_kasus' , 'kasus');
     }
-    public function index_get()
-    {
-        $kasus = $this->kasus->index();
+    // public function index_get()
+    // {
+    //     $kasus = $this->kasus->index();
 
+    //     if ($kasus) {
+    //         $this->response([
+    //             'status' => TRUE,
+    //             'data' => $kasus
+    //         ], REST_Controller::HTTP_OK);
+    //     }else {
+    //         $this->response([
+    //             'status' => FALSE,
+    //             'message' => 'kasus Tidak Ditemukan'
+    //         ], REST_Controller::HTTP_NOT_FOUND);
+    //     }
+    // }
+    public function index_get(){
+
+        $id = $this->get('id_kasus');
+        // $output = $this->berita->getBerita();
+        if ($id === null){
+            $kasus = $this->kasus->index();
+        }else{
+            $kasus = $this->kasus->index($id);
+        }
         if ($kasus) {
             $this->response([
                 'status' => TRUE,
-                'data' => $kasus
+                'data' => $kasus,
             ], REST_Controller::HTTP_OK);
         }else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'kasus Tidak Ditemukan'
+                'message' => 'Tidak Ada Kasus'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
