@@ -1,6 +1,7 @@
 package com.example.donasiyatim;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.PluralsRes;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +44,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ListAdapter.OnItemClickListener {
+    public static final String EXTRA_ID = "id_kasus";
     TextView nama_user, saldo;
     ImageView img;
     Button btn_dompet;
@@ -103,8 +106,8 @@ public class HomeFragment extends Fragment {
                     {
                         ModelData playerModel = new ModelData();
                         JSONObject dataobj = data.getJSONObject(i);
-
                         playerModel.setJudul(dataobj.getString("judul"));
+                        playerModel.setID_Kasus(dataobj.getString("id_kasus"));
                         playerModel.setTujuan(Util.setformatrupiah(dataobj.getString("tujuan_dana")));
                         playerModel.setImage(dataobj.getString("gambar"));
 
@@ -137,14 +140,15 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(listAdapter);
-    }
 
+        listAdapter.setOnItemClickListenener(HomeFragment.this);
+
+    }
 
 
     private void loaddetail()//ini buat nampilin saldo
     {
         StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="+authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
-                //StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
@@ -180,5 +184,17 @@ public class HomeFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         requestQueue.add(senddata);
+    }
+
+    @Override
+    public void OnitemClick(int position) {
+        Intent detailIntent = new Intent(getActivity().getApplicationContext(), DetailDonasiActivity.class);
+        ModelData clickItem = modelDataList.get(position);
+
+//        detailIntent.putExtra(EXTRA_IMG, clickItem.getImage());
+        detailIntent.putExtra(EXTRA_ID, clickItem.getID_Kasus());
+
+        startActivity(detailIntent);
+
     }
 }

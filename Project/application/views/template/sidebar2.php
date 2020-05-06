@@ -51,7 +51,7 @@
       <span>Permintaan Verifikasi</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="<?= base_url('panti/akun_panti') ?>">
       <i class="fas fa-fw fa-user-edit"></i>
       <span>Edit Akun</span></a>
   </li>

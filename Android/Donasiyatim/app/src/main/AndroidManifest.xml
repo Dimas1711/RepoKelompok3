@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LupaPass"></activity>
+        <activity android:name=".DetailDonasiActivity"></activity>
+        <activity android:name=".LupaPass" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RegistrasiActivity" />
         <activity android:name=".LoginActivity">

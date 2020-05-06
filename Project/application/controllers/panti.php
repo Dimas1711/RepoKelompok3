@@ -55,6 +55,17 @@
             $this->load->view("template/footer");
         }
 
+        public function akun_panti()
+        {
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+
+            $this->load->view("template/sidebar2");
+            $this->load->view("template/header",$data);
+            $this->load->view("panti/akun_panti",$data);
+            $this->load->view("template/footer");
+        }
+
         public function addKasus()
         {
             

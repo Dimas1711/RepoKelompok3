@@ -19,6 +19,18 @@ import java.util.List;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.HolderData> {
     private List<ModelData> mItems;
     private Context context;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener
+    {
+        void OnitemClick(int position);
+    }
+
+    public void setOnItemClickListenener(OnItemClickListener listenener)
+    {
+        mListener = listenener;
+    }
+
     public ListAdapter(Context context, List<ModelData> modelDataList)
     {
         this.context = context;
@@ -54,6 +66,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.HolderData> {
             judul = itemView.findViewById(R.id.tv_judul);
             tujuan_dana = itemView.findViewById(R.id.tv_tujuan_dana);
             image = itemView.findViewById(R.id.img_kasus);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mListener != null)
+                    {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION)
+                        {
+                            mListener.OnitemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
