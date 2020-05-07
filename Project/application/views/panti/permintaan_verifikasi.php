@@ -72,20 +72,20 @@
                  value="<?= $registrasi['id_registrasi']?>"
                  >
           <input type="text"
-              name="nama_panti"
-              id="nama_panti"
+              name="no_ktp"
+              id="no_ktp"
                  class="form-control border-dark small mb-3"
                  placeholder="Masukkan Nama Panti"
                  aria-describedby="basic-addon2"
-                 value="<?php echo set_value('nama_panti')?>"
+                 value="<?php echo set_value('no_ktp')?>"
                  >
         </div>
-                 <?= form_error('nama_panti', '<small class="text-danger">', '</small>')?>
+                 <?= form_error('no_ktp', '<small class="text-danger">', '</small>')?>
       </div>
       <div class="col-sm-6">
                   <p>Upload KTP Ketua Panti</p>
                   <div class="input-group">
-                    <input name="foto" id="foto"
+                    <input name="foto_ktp" id="foto_ktp"
                            type="file"
                            class="form-control border-dark small mb-3"
                            placeholder=""

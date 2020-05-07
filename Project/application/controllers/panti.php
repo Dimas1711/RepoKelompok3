@@ -60,6 +60,10 @@
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
 
+            $id_registrasi = $this->session->userdata('id_registrasi');
+
+            $data['akun'] = $this->db->query("SELECT nama_panti, email, tanggal_berdiri, foto FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
+
             $this->load->view("template/sidebar2");
             $this->load->view("template/header",$data);
             $this->load->view("panti/akun_panti",$data);
@@ -220,13 +224,14 @@
                 $this->load->view("template/footer");
             }else {
                 $foto = $_FILES['foto']['name'];
+                $foto_ktp = $_FILES['foto_ktp']['name'];
 
                 $config['allowed_types'] = 'jpg|png|gif|jpeg';
                 $config['max_size'] = '2048';
                 $config['upload_path'] = './uploads/panti';
         
                 $this->load->library('upload' , $config);
-                if ($this->upload->do_upload('foto')) {
+                if ($this->upload->do_upload('foto') ) {
                     $dataPost = array(
                         'id_registrasi' =>$this->input->post('id'),
                         'nama_panti' => $this->input->post('nama_panti'),
@@ -240,6 +245,7 @@
                         'nama_rekening' => $this->input->post('nama_rekening'),
                         'nama_bank' => $this->input->post('nama_bank'),
                         'no_rekening' =>$this->input->post('nomor_rekening'),
+                        'no_ktp' => $this->input->post('no_ktp'),
                         'email' => $this->input->post('email'),
                         'deskripsi' => $this->input->post('deskripsi_panti'),
                         'status' => 0
