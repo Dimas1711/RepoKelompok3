@@ -33,7 +33,7 @@ class Donasi extends REST_Controller{
 
         $kasus = $this->donasi->kasus($id_kasus);
         $zzz = $kasus['jumlah_uang_terkumpul'];
-
+        $jumlah_orang = $kasus['jumlah_pendonasi'];
         if ($www < $jumlah_donasi) {
             $response = [
                 'status' => false,
@@ -43,6 +43,7 @@ class Donasi extends REST_Controller{
             $cek = $this->donasi->insert('donasi', $arr);
             $updatejumlahsaldo = $www - $jumlah_donasi;
             $updateuangterkumpul = $zzz + $jumlah_donasi;
+            $updateorang = $jumlah_orang + 1;
 
             //update saldo user
 
@@ -53,6 +54,10 @@ class Donasi extends REST_Controller{
             //tambah ke kasus finansial nya
 
             $this->db->set('jumlah_uang_terkumpul',$updateuangterkumpul);
+            $this->db->where('id_kasus' , $id_kasus);
+            $this->db->update('kasus');
+
+            $this->db->set('jumlah_pendonasi',$updateorang);
             $this->db->where('id_kasus' , $id_kasus);
             $this->db->update('kasus');
 
