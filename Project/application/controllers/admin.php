@@ -291,6 +291,22 @@ class Admin extends CI_Controller
             $this->load->view("template/footer");
         }
 
+     public function hapus_panti($id){
+        $data = $this->Verif_model->hapusdatapanti($id);
+
+        if ($data) {
+            $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                    Data Berhasil Dihapus
+            </div>');
+            redirect('admin/verifikasi_panti');
+        }else {
+            $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">
+                    Data Gagal Dihapus
+            </div>');
+            redirect('admin/verifikasi_panti');
+        }
+    }   
+
 
     function get_status_verifpanti()
     {
@@ -328,7 +344,7 @@ class Admin extends CI_Controller
                    <i class="fas fa-plus"></i>
                  </a>
                  <a href="#"
-                    onclick="confirm_modal('<?php echo 'komunitas/hapus/' ?>')"
+                    onclick="confirm_modal('<?= 'hapus_panti/'.$row['id_registrasi'] ?>')"
                     class="btn btn-sm btn-danger btn-circle"
                     data-toggle="modal" data-target="#hapusModal">
                    <i class="fa fa-trash"></i>
