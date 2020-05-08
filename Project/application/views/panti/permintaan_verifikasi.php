@@ -71,7 +71,7 @@
                  aria-describedby="basic-addon2"
                  value="<?= $registrasi['id_registrasi']?>"
                  >
-          <input type="text"
+          <input type="number"
               name="no_ktp"
               id="no_ktp"
                  class="form-control border-dark small mb-3"
@@ -83,9 +83,9 @@
                  <?= form_error('no_ktp', '<small class="text-danger">', '</small>')?>
       </div>
       <div class="col-sm-6">
-                  <p>Upload KTP Ketua Panti</p>
+                  <p>Scan KTP Ketua Panti</p>
                   <div class="input-group">
-                    <input name="foto_ktp" id="foto_ktp"
+                    <input name="ktp_pemilik" id="ktp_pemilik"
                            type="file"
                            class="form-control border-dark small mb-3"
                            placeholder=""
@@ -169,7 +169,7 @@
                 <div class="col-sm-6">
                   <p>Telepon/Whatsapp</p>
                   <div class="input-group">
-                    <input type="text"
+                    <input type="number"
                     id="no_telp"
                     name="no_telp"
                            class="form-control border-dark small mb-3"
@@ -194,6 +194,19 @@
                            aria-describedby="basic-addon2"
                            >
                 </div>
+                
+                <div class="col-sm-6">
+                  <p>Upload Surat Pengesahan</p>
+                  <div class="input-group">
+                    <input name="surat_pengesahan" id="surat_pengesahan" id"
+                           type="file"
+                           class="form-control border-dark small mb-3"
+                           placeholder=""
+                           aria-describedby="basic-addon2"
+                           >
+                  </div>
+                </div>
+
                 <div class="col-sm-6">
                   <p>Upload Logo Komunitas</p>
                   <div class="input-group">
