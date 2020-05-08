@@ -32,13 +32,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.donasiyatim.HomeFragment.EXTRA_ID;
-import static com.example.donasiyatim.HomeFragment.EXTRA_ID_PANTI;
 
 
-public class DonasiFragment extends Fragment implements ListAdapter.OnItemClickListener {
-    public static final String EXTRA_ID = "id_kasus";
-    public static final String EXTRA_ID_PANTI = "id_panti";
+public class DonasiFragment extends Fragment {
     RecyclerView recyclerView;
     ImageView img;
     List<ModelData> modelDataList;
@@ -60,7 +56,7 @@ public class DonasiFragment extends Fragment implements ListAdapter.OnItemClickL
     }
     private void retrieveJSON()
     {
-        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.URL_LIST_ITEM    , new Response.Listener<String>() {
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.URL_LIST_ITEM  , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("strrrrr", ">>" + response);
@@ -107,20 +103,6 @@ public class DonasiFragment extends Fragment implements ListAdapter.OnItemClickL
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(listAdapter);
 
-        listAdapter.setOnItemClickListenener(DonasiFragment.this);
-
     }
 
-    @Override
-    public void OnitemClick(int position) {
-        Intent detailIntent = new Intent(getActivity().getApplicationContext(), DetailDonasiActivity.class);
-        ModelData clickItem = modelDataList.get(position);
-
-//        detailIntent.putExtra(EXTRA_IMG, clickItem.getImage());
-        detailIntent.putExtra(EXTRA_ID, clickItem.getID_Kasus());
-        detailIntent.putExtra(EXTRA_ID_PANTI, clickItem.getID_Panti());
-
-        startActivity(detailIntent);
-
-    }
 }

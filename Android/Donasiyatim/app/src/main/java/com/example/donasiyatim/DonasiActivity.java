@@ -24,9 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DonasiActivity extends AppCompatActivity implements ListAdapter.OnItemClickListener{
-    public static final String EXTRA_ID = "id_kasus";
-    public static final String EXTRA_ID_PANTI = "id_panti";
+public class DonasiActivity extends AppCompatActivity{
     RecyclerView rv;
     List<ModelData> modelDataList;
     ListAdapter listAdapter;
@@ -90,18 +88,6 @@ public class DonasiActivity extends AppCompatActivity implements ListAdapter.OnI
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(listAdapter);
-
-        listAdapter.setOnItemClickListenener(DonasiActivity.this);
-    }
-
-    public void OnitemClick(int position) {
-        Intent detailIntent = new Intent(this, DetailDonasiActivity.class);
-        ModelData clickItem = modelDataList.get(position);
-
-        detailIntent.putExtra(EXTRA_ID, clickItem.getID_Kasus());
-        detailIntent.putExtra(EXTRA_ID_PANTI, clickItem.getID_Panti());
-
-        startActivity(detailIntent);
 
     }
 }

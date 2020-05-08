@@ -23,9 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.example.donasiyatim.HomeFragment.EXTRA_ID;
-import static com.example.donasiyatim.HomeFragment.EXTRA_ID_PANTI;
-
 public class DetailDonasiActivity extends AppCompatActivity {
 
     TextView uang_terkumpul, tujuan_dana, deskripsi, tanggal, judul, nama_panti, tenggat_waktu;
@@ -53,7 +50,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
 
     private void loaddetail()
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_get?id_kasus="+getIntent().getStringExtra(EXTRA_ID), new Response.Listener<String>(){
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_get?id_kasus="+getIntent().getStringExtra("id_kasus"), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
@@ -90,7 +87,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
 
     private void loadPanti()
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "panti/index_get?id_panti="+getIntent().getStringExtra(EXTRA_ID_PANTI), new Response.Listener<String>(){
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "panti/index_get?id_panti="+getIntent().getStringExtra("id_panti"), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
