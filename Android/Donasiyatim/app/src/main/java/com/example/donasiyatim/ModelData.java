@@ -9,6 +9,7 @@ public class ModelData {
     private int img;
     private String description;
 
+
     public String getTujuan() {
         return Tujuan;
     }
@@ -49,6 +50,7 @@ public class ModelData {
         this.ID_Panti = ID_Panti;
     }
 
+<<<<<<< HEAD
     public int getImg() { return img; }
 
     public void setImg(int img) { this.img = img;}
@@ -56,4 +58,6 @@ public class ModelData {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description;}
+=======
+>>>>>>> 07739d154dff46a19342fb35cd37a6d66f6bf2ed
 }

@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.PluralsRes;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,9 +32,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.donasiyatim.configfile.ServerApi;
 import com.example.donasiyatim.configfile.Util;
 import com.example.donasiyatim.configfile.authdata;
-import com.example.moeidbannerlibrary.banner.BannerLayout;
-import com.example.moeidbannerlibrary.banner.BaseBannerAdapter;
 import com.squareup.picasso.Picasso;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,14 +48,21 @@ import java.util.Map;
 public class HomeFragment extends Fragment implements ListAdapter.OnItemClickListener {
     public static final String EXTRA_ID = "id_kasus";
     public static final String EXTRA_ID_PANTI = "id_panti";
-    TextView nama_user, saldo;
+    CarouselView carouselView;
+    int[] sampleImage = {
+            R.drawable.image1,
+            R.drawable.image2
+    };
+    TextView nama_user, saldo, showAllKasus;
     ImageView img;
     Button btn_dompet;
     String id_regis;
     String saldoku;
-    RecyclerView rv;
+    RecyclerView rv, rvBerita;
     List<ModelData> modelDataList;
+    List<ModelDataBerita> modelDataBeritaList;
     ListAdapter listAdapter;
+    ListAdapterBerita listAdapterBerita;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
@@ -63,31 +71,37 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
         saldo = v.findViewById(R.id.tv_saldo);
         btn_dompet = v.findViewById(R.id.btn_dompet);
         rv = v.findViewById(R.id.rv);
+        rvBerita = v.findViewById(R.id.rv_berita);
         img = v.findViewById(R.id.img_kasus);
-        BannerLayout banner= v.findViewById(R.id.Banner);
+        carouselView = v.findViewById(R.id.Banner);
+        carouselView.setPageCount(sampleImage.length);
+        showAllKasus = v.findViewById(R.id.btn_showAll_kasus);
 
-        List<String> urls = new ArrayList<>();
-        urls.add("https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/10/DONASI-PALU-1068x601.jpg");
-        urls.add("https://blog.kitabisa.com/wp-content/uploads/2019/09/Featured-Images-770x515-2019-09-10T135137.593.jpg");
-        urls.add("https://siteniagaweb.co.id/amanah-takaful/wp-content/uploads/2019/07/donasi-sekarang-1.png");
-        urls.add("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTVZNZ4xt26RhB7guvwLNStEtB3TYCGbZqYzl5B0bTGAE0g6biU&usqp=CAU");
-        BaseBannerAdapter webBannerAdapter = new BaseBannerAdapter(getActivity().getApplicationContext(), urls);
-        webBannerAdapter.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
+        ImageListener imageListener = new ImageListener() {
             @Override
-            public void onItemClick(int position) {
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(sampleImage[position]);
+            }
+        };
 
+        carouselView.setImageListener(imageListener);
+
+        showAllKasus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), DonasiActivity.class);
+                startActivity(intent);
             }
         });
-            banner.setAdapter(webBannerAdapter);
 
-        //String jenenge = getActivity().getIntent().getStringExtra("jeneng");
-//        id_regis = getActivity().getIntent().getStringExtra("id_registrasi");
-//        Log.e("id_register" ,""+ id_regis);
+
+
         String val = authdata.getInstance(getActivity()).getKodeUser();
         Log.e("val","testes" + val);
         //nama_user.setText(jenenge);
         loaddetail();
         retrieveJSON();
+        retrieveJSONBerita();
 
         return v;
     }
@@ -103,7 +117,7 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
 
                     modelDataList = new ArrayList<>();
                     JSONArray data = obj.getJSONArray("data");
-                    for (int i = 0; i < data.length(); i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         ModelData playerModel = new ModelData();
                         JSONObject dataobj = data.getJSONObject(i);
@@ -136,6 +150,56 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
         requestQueue.add(stringRequest);
     }
 
+    private void retrieveJSONBerita()
+    {
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "berita/index_get", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String responseBerita) {
+                Log.d("strrrrr", ">>" + responseBerita);
+                try {
+                    JSONObject obj  = new JSONObject(responseBerita);
+
+                    modelDataBeritaList = new ArrayList<>();
+                    JSONArray data = obj.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++)
+                    {
+                        ModelDataBerita playerModel = new ModelDataBerita();
+                        JSONObject dataobj = data.getJSONObject(i);
+                        playerModel.setJudul_berita(dataobj.getString("judul"));
+                        playerModel.setTanggal_berita(dataobj.getString("tanggal_berita"));
+                        playerModel.setGambar_berita(dataobj.getString("gambar"));
+
+                        modelDataBeritaList.add(playerModel);
+                    }
+                    setupListBerita();
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "errornya : " + error.getMessage());
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void setupListBerita()
+    {
+        listAdapterBerita = new ListAdapterBerita(getContext(), modelDataBeritaList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        rvBerita.setLayoutManager(layoutManager);
+        rvBerita.setAdapter(listAdapterBerita);
+    }
+
     private void setupListView()
     {
         listAdapter = new ListAdapter(getContext(), modelDataList);
@@ -144,9 +208,7 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
         rv.setAdapter(listAdapter);
 
         listAdapter.setOnItemClickListenener(HomeFragment.this);
-
     }
-
 
     private void loaddetail()//ini buat nampilin saldo
     {
