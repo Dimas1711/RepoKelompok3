@@ -16,7 +16,7 @@
       </div>
       <div class="card-body">
 
-        <img src="<?= base_url('uploads/listpanti/') . $a['foto'];?>" alt="Logo Komunitas" class="logo-komunitas mx-auto d-block mb-5" style="width:300">
+        <img src="<?= base_url('uploads/panti/') . $a['foto'];?>" alt="Logo Komunitas" class="logo-komunitas mx-auto d-block mb-5" style="width:300">
 
         <div class="row">
           <div class="my-auto col-sm-2">
@@ -104,7 +104,7 @@
             <p>Surat Pengesahan : </p>
           </div>
           <div class="my-auto col-sm-9">
-            <p><a href="<?= base_url('./uploads/listpanti/'). $a['surat_pengesahan']?>">Download File</a></p>
+            <p><a href="<?= base_url('/uploads/panti/'). $a['surat_pengesahan']?>">Download File</a></p>
           </div>
         </div>
 

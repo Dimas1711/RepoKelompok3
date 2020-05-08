@@ -1,7 +1,10 @@
 <div class="col mt-3">
-<a href ="<?= base_url('tampilPanti/tambahpanti') ?>" class="nav-link" href="<?= base_url("panti/tambah_panti")?>"
+<h1>Selamat Datang Di Aplikasi Donasi Yatim.</h1>
+<h1>Anda Login Sebagai Panti</h1> 
+
+<a href ="<?= base_url('Panti/permintaan_verifikasi') ?>" class="nav-link" href="<?= base_url("panti/permintaan_verifikasi")?>"
 class="btn btn-sm btn-info btn-icon-split shadow-sm">
-                  <a href="<?= base_url('panti/tambahpanti') ?>"
+                  <a href="<?= base_url('panti/permintaan_verifikasi') ?>"
                    class="btn btn-sm btn-info btn-icon-split shadow-sm">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
@@ -12,7 +15,7 @@ class="btn btn-sm btn-info btn-icon-split shadow-sm">
         <div class="col-md-3 col-sm-6 col-xs-6">           
 			<div class="panel panel-back noti-box">
                 <div class="text-box" >
-                <img src="<?= base_url("uploads/panti/images.png")?>" width="120px">
+                <img src="<?= base_url("uploads/panti/images.png")?>" width="200px">
                 <br><br>
                     <p class="text-muted">Jumlah Kasus</p>
                     <!-- <p class="main-text"><?php //echo "$d";?></p>-->

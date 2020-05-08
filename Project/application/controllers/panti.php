@@ -212,6 +212,7 @@
             $this->form_validation->set_rules('nama_bank','Nama Bank','required');
             $this->form_validation->set_rules('nomor_rekening','No Rekening','required');
             $this->form_validation->set_rules('deskripsi_panti','Deskripsi','required');
+            $this->form_validation->set_rules('no_ktp','No KTP','required');
 		
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
@@ -225,10 +226,12 @@
             }else {
                 $foto = $_FILES['foto']['name'];
                 $foto_ktp = $_FILES['foto_ktp']['name'];
+                $pdf = $_FILES['surat_pengesahan']['name'];
+                $pdf2 = $_FILES['ktp_pemilik']['name'];
 
-                $config['allowed_types'] = 'jpg|png|gif|jpeg';
-                $config['max_size'] = '2048';
-                $config['upload_path'] = './uploads/panti';
+                $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
+                $config['max_size'] = '3000';
+                $config['upload_path'] = 'uploads/panti';
         
                 $this->load->library('upload' , $config);
                 if ($this->upload->do_upload('foto') ) {
@@ -248,6 +251,9 @@
                         'no_ktp' => $this->input->post('no_ktp'),
                         'email' => $this->input->post('email'),
                         'deskripsi' => $this->input->post('deskripsi_panti'),
+                        'no_ktp' => $this->input->post('no_ktp'),
+                        'ktp_pemilik' => $pdf2,
+                        'surat_pengesahan' => $pdf,
                         'status' => 0
                         
                     );

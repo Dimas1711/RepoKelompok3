@@ -35,7 +35,43 @@
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Kota</p>
+                  <p>Nama Ketua Panti</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['nama_yayasanInduk'] ?></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Nomor KTP Ketua Panti</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['no_ktp'] ?></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Scan KTP Ketua Panti</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                   <p><a href="<?= base_url('uploads/panti/'). $row['surat_pengesahan']?>">Download File</a></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Alamat Panti</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['alamat_panti'] ?></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Kabupaten</p>
                 </div>
                 <div class="my-auto col-sm-9">
                   <p><?= $row['nama_kabupaten'] ?></p>
@@ -62,10 +98,19 @@
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Nama Yayasan Induk</p>
+                  <p>Email Panti atau Ketua Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <p><?= $row['nama_yayasanInduk'] ?></p>
+                  <p><?= $row['email'] ?></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Deskripsi Panti</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                  <p><?= $row['deskripsi'] ?></p>
                 </div>
               </div>
 
@@ -80,10 +125,19 @@
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Foto</p>
+                  <p>Logo Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <img src="<?=base_url('uploads/panti/') . $row['foto'] ?>" alt="fotoe" width="50">
+                  <img src="<?=base_url('uploads/panti/') . $row['foto'] ?>" alt="foto" width="50">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="my-auto col-sm-2">
+                  <p>Surat Pengesahan Panti</p>
+                </div>
+                <div class="my-auto col-sm-9">
+                <p><a href="<?= base_url('uploads/panti/'). $row['surat_pengesahan']?>">Download File</a></p>
                 </div>
               </div>
 
@@ -114,23 +168,7 @@
                 </div>
               </div>
               
-              <div class="row">
-                <div class="my-auto col-sm-2">
-                  <p>Email</p>
-                </div>
-                <div class="my-auto col-sm-9">
-                  <p><?= $row['email'] ?></p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="my-auto col-sm-2">
-                  <p>Deskripsi</p>
-                </div>
-                <div class="my-auto col-sm-9">
-                  <p><?= $row['deskripsi'] ?></p>
-                </div>
-              </div>
+            
           <?php }?>
 
               <a href="<?php echo base_url('admin/verifikasi_panti') ?>" class="btn btn-danger btn-icon-split">
