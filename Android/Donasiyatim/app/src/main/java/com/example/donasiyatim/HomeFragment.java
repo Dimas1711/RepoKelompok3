@@ -45,9 +45,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeFragment extends Fragment implements ListAdapter.OnItemClickListener {
-    public static final String EXTRA_ID = "id_kasus";
-    public static final String EXTRA_ID_PANTI = "id_panti";
+public class HomeFragment extends Fragment  {
+//    public static final String EXTRA_ID = "id_kasus";
+//    public static final String EXTRA_ID_PANTI = "id_panti";
     CarouselView carouselView;
     int[] sampleImage = {
             R.drawable.image1,
@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
 
                     modelDataList = new ArrayList<>();
                     JSONArray data = obj.getJSONArray("data");
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         ModelData playerModel = new ModelData();
                         JSONObject dataobj = data.getJSONObject(i);
@@ -165,6 +165,7 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
                     {
                         ModelDataBerita playerModel = new ModelDataBerita();
                         JSONObject dataobj = data.getJSONObject(i);
+                        playerModel.setID_berita(dataobj.getString("id_berita"));
                         playerModel.setJudul_berita(dataobj.getString("judul"));
                         playerModel.setTanggal_berita(dataobj.getString("tanggal_berita"));
                         playerModel.setGambar_berita(dataobj.getString("gambar"));
@@ -207,7 +208,6 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(listAdapter);
 
-        listAdapter.setOnItemClickListenener(HomeFragment.this);
     }
 
     private void loaddetail()//ini buat nampilin saldo
@@ -250,16 +250,17 @@ public class HomeFragment extends Fragment implements ListAdapter.OnItemClickLis
         requestQueue.add(senddata);
     }
 
-    @Override
-    public void OnitemClick(int position) {
-        Intent detailIntent = new Intent(getActivity().getApplicationContext(), DetailDonasiActivity.class);
-        ModelData clickItem = modelDataList.get(position);
+//    @Override
+//    public void OnitemClick(int position) {
+//        Intent detailIntent = new Intent(getActivity().getApplicationContext(), DetailDonasiActivity.class);
+//        ModelData clickItem = modelDataList.get(position);
+//
+////        detailIntent.putExtra(EXTRA_IMG, clickItem.getImage());
+//        detailIntent.putExtra(EXTRA_ID, clickItem.getID_Kasus());
+//        detailIntent.putExtra(EXTRA_ID_PANTI, clickItem.getID_Panti());
+//
+//        startActivity(detailIntent);
+//
+//    }
 
-//        detailIntent.putExtra(EXTRA_IMG, clickItem.getImage());
-        detailIntent.putExtra(EXTRA_ID, clickItem.getID_Kasus());
-        detailIntent.putExtra(EXTRA_ID_PANTI, clickItem.getID_Panti());
-
-        startActivity(detailIntent);
-
-    }
 }

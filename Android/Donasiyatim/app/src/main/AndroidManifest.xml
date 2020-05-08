@@ -12,16 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailDonasiActivity"/>
-        <activity android:name=".DonasiActivity"></activity>
-
+        <activity android:name=".DetailBeritaActivity"></activity>
+        <activity android:name=".DetailDonasiActivity" />
+        <activity android:name=".DonasiActivity" />
         <activity android:name=".LupaPass" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RegistrasiActivity" />
-        <activity android:name=".DonasiFragment"/>
+        <activity android:name=".DonasiFragment" />
         <activity android:name=".LoginActivity">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,6 +1,7 @@
 package com.example.donasiyatim;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.donasiyatim.configfile.ServerApi;
@@ -36,8 +38,17 @@ public class ListAdapterBerita extends RecyclerView.Adapter<ListAdapterBerita.Ho
     public void onBindViewHolder(@NonNull final HolderDataBerita holder, int position) {
         ModelDataBerita me = mItems.get(position);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), DetailBeritaActivity.class);
+                intent.putExtra("id_berita",holder.id_berita);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
         holder.judul_berita.setText(me.getJudul_berita());
         holder.tanggal_berita.setText(me.getTanggal_berita());
+        holder.id_berita = me.getID_berita();
         Picasso.get().load(ServerApi.IPServer + "../" + "uploads/berita/" + me.getGambar_berita()).into(holder.image_berita);
 
     }
@@ -50,11 +61,13 @@ public class ListAdapterBerita extends RecyclerView.Adapter<ListAdapterBerita.Ho
     public class HolderDataBerita extends RecyclerView.ViewHolder {
         TextView judul_berita,tanggal_berita;
         ImageView image_berita;
+        String id_berita;
         public HolderDataBerita(@NonNull View itemView) {
             super(itemView);
             judul_berita = itemView.findViewById(R.id.tv_judul_berita);
             tanggal_berita = itemView.findViewById(R.id.tv_tanggal_berita);
             image_berita = itemView.findViewById(R.id.img_berita);
+
         }
     }
 }
