@@ -49,7 +49,7 @@ public class ModelData {
     public void setID_Panti(String ID_Panti) {
         this.ID_Panti = ID_Panti;
     }
-    
+
     public int getImg() { return img; }
 
     public void setImg(int img) { this.img = img;}
