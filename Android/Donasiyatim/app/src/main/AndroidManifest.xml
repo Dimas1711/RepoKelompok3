@@ -12,12 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
         <activity android:name=".DetailDonasiActivity"/>
-=======
         <activity android:name=".DonasiActivity"></activity>
-        <activity android:name=".DetailDonasiActivity" />
->>>>>>> 07739d154dff46a19342fb35cd37a6d66f6bf2ed
+
         <activity android:name=".LupaPass" />
         <activity android:name=".MainActivity" />
         <activity android:name=".RegistrasiActivity" />

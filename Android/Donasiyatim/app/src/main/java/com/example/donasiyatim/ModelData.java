@@ -49,8 +49,7 @@ public class ModelData {
     public void setID_Panti(String ID_Panti) {
         this.ID_Panti = ID_Panti;
     }
-
-<<<<<<< HEAD
+    
     public int getImg() { return img; }
 
     public void setImg(int img) { this.img = img;}
@@ -58,6 +57,5 @@ public class ModelData {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description;}
-=======
->>>>>>> 07739d154dff46a19342fb35cd37a6d66f6bf2ed
+
 }
