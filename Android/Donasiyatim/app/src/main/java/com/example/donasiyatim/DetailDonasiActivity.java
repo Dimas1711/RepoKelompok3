@@ -1,10 +1,15 @@
 package com.example.donasiyatim;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +32,8 @@ public class DetailDonasiActivity extends AppCompatActivity {
 
     TextView uang_terkumpul, tujuan_dana, deskripsi, tanggal, judul, nama_panti, tenggat_waktu;
     ImageView imgView, imgPanti;
+    Button donasiSekarang;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,9 @@ public class DetailDonasiActivity extends AppCompatActivity {
         nama_panti = findViewById(R.id.nama_panti);
         tenggat_waktu = findViewById(R.id.tv_tenggat_waktu);
         imgPanti = findViewById(R.id.img_panti);
+        donasiSekarang = findViewById(R.id.btn_donasi);
+
+
 
         loaddetail();
         loadPanti();
@@ -66,6 +76,12 @@ public class DetailDonasiActivity extends AppCompatActivity {
                     tenggat_waktu.setText(arr1.getString("tenggat_waktu"));
                     judul.setText(arr1.getString("judul"));
                     Picasso.get().load(ServerApi.IPServer + "../"+ "uploads/panti/" +arr1.getString("gambar")).into(imgView);
+                    if (arr1.getString("is_active").equals("0"))
+                    {
+                        donasiSekarang.setEnabled(false);
+                        donasiSekarang.setText("Donasi Telah Selesai");
+                        donasiSekarang.setBackgroundResource(R.drawable.btn_donasi_selesai);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("erronya ",""+e);
