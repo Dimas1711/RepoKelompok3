@@ -8,4 +8,6 @@
     <string name="email" />
     <string name="masukan_email_anda" />
     <string name="submit" />
+    <string name="description">Description</string>
+    <string name="judul">Judul</string>
 </resources>
