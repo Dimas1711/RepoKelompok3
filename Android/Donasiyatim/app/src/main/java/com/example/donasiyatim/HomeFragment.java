@@ -46,8 +46,6 @@ import java.util.List;
 import java.util.Map;
 
 public class HomeFragment extends Fragment  {
-//    public static final String EXTRA_ID = "id_kasus";
-//    public static final String EXTRA_ID_PANTI = "id_panti";
     CarouselView carouselView;
     int[] sampleImage = {
             R.drawable.image1,
