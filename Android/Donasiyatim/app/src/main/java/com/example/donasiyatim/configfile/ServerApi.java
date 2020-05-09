@@ -13,6 +13,5 @@ public class ServerApi {
     public static final String URL_GET_DATA=IPServer+"Api/getdataresult";
     public static final String URL_GET_DETAIL_DATA=IPServer+"Api/getdetaildata";
     public static final String URL_LIST_ITEM = IPServer+"kasus/index_get";
-    public static final String URL_DONASI = IPServer+"donasi/index_post";
 
 }

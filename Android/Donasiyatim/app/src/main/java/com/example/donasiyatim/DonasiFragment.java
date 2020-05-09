@@ -73,6 +73,7 @@ public class DonasiFragment extends Fragment {
                         playerModel.setTujuan(Util.setformatrupiah(dataobj.getString("tujuan_dana")));
                         playerModel.setImage(dataobj.getString("gambar"));
                         playerModel.setID_Panti(dataobj.getString("id_panti"));
+                        playerModel.setID_Kasus(dataobj.getString("id_kasus"));
 
                         modelDataList.add(playerModel);
                     }

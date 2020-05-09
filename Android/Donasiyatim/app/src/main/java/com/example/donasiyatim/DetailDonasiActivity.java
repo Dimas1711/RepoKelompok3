@@ -50,7 +50,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
 
     private void loaddetail()
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_get?id_kasus="+getIntent().getStringExtra("id_kasus"), new Response.Listener<String>(){
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_post?id_kasus="+getIntent().getStringExtra("id_kasus   "), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
