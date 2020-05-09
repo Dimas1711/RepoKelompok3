@@ -60,7 +60,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
 
     private void loaddetail()
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_post?id_kasus="+getIntent().getStringExtra("id_kasus   "), new Response.Listener<String>(){
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_post?id_kasus="+getIntent().getStringExtra("id_kasus"), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
@@ -72,8 +72,8 @@ public class DetailDonasiActivity extends AppCompatActivity {
                     uang_terkumpul.setText(Util.setformatrupiah(arr1.getString("jumlah_uang_terkumpul")));
                     tujuan_dana.setText(Util.setformatrupiah(arr1.getString("tujuan_dana")));
                     deskripsi.setText(arr1.getString("deskripsi"));
-                    tanggal.setText(arr1.getString("tanggal"));
-                    tenggat_waktu.setText(arr1.getString("tenggat_waktu"));
+                    tanggal.setText(Util.settanggal(arr1.getString("tanggal")));
+                    tenggat_waktu.setText(Util.settanggal(arr1.getString("tenggat_waktu")));
                     judul.setText(arr1.getString("judul"));
                     Picasso.get().load(ServerApi.IPServer + "../"+ "uploads/panti/" +arr1.getString("gambar")).into(imgView);
                     if (arr1.getString("is_active").equals("0"))

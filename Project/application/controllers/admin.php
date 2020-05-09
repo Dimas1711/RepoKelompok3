@@ -295,10 +295,11 @@ class Admin extends CI_Controller
             $this->load->view("template/footer");
         }
 
-     public function hapus_panti($id){
+     public function hapus_panti($id)
+    {
         $data = $this->Verif_model->hapusdatapanti($id);
-
-        if ($data) {
+        if ($data) 
+        {
             $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
                     Data Berhasil Dihapus
             </div>');

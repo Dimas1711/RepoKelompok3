@@ -194,15 +194,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <!--    <com.example.moeidbannerlibrary.banner.BannerLayout-->
-<!--        android:id="@+id/Banner"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_marginTop="188dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
