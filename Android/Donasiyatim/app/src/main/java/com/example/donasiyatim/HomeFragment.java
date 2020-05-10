@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment  {
             R.drawable.image1,
             R.drawable.image2
     };
-    TextView nama_user, saldo, showAllKasus;
+    TextView nama_user, saldo, showAllKasus, showAllBerita;
     ImageView img;
     Button btn_dompet;
     String id_regis;
@@ -74,6 +74,7 @@ public class HomeFragment extends Fragment  {
         carouselView = v.findViewById(R.id.Banner);
         carouselView.setPageCount(sampleImage.length);
         showAllKasus = v.findViewById(R.id.btn_showAll_kasus);
+        showAllBerita = v.findViewById(R.id.btn_showAll_berita);
 
         ImageListener imageListener = new ImageListener() {
             @Override
@@ -88,6 +89,14 @@ public class HomeFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), DonasiActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        showAllBerita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), BeritaActivity.class);
                 startActivity(intent);
             }
         });
@@ -124,7 +133,6 @@ public class HomeFragment extends Fragment  {
                         playerModel.setTujuan(Util.setformatrupiah(dataobj.getString("tujuan_dana")));
                         playerModel.setImage(dataobj.getString("gambar"));
                         playerModel.setID_Panti(dataobj.getString("id_panti"));
-
                         modelDataList.add(playerModel);
                     }
                     setupListView();
@@ -159,7 +167,7 @@ public class HomeFragment extends Fragment  {
 
                     modelDataBeritaList = new ArrayList<>();
                     JSONArray data = obj.getJSONArray("data");
-                    for (int i = 0; i < data.length(); i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         ModelDataBerita playerModel = new ModelDataBerita();
                         JSONObject dataobj = data.getJSONObject(i);

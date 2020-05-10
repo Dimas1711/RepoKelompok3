@@ -46,8 +46,9 @@ class Verif_model extends CI_Model
 	public function hapusdatapanti($id){
         // $this->db->where('id_registrasi' , $id);
 		// return $this->db->delete('panti');
-		$this->db->query("DELETE FROM panti WHERE id_registrasi = '$id'");
-		$this->db->query("DELETE FROM registrasi WHERE id_registrasi = '$id'");
+		$tables = array('panti', 'registrasi');
+		$this->db->where('id_registrasi', $id);
+		return $this->db->delete($tables);
     }
 	public function buat_kode(){
         $this->db->select('RIGHT(registrasi.id_registrasi,3) as kode',FALSE);
