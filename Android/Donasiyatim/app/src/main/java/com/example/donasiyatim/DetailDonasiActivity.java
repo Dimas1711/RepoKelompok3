@@ -33,8 +33,6 @@ public class DetailDonasiActivity extends AppCompatActivity {
     TextView uang_terkumpul, tujuan_dana, deskripsi, tanggal, judul, nama_panti, tenggat_waktu;
     ImageView imgView, imgPanti;
     Button donasiSekarang;
-    Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -101,8 +101,6 @@ public class HomeFragment extends Fragment  {
             }
         });
 
-
-
         String val = authdata.getInstance(getActivity()).getKodeUser();
         Log.e("val","testes" + val);
         //nama_user.setText(jenenge);
@@ -115,7 +113,8 @@ public class HomeFragment extends Fragment  {
 
     private void retrieveJSON()
     {
-        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_get", new Response.Listener<String>() {
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_get",
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("strrrrr", ">>" + response);
@@ -158,7 +157,8 @@ public class HomeFragment extends Fragment  {
 
     private void retrieveJSONBerita()
     {
-        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "berita/index_get", new Response.Listener<String>() {
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "berita/index_get",
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String responseBerita) {
                 Log.d("strrrrr", ">>" + responseBerita);
@@ -218,7 +218,8 @@ public class HomeFragment extends Fragment  {
 
     private void loaddetail()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="+authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="
+                +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
@@ -244,29 +245,10 @@ public class HomeFragment extends Fragment  {
                     }
                 }) {
 
-//            @Override
-//            public Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("id_registrasi", authdata.getInstance(getActivity()).getKodeUser());
-//                return params;
-//            }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-
         requestQueue.add(senddata);
     }
 
-//    @Override
-//    public void OnitemClick(int position) {
-//        Intent detailIntent = new Intent(getActivity().getApplicationContext(), DetailDonasiActivity.class);
-//        ModelData clickItem = modelDataList.get(position);
-//
-////        detailIntent.putExtra(EXTRA_IMG, clickItem.getImage());
-//        detailIntent.putExtra(EXTRA_ID, clickItem.getID_Kasus());
-//        detailIntent.putExtra(EXTRA_ID_PANTI, clickItem.getID_Panti());
-//
-//        startActivity(detailIntent);
-//
-//    }
 
 }

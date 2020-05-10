@@ -191,8 +191,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_panti"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
@@ -206,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:text="nama panti"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/img_panti"

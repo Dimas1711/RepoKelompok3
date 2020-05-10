@@ -32,10 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    TextView nama_user, saldo;
-    Button btn_dompet;
-    String id_regis;
-    String saldoku;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListenener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-
     }
-
     private BottomNavigationView.OnNavigationItemSelectedListener navListenener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -70,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-
                     return true;
                 }
             };

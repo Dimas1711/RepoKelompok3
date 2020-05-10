@@ -8,7 +8,6 @@ public class ModelDataBerita {
     private String Tanggal_berita;
     private String Gambar_berita;
 
-
     public String getGambar_berita() {
         return Gambar_berita;
     }
