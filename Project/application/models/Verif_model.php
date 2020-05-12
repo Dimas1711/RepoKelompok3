@@ -102,7 +102,7 @@ class Verif_model extends CI_Model
 
 	public function verif_topup_detail($id)
 	{
-		return $query = $this->db->query("SELECT * FROM dompet, user WHERE user.id_user = dompet.id_user AND dompet.id_dompet = $id")->result_array();
+		return $query = $this->db->query("SELECT * FROM dompet, user WHERE user.id_user = dompet.id_user AND dompet.id_dompet = '$id'")->result_array();
 	}
 
 	public function ubah_status_setuju_topup($id)
