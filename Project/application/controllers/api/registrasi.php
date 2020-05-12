@@ -16,7 +16,7 @@ class Registrasi extends REST_Controller{
     public function index_post(){
         $email = $this->input->post('email');
         $password = md5($this->input->post('password'));
-     
+        $kodeku = $this->UserModel->randomkode(32);
         $nama = $this->input->post('nama');
 
         $cek = $this->db->get_where('registrasi', ['email' => $email])->row_array();
