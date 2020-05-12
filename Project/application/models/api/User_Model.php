@@ -41,7 +41,7 @@ class User_Model extends CI_Model
             $kode=1;
         }
         $kode_max=str_pad($kode,3,"0",STR_PAD_LEFT);
-        $kode_jadi="AxDGajfuY".$kode_max;
+        $kode_jadi="A00".$kode_max;
         return $kode_jadi;
     }
 
