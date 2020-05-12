@@ -54,8 +54,7 @@ public class HomeFragment extends Fragment  {
     TextView nama_user, saldo, showAllKasus, showAllBerita;
     ImageView img;
     Button btn_dompet;
-    String id_regis;
-    String saldoku;
+    String saldoku, userid, idregis;
     RecyclerView rv, rvBerita;
     List<ModelData> modelDataList;
     List<ModelDataBerita> modelDataBeritaList;
@@ -85,6 +84,16 @@ public class HomeFragment extends Fragment  {
 
         carouselView.setImageListener(imageListener);
 
+        btn_dompet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplicationContext(),DompetActivity.class);
+                intent.putExtra("id_regis", idregis);
+                intent.putExtra("id_user", userid);
+                startActivity(intent);
+            }
+        });
+
         showAllKasus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +116,8 @@ public class HomeFragment extends Fragment  {
         loaddetail();
         retrieveJSON();
         retrieveJSONBerita();
+
+
 
         return v;
     }
@@ -230,8 +241,12 @@ public class HomeFragment extends Fragment  {
                     JSONObject arr1 = arr.getJSONObject(0);
                     saldo.setText(Util.setformatrupiah(arr1.getString("finansial")));
                     nama_user.setText(arr1.getString("nama_user"));
+                    idregis = arr1.getString("id_registrasi");
+                    userid = arr1.getString("id_user");
                     saldoku = arr1.getString("finansial");
                     Log.e("saldo", ""+saldoku);
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("erronya ",""+e);
