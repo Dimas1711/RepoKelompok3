@@ -15,19 +15,18 @@ class Top_Up extends REST_Controller{
     }
 
     public function index_post(){
-        $token = base64_encode(random_bytes(32));
-        // $id_dompet = $token;
         $id_user = $this->input->post('id_user');
         $jumlah = $this->input->post('jumlah_inginkan');
+        $kode = $this->topup->buat_kode();
 
         $foto = $_FILES['foto']['name'];
-        $kode = $this->topup->buat_kode();
+     
         $config['allowed_types'] = 'jpg|png|gif|jpeg';
         $config['max_size'] = '2048';
-        $config['upload_path'] = '../../uploads/topup';
+        $config['upload_path'] = '././uploads/topup';
         
         $this->load->library('upload' , $config);
-            
+        if ($this->upload->do_upload('foto')) {
         $arr = [
             'id_dompet' => $kode,
             'id_user' => $id_user,
@@ -36,8 +35,21 @@ class Top_Up extends REST_Controller{
             'tanggal' => date("Y-m-d"),
             'status' => 0,
         ];
-        $cek = $this->topup->insert('dompet', $arr);
-        
+            if ($this->topup->insert('dompet', $arr)) {
+                $response = [
+                    'status' => true,
+                    'pesan' => 'Top Up Berhasil , Tunggu Konfirmasi dari Admin',
+                ];
+                $this->response($response, 200);
+            }else{
+                $response = [
+                    'status' => false,
+                    'pesan' => 'Top Up Gagal',
+                ];
+                $this->response($response, 200);
+            }
+      
+            }
         
    /// todo :: ini untuk ambil data dari user dompet yg sekarang
         $dompet = $this->topup->top_up($id_user);
@@ -61,6 +73,7 @@ class Top_Up extends REST_Controller{
             ];
             $this->response($response, 200);
         }
+        
        
 
        
