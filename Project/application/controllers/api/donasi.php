@@ -19,9 +19,9 @@ class Donasi extends REST_Controller{
         $id_user = $this->input->post('id_user');
         $id_kasus = $this->input->post('id_kasus');
         $jumlah_donasi = $this->input->post('jumlah_donasi');
-
+        $kode = $this->donasi->buat_kode();
         $arr = [
-            'id_donasi' => urlencode($token),
+            'id_donasi' => $kode,
             'id_user' =>  $id_user,
             'id_kasus' => $id_kasus,
             'jumlah_donasi' => $jumlah_donasi,

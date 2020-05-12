@@ -19,24 +19,33 @@ class Top_Up extends REST_Controller{
         // $id_dompet = $token;
         $id_user = $this->input->post('id_user');
         $jumlah = $this->input->post('jumlah_inginkan');
-        $foto = $this->input->post('foto');
+
+        $foto = $_FILES['foto']['name'];
+        $kode = $this->topup->buat_kode();
+        $config['allowed_types'] = 'jpg|png|gif|jpeg';
+        $config['max_size'] = '2048';
+        $config['upload_path'] = '../../uploads/topup';
         
+        $this->load->library('upload' , $config);
+            
         $arr = [
-            'id_dompet' => urlencode($token),
+            'id_dompet' => $kode,
             'id_user' => $id_user,
             'jumlah_inginkan' => $jumlah,
-            'foto' => '',
+            'foto' => $foto,
             'tanggal' => date("Y-m-d"),
             'status' => 0,
         ];
         $cek = $this->topup->insert('dompet', $arr);
+        
+        
    /// todo :: ini untuk ambil data dari user dompet yg sekarang
         $dompet = $this->topup->top_up($id_user);
         $www = $dompet['finansial'];
 
         /// ini untuk ambil saldo setelah di top up di tb dompet
         
-        $cektopup = $this->topup->cekdompet(urlencode($token));
+        $cektopup = $this->topup->cekdompet($kode);
         $qq = $cektopup['jumlah_inginkan'];
 
         $akhir = $www + $qq;
