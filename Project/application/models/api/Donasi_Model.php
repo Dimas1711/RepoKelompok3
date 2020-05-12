@@ -21,6 +21,13 @@
                 return $this->db->get_where('kasus' , ['id_kasus' => $id])->row_array();
             }
         }
+        public function panti($id = null){ // cek user finansial
+            if ($id === null) {
+                return $this->db->get_where('panti')->row_array();
+            }else {
+                return $this->db->get_where('panti' , ['id_panti' => $id])->row_array();
+            }
+        }
         public function cekdonasi($id = null){//cek hasil donasi
             if ($id === null) {
                 return $this->db->get_where('donasi')->row_array();

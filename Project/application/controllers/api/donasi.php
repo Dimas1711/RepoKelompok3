@@ -32,7 +32,14 @@ class Donasi extends REST_Controller{
         $www = $dompet['finansial'];
 
         $kasus = $this->donasi->kasus($id_kasus);
+       
         $zzz = $kasus['jumlah_uang_terkumpul'];
+
+        $id_panti = $kasus['id_panti'];
+        $panti = $this->donasi->panti($id_panti);
+        $finansial = $panti['finansial'];
+       
+
         $jumlah_orang = $kasus['jumlah_pendonasi'];
         if ($www < $jumlah_donasi) {
             $response = [
@@ -41,7 +48,9 @@ class Donasi extends REST_Controller{
             ];
         }else{
             $cek = $this->donasi->insert('donasi', $arr);
+            // echo $finansial;
             $updatejumlahsaldo = $www - $jumlah_donasi;
+            $updatefinansial = $jumlah_donasi + $finansial;
             $updateuangterkumpul = $zzz + $jumlah_donasi;
             $updateorang = $jumlah_orang + 1;
 
@@ -56,10 +65,15 @@ class Donasi extends REST_Controller{
             $this->db->set('jumlah_uang_terkumpul',$updateuangterkumpul);
             $this->db->where('id_kasus' , $id_kasus);
             $this->db->update('kasus');
-
+            //jumlah donasi orangnya
             $this->db->set('jumlah_pendonasi',$updateorang);
             $this->db->where('id_kasus' , $id_kasus);
             $this->db->update('kasus');
+
+            //update ke tb panti finansialnya
+            $this->db->set('finansial',$updatefinansial);
+            $this->db->where('id_panti' , $id_panti);
+            $this->db->update('panti');
 
             $response = [
                 'status' => true,
