@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
     TextView uang_terkumpul, tujuan_dana, deskripsi, tanggal, judul, nama_panti, tenggat_waktu;
     ImageView imgView, imgPanti;
     Button donasiSekarang;
+    String id_kasus, id_user, id_regis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +50,20 @@ public class DetailDonasiActivity extends AppCompatActivity {
         tenggat_waktu = findViewById(R.id.tv_tenggat_waktu);
         imgPanti = findViewById(R.id.img_panti);
         donasiSekarang = findViewById(R.id.btn_donasi);
+        id_kasus = getIntent().getStringExtra("id_kasus");
+        id_regis = authdata.getInstance(getApplicationContext()).getKodeUser();
 
+        donasiSekarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailDonasiActivity.this, ProsesDonasiActivity.class);
+                intent.putExtra("id_kasus", id_kasus);
+                intent.putExtra("id_user", id_user);
+                startActivity(intent);
+            }
+        });
 
-
+        loaduser();
         loaddetail();
         loadPanti();
 
@@ -58,7 +71,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
 
     private void loaddetail()
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_post?id_kasus="+getIntent().getStringExtra("id_kasus"), new Response.Listener<String>(){
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "kasus/index_post?id_kasus="+id_kasus, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
@@ -128,6 +141,39 @@ public class DetailDonasiActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
+        requestQueue.add(senddata);
+    }
+
+    private void loaduser()//ini buat nampilin saldo
+    {
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="
+                +authdata.getInstance(getApplicationContext()).getKodeUser(), new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                JSONObject res = null;
+                try {
+                    res = new JSONObject(response);
+                    Log.e("responnya ",""+response);
+                    JSONArray arr = res.getJSONArray("data");
+                    JSONObject arr1 = arr.getJSONObject(0);
+                    id_user = arr1.getString("id_user");
+                    Log.e("saldo", ""+id_user);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("erronya ",""+e);
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "errornya : " + error.getMessage());
+                    }
+                }) {
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(senddata);
     }
 

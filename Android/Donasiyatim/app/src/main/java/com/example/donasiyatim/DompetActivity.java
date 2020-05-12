@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -31,6 +34,8 @@ public class DompetActivity extends AppCompatActivity {
     List<ModelDataRiwayatTopup> modelDataRiwayatTopup;
     ListAdapterRiwayatTopup listAdapterRiwayatTopup;
     RecyclerView rv_riwayat;
+    Button isi_saldo;
+    String id_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +43,19 @@ public class DompetActivity extends AppCompatActivity {
 
         saldo = findViewById(R.id.finansial);
         rv_riwayat = findViewById(R.id.rv_riwayatTopup);
+        isi_saldo = findViewById(R.id.btn_isi);
 
         loaddetail();
         retrieveJSONRiwayatTopup();
+
+        isi_saldo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DompetActivity.this, TopupActivity.class);
+                intent.putExtra("id_user",id_user);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -57,6 +72,7 @@ public class DompetActivity extends AppCompatActivity {
                     JSONArray arr = res.getJSONArray("data");
                     JSONObject arr1 = arr.getJSONObject(0);
                     saldo.setText(Util.setformatrupiah(arr1.getString("finansial")));
+                    id_user = arr1.getString("id_user");
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("erronya ",""+e);

@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment  {
     TextView nama_user, saldo, showAllKasus, showAllBerita;
     ImageView img;
     Button btn_dompet;
-    String saldoku, userid, idregis;
+    String saldoku, userid, idregis, auth;
     RecyclerView rv, rvBerita;
     List<ModelData> modelDataList;
     List<ModelDataBerita> modelDataBeritaList;
@@ -74,6 +74,9 @@ public class HomeFragment extends Fragment  {
         carouselView.setPageCount(sampleImage.length);
         showAllKasus = v.findViewById(R.id.btn_showAll_kasus);
         showAllBerita = v.findViewById(R.id.btn_showAll_berita);
+
+       auth = authdata.getInstance(getActivity()).getAksesData();
+       Log.e("kode user", ""+auth);
 
         ImageListener imageListener = new ImageListener() {
             @Override
@@ -98,6 +101,7 @@ public class HomeFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), DonasiActivity.class);
+                intent.putExtra("id_user", userid);
                 startActivity(intent);
             }
         });
@@ -116,8 +120,6 @@ public class HomeFragment extends Fragment  {
         loaddetail();
         retrieveJSON();
         retrieveJSONBerita();
-
-
 
         return v;
     }
@@ -243,6 +245,7 @@ public class HomeFragment extends Fragment  {
                     nama_user.setText(arr1.getString("nama_user"));
                     idregis = arr1.getString("id_registrasi");
                     userid = arr1.getString("id_user");
+                    Log.e("saldo", ""+userid);
                     saldoku = arr1.getString("finansial");
                     Log.e("saldo", ""+saldoku);
 
