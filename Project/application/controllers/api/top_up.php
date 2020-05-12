@@ -26,6 +26,7 @@ class Top_Up extends REST_Controller{
             'id_user' => $id_user,
             'jumlah_inginkan' => $jumlah,
             'foto' => '',
+            'tanggal' => date("Y-m-d"),
             'status' => 0,
         ];
         $cek = $this->topup->insert('dompet', $arr);
