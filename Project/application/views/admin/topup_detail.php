@@ -22,6 +22,9 @@
           <?php foreach ($dompet as $row) {
           ?>
           <input type="hidden" name="id_dompet" value="<?= $row['id_dompet']?>">
+          <input type="hidden" name="finansial" value="<?= $row['finansial']?>">
+          <input type="hidden" name="id_user" value="<?= $row['id_user']?>">
+          <input type="hidden" name="jumlah_inginkan" value="<?= $row['jumlah_inginkan']?>">
             <div class="card-body">
               <div class="row">
                 <div class="my-auto col-sm-2">

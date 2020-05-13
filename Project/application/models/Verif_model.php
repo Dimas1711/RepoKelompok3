@@ -109,6 +109,11 @@ class Verif_model extends CI_Model
 	{
 		$this->db->where('id_dompet', $this->input->post('id_dompet'));
 		$this->db->update('dompet', ['status' => 1]);
+		$jumlah_inginkan = $this->input->post('jumlah_inginkan');
+		$id_user = $this->input->post('id_user');
+		$finansial = $this->input->post('finansial');
+		$jumlah = $finansial + $jumlah_inginkan;
+		$this->db->query("UPDATE user SET finansial = $jumlah WHERE id_user = $id_user");
 	}
 
 	public function ubah_status_tolak_topup($id)
