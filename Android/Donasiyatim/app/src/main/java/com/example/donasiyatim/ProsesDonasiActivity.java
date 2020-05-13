@@ -2,12 +2,14 @@ package com.example.donasiyatim;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.donasiyatim.configfile.ServerApi;
+import com.example.donasiyatim.configfile.Util;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,8 +68,20 @@ public class ProsesDonasiActivity extends AppCompatActivity {
     {
         StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "Donasi/index_post",
                 new Response.Listener<String>(){
+
                     @Override
                     public void onResponse(String response) {
+                        try {
+                            JSONObject res = new JSONObject(response);
+                            if (res.optString("status").equals("true")) {
+                                Toast.makeText(ProsesDonasiActivity.this, res.getString("pesan"), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ProsesDonasiActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
 
                     }
                 },
@@ -77,7 +93,7 @@ public class ProsesDonasiActivity extends AppCompatActivity {
                 }) {
             protected Map<String, String> getParams(){
                 Map<String , String> params = new HashMap<>();
-                params.put("id_user" , "6");
+                params.put("id_user" , id_user);
                 params.put("id_kasus" , id_kasus);
                 params.put("jumlah_donasi" , isi.getText().toString());
 

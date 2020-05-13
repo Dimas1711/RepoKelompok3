@@ -2,12 +2,14 @@ package com.example.donasiyatim;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -60,19 +62,19 @@ public class TopupActivity extends AppCompatActivity {
 
     private void loaddetail()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "top_up/index_get",
+        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "top_up/index_post",
                 new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response) {
-                        JSONObject res = null;
                         try {
-                            res = new JSONObject(response);
-                            Log.e("responnya ",""+response);
-                            JSONArray arr = res.getJSONArray("data");
-                            JSONObject arr1 = arr.getJSONObject(0);
+                            JSONObject res = new JSONObject(response);
+                            if (res.optString("status").equals("true")) {
+                                Toast.makeText(TopupActivity.this, res.getString("pesan"), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(TopupActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.e("erronya ",""+e);
                         }
                     }
                 },
@@ -87,7 +89,6 @@ public class TopupActivity extends AppCompatActivity {
                 params.put("id_user" , id_user);
                 params.put("jumlah_inginkan" , isi.getText().toString());
                 params.put("foto" , "");
-
                 return params;
             }
 
