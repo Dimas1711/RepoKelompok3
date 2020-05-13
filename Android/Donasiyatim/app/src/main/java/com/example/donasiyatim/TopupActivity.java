@@ -55,45 +55,49 @@ public class TopupActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loaddetail();
+//                loaddetail();
+                Intent intent = new Intent(TopupActivity.this, UploadFotoActivity.class);
+                intent.putExtra("jumlah_inginkan", isi.getText().toString());
+                intent.putExtra("id_user", id_user);
+            startActivity(intent);
             }
         });
     }
 
-    private void loaddetail()//ini buat nampilin saldo
-    {
-        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "top_up/index_post",
-                new Response.Listener<String>(){
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject res = new JSONObject(response);
-                            if (res.optString("status").equals("true")) {
-                                Toast.makeText(TopupActivity.this, res.getString("pesan"), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(TopupActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("volley", "errornya : " + error.getMessage());
-                    }
-                }) {
-            protected Map<String, String> getParams(){
-                Map<String , String> params = new HashMap<>();
-                params.put("id_user" , id_user);
-                params.put("jumlah_inginkan" , isi.getText().toString());
-                params.put("foto" , "");
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(senddata);
-    }
+//    private void loaddetail()//ini buat nampilin saldo
+//    {
+//        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "top_up/index_post",
+//                new Response.Listener<String>(){
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject res = new JSONObject(response);
+//                            if (res.optString("status").equals("true")) {
+//                                Toast.makeText(TopupActivity.this, res.getString("pesan"), Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(TopupActivity.this, MainActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.d("volley", "errornya : " + error.getMessage());
+//                    }
+//                }) {
+//            protected Map<String, String> getParams(){
+//                Map<String , String> params = new HashMap<>();
+//                params.put("id_user" , id_user);
+//                params.put("jumlah_inginkan" , isi.getText().toString());
+//                params.put("foto" , "");
+//                return params;
+//            }
+//
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        requestQueue.add(senddata);
+//    }
 }

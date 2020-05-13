@@ -22,7 +22,7 @@ class Top_Up extends REST_Controller{
         $foto = $_FILES['foto']['name'];
      
         $config['allowed_types'] = 'jpg|png|gif|jpeg';
-        $config['max_size'] = '2048';
+        $config['max_size'] = '5000';
         $config['upload_path'] = '././uploads/topup';
         
         $this->load->library('upload' , $config);
