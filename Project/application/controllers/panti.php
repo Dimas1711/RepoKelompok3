@@ -62,11 +62,25 @@
 
             $id_registrasi = $this->session->userdata('id_registrasi');
 
-            $data['akun'] = $this->db->query("SELECT nama_panti, email, tanggal_berdiri, foto FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
+            $data['akun'] = $this->db->query("SELECT id_panti, nama_panti, email, tanggal_berdiri, foto FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
 
             $this->load->view("template/sidebar2");
             $this->load->view("template/header",$data);
             $this->load->view("panti/akun_panti",$data);
+            $this->load->view("template/footer");
+        }
+        public function detail($id)
+        {
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+            $this->session->userdata('email')])->row_array();
+
+            $id_registrasi = $this->session->userdata('id_registrasi');
+
+            $data['akun'] = $this->db->query("SELECT * FROM panti WHERE id_panti = '$id'")->result_array();
+
+            $this->load->view("template/sidebar2");
+            $this->load->view("template/header",$data);
+            $this->load->view("panti/akun_panti_detail",$data);
             $this->load->view("template/footer");
         }
 
