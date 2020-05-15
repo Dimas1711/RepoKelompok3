@@ -25,7 +25,9 @@ class Admin extends CI_Controller
         $data['task'] = $this->db->query("select sum(tbl.hasil)
         from(select count(status) as hasil from kasus WHERE status = 1 UNION ALL select count(status) as hasil from panti WHERE status = 1 UNION ALL select count(status) as hasil from dompet WHERE status = 1 ) tbl")->row_array();
         $data['jumlah'] = $this->db->query("SELECT SUM(jumlah_donasi) FROM donasi")->row_array();
-        
+        $data['kasus'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 0")->row_array();
+        $data['panti'] = $this->db->query("select count(status) as hasil from panti WHERE status = 0")->row_array();
+        $data['dompet'] = $this->db->query("select count(status) as hasil from dompet WHERE status = 0")->row_array();
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
         $this->load->view("template/dashboard",$data);

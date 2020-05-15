@@ -1,3 +1,4 @@
+
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -84,8 +85,17 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <div class="dropdown">
+                        <button class="btn btn-light " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pending Requests
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="<?= base_url("admin/verif_kasus")?>">Kasus Donasi (<?php foreach($kasus as $row){?> <?=$row?> <?php }?>)</a>
+                          <a class="dropdown-item" href="<?= site_url("admin/verif_topup")?>">Top Up (<?php foreach($dompet as $row){?> <?=$row?> <?php }?>)</a>
+                          <a class="dropdown-item" href="<?= base_url("admin/verifikasi_panti")?>">Panti (<?php foreach($panti as $row){?> <?=$row?> <?php }?>)</a>
+                        </div>
+                      </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
                       <?php foreach($hasil as $row){?>
                         <?=$row?> 
                         <?php }?>
