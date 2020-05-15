@@ -23,9 +23,14 @@ class Admin extends CI_Controller
         $data['hasil'] = $this->db->query("select sum(tbl.hasil)
         from(select count(status) as hasil from kasus WHERE status = 0 UNION ALL select count(status) as hasil from panti WHERE status = 0 UNION ALL select count(status) as hasil from dompet WHERE status = 0 ) tbl")->row_array();
         $data['task'] = $this->db->query("select sum(tbl.hasil)
-        from(select count(status) as hasil from kasus WHERE status = 1 UNION ALL select count(status) as hasil from panti WHERE status = 1 UNION ALL select count(status) as hasil from dompet WHERE status = 1 ) tbl")->row_array();
+        from(select count(status) as hasil from kasus WHERE status = 1 UNION ALL select count(status) as hasil from kasus WHERE status = 2 ) tbl")->row_array();
         $data['jumlah'] = $this->db->query("SELECT SUM(jumlah_donasi) FROM donasi")->row_array();
-        
+        $data['kasus'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 0")->row_array();
+        $data['panti'] = $this->db->query("select count(status) as hasil from panti WHERE status = 0")->row_array();
+        $data['dompet'] = $this->db->query("select count(status) as hasil from dompet WHERE status = 0")->row_array();
+        $data['activepanti'] = $this->db->query("select count(status) as hasil from panti WHERE status = 1")->row_array();
+        $data['kasus1'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 1")->row_array();
+        $data['kasus2'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 2")->row_array();
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
         $this->load->view("template/dashboard",$data);
@@ -44,6 +49,20 @@ class Admin extends CI_Controller
         $this->load->view("admin/setting/setting" , $data);
         $this->load->view("template/footer");
     }
+
+    public function profil(){
+
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->index_admin();
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/profil" , $data);
+        $this->load->view("template/footer");
+    }
+
     public function data_bank(){
 
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 

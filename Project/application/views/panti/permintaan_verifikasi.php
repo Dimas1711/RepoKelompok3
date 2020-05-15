@@ -208,7 +208,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                  <p>Upload Logo Komunitas</p>
+                  <p>Foto Panti</p>
                   <div class="input-group">
                     <input name="foto" id="foto"
                            type="file"
