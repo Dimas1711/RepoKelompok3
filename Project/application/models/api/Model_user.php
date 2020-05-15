@@ -14,4 +14,11 @@ class Model_user extends CI_Model
             return $cek;
             
         }
+        public function getAcc($id = null){
+                if ($id === null) {
+                     return $this->db->get('akun_bank')->result_array();
+                }else {
+                    return $this->db->get_where('akun_bank' , ['id_akun' => $id])->result_array();
+                }
+            }
 }
