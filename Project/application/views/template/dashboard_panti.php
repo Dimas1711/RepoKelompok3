@@ -12,17 +12,29 @@ class="btn btn-sm btn-info btn-icon-split shadow-sm">
                   <span class="text">Daftar Panti</span>
 </a> <br><br><br><br>
 
-        <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
-                <div class="text-box" >
-                <img src="<?= base_url("uploads/panti/images.png")?>" width="200px">
-                <br><br>
-                    <p class="text-muted">Jumlah Kasus</p>
-                    <!-- <p class="main-text"><?php //echo "$d";?></p>-->
-                </div>
-            </div>
-		</div>
+ 
+  <div class="card-deck">
+    <div class="card">
+      <img src="<?= base_url("uploads/panti/images.png")?>" style="width: 40%" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">0</h5>
+          <p class="card-text">Jumlah Kasus</p>
+          <a href="<?= base_url('panti/listKasusPanti') ?>" class="btn btn-primary">Lihat</a>
+    </div>
+  
+ </div>
 
+    <div class="card" style="width: 10%">
+      <img src="<?= base_url("uploads/panti/saldo.png")?>" style="width: 40%" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Rp 0,- </h5>
+          <p class="card-text">Jumlah Saldo</p>
+          <a href="<?= base_url('panti/tariksaldo') ?>" class="btn btn-primary">Lihat</a>
+    </div>
+ </div>
+ </div>
+
+        <br><br><br><br>
 <div>
 <?php echo $this->session->flashdata('pesan')?>
 </div>

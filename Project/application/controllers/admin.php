@@ -49,6 +49,20 @@ class Admin extends CI_Controller
         $this->load->view("admin/setting/setting" , $data);
         $this->load->view("template/footer");
     }
+
+    public function profil(){
+
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        $data['admin'] = $this->Verif_model->index_admin();
+        
+        $this->load->view("template/sidebar");
+        $this->load->view("template/header",$data);
+        $this->load->view("admin/setting/profil" , $data);
+        $this->load->view("template/footer");
+    }
+
     public function data_bank(){
 
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
