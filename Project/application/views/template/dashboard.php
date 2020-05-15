@@ -17,8 +17,12 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Panti</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php foreach($activepanti as $row){?>
+                        <?=$row?> 
+                        <?php }?>
+                      </div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -55,7 +59,16 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Active</div>
+                      <!-- <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Kasus</div> -->
+                        <div class="dropdown">
+                            <button class="btn btn-light " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Kasus
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="<?= base_url("admin/verif_kasus")?>">Selesai (<?php foreach($kasus1 as $row){?> <?=$row?> <?php }?>)</a>
+                              <a class="dropdown-item" href="<?= site_url("admin/verif_topup")?>">Belum Selesai (<?php foreach($kasus2 as $row){?> <?=$row?> <?php }?>)</a>
+                            </div>
+                          </div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
@@ -65,9 +78,9 @@
                           </div>
                         </div>
                         <div class="col">
-                          <div class="progress progress-sm mr-2">
+                          <!-- <div class="progress progress-sm mr-2">
                             <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </div>
@@ -85,17 +98,17 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="dropdown">
-                        <button class="btn btn-light " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pending Requests
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="<?= base_url("admin/verif_kasus")?>">Kasus Donasi (<?php foreach($kasus as $row){?> <?=$row?> <?php }?>)</a>
-                          <a class="dropdown-item" href="<?= site_url("admin/verif_topup")?>">Top Up (<?php foreach($dompet as $row){?> <?=$row?> <?php }?>)</a>
-                          <a class="dropdown-item" href="<?= base_url("admin/verifikasi_panti")?>">Panti (<?php foreach($panti as $row){?> <?=$row?> <?php }?>)</a>
+                        <div class="dropdown">
+                          <button class="btn btn-light " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Pending Requests
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="<?= base_url("admin/verif_kasus")?>">Kasus Donasi (<?php foreach($kasus as $row){?> <?=$row?> <?php }?>)</a>
+                            <a class="dropdown-item" href="<?= site_url("admin/verif_topup")?>">Top Up (<?php foreach($dompet as $row){?> <?=$row?> <?php }?>)</a>
+                            <a class="dropdown-item" href="<?= base_url("admin/verifikasi_panti")?>">Panti (<?php foreach($panti as $row){?> <?=$row?> <?php }?>)</a>
+                          </div>
                         </div>
-                      </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
                       <?php foreach($hasil as $row){?>
                         <?=$row?> 
                         <?php }?>
