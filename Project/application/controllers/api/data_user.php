@@ -33,5 +33,39 @@ class data_user extends REST_Controller{
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
+
+    public function index_put()
+    {
+        $id = $this->put('id_user');
+        $data = [
+            'id_registrasi' => $this->put('id_registrasi'),
+            'nama_user' => $this->put('nama_user'),
+            'alamat' => $this->put('alamat'),
+            'no_telp' => $this->put('no_telp'),
+            'email' => $this->put('email'),
+            'no_rekening' => $this->put('no_rekening'),
+            'nama_rekening' => $this->put('nama_rekening'),
+            'nama_bank' => $this->put('nama_bank'),
+            'tanggal_lahir' => $this->put('tanggal_lahir'),
+            'jenis_kelamin' => $this->put('jenis_kelamin'),
+            'tempat_lahir' => $this->put('tempat_lahir'),
+            'nik' => $this->put('nik'),
+            'pekerjaan' => $this->put('pekerjaan'),
+            'finansial' => $this->put('finansial')
+        ];
+        if($this->user->updateUser($data, $id) > 0)
+        {
+            $this->response([
+                'status' => 'true',
+                'message' => 'User telah di update'
+            ], REST_Controller::HTTP_OK);
+        }
+        else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'User gagal di update'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
     
 }
