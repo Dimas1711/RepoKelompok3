@@ -35,7 +35,7 @@ public class DompetActivity extends AppCompatActivity {
     ListAdapterRiwayatTopup listAdapterRiwayatTopup;
     RecyclerView rv_riwayat;
     Button isi_saldo;
-    String id_user;
+    String id_user,id_regis,nama;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,7 @@ public class DompetActivity extends AppCompatActivity {
         saldo = findViewById(R.id.finansial);
         rv_riwayat = findViewById(R.id.rv_riwayatTopup);
         isi_saldo = findViewById(R.id.btn_isi);
+        id_regis = getIntent().getStringExtra("id_regis");
 
         loaddetail();
         retrieveJSONRiwayatTopup();
@@ -53,15 +54,16 @@ public class DompetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DompetActivity.this, TopupActivity.class);
                 intent.putExtra("id_user",id_user);
+                intent.putExtra("id_regis",id_regis);
+                intent.putExtra("nama_user",nama);
                 startActivity(intent);
             }
         });
 
     }
-
     private void loaddetail()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="+getIntent().getStringExtra("id_regis"),
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="+id_regis,
                 new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
@@ -73,6 +75,7 @@ public class DompetActivity extends AppCompatActivity {
                     JSONObject arr1 = arr.getJSONObject(0);
                     saldo.setText(Util.setformatrupiah(arr1.getString("finansial")));
                     id_user = arr1.getString("id_user");
+                    nama = arr1.getString("nama_user");
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("erronya ",""+e);
