@@ -38,7 +38,6 @@ class data_user extends REST_Controller{
     {
         $id = $this->put('id_user');
         $data = [
-            'id_registrasi' => $this->put('id_registrasi'),
             'nama_user' => $this->put('nama_user'),
             'alamat' => $this->put('alamat'),
             'no_telp' => $this->put('no_telp'),
