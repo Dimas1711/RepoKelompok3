@@ -304,7 +304,7 @@
             $this->load->view("template/footer");
         }
 
-        public function profil()
+        public function profilpanti()
         {
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
@@ -321,6 +321,80 @@
             $this->load->view("template/footer");
         }
       
+        public function editdata($id){
+                      
+            $this->form_validation->set_rules('email','Email','required');
+            $this->form_validation->set_rules('nama','Ketua Panti','required|trim');
+          
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => $this->session->userdata('email')])->row_array();
+            $akun['akun'] = $this->z->detail($id);
+            if ($this->form_validation->run() == false) {
+            
+                $this->load->view("template/sidebar2");
+                $this->load->view("template/header",$data);
+                $this->load->view("panti/akun_panti",$akun);
+                $this->load->view("template/footer");
+            
+            }else{
+              
+                $email = $this->input->post('email');
+                $nama = $this->input->post('nama');
         
+
+               $this->db->set('nama', $nama);
+               $this->db->where('email', $email);
+               $this->db->update('profilpanti');
+
+               $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+			Profil Berhasi Diubah!
+			</div>');
+			redirect('panti/profilpanti');
+
+               if ($update) {
+                   
+                $ubahfoto = $_FILES['profil']['name'];
+
+                if ($ubahfoto) {
+                    $config['allowed_types'] = 'jpg|png|gif|jpeg';
+                    $config['max_size'] = '4000';
+                    $config['upload_path'] = './uploads/akun/';
+
+                    $this->load->library('upload', $config);
+
+                    if ($this->upload->do_upload('profil')) {
+                        $old_profil = $data['profilakun']['profil'];
+                        if($old_profil != 'default.jpg') {
+                            unlink(FCPATH . 'uploads/akun/' . $old_profil);
+                        }
+                        
+                        $fotobaru = $this->upload->data('file_name');
+                        $user = $this->db->get_where('registrasi', ['id_registrasi'=>$id])->row_array();
+                        $fotolama = $user['profil'];
+                        if ($fotolama) {
+                            unlink(FCPATH . '/uploads/akun/' . $fotolama);
+                        }
+                        $fotobaru = $this->upload->data('file_name');
+                        $this->db->set('profil', $fotobaru);
+                        $this->db->where('id_registrasi', $id);
+                        $this->db->update('registrasi');
+                    } else {
+                        $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">'
+                        . $this->upload->display_errors() .
+                        '</div>');
+                        redirect('panti/akun_panti');
+                    }
+			}
+			$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+			Berhasil Mengubah Data!
+			</div>');
+			redirect('panti/akun_panti');
+            }else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                    Gagal Mengubah Data!
+                    </div>');
+                redirect('panti/profilpanti');
+            }
+        }
+    } 
 }
 ?>

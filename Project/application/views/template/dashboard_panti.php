@@ -24,8 +24,8 @@ class="btn btn-sm btn-info btn-icon-split shadow-sm">
   
  </div>
 
-    <div class="card" style="width: 10%">
-      <img src="<?= base_url("uploads/panti/saldo.png")?>" style="width: 40%" class="card-img-top">
+    <div class="card">
+      <img src="<?= base_url("uploads/panti/uang.png")?>" style="width: 40%" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">Rp 0,- </h5>
           <p class="card-text">Jumlah Saldo</p>
