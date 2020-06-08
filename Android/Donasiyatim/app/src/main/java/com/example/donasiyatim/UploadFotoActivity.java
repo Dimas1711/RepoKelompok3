@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,10 +28,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.donasiyatim.configfile.ServerApi;
+import com.example.donasiyatim.configfile.Util;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -39,10 +42,18 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,10 +63,10 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 public class UploadFotoActivity extends AppCompatActivity {
     ImageView img_foto;
     Button pilih, upload;
+    TextView nama, jumlah, tanggal;
     public static final int REQUEST_CODE_CAMERA = 001;
     public static final int REQUEST_CODE_GALLERY = 002;
-    String id_user, jumlah_inginkan;
-    ProgressDialog progressDoalog;
+    String id_user, jumlah_inginkan, nama_user;
     Bitmap bitmap;
 
     @Override
@@ -67,21 +78,31 @@ public class UploadFotoActivity extends AppCompatActivity {
         img_foto = findViewById(R.id.img_foto);
         pilih = findViewById(R.id.btn_choose);
         upload = findViewById(R.id.btn_upload);
+        nama = findViewById(R.id.nama);
+        jumlah = findViewById(R.id.jumlah_topup);
+        tanggal = findViewById(R.id.tanggal);
+
+        nama_user = getIntent().getStringExtra("nama_user");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY 'at' HH:mm:ss");
+        String currentDateandTime = sdf.format(new Date());
+
+
+        tanggal.setText(currentDateandTime);
+
+
         id_user = getIntent().getStringExtra("id_user");
         jumlah_inginkan = getIntent().getStringExtra("jumlah_inginkan");
 
+
         Log.e("saldo", ""+id_user);
+        Log.e("saldo", ""+nama_user);
         Log.e("saldo", ""+jumlah_inginkan);
 
 
         pilih.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ActivityCompat.requestPermissions(
-//                        UploadFotoActivity.this,
-//                        new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
-//                        REQUEST_CODE_GALLERY
-//                );
                 setRequestImage();
             }
         });
@@ -92,6 +113,9 @@ public class UploadFotoActivity extends AppCompatActivity {
                 loaddetail();
             }
         });
+
+        jumlah.setText(Util.setformatrupiah(jumlah_inginkan));
+        nama.setText(nama_user);
     }
 
     private void setRequestImage(){
@@ -140,19 +164,6 @@ public class UploadFotoActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if  (requestCode == CODE_GALLERY_REQUEST && resultCode == RESULT_OK && data != null)
-////        {
-////            Uri filePath = data.getData();
-////            try {
-////                InputStream inputStream = getContentResolver().openInputStream(filePath);
-////                bitmap = BitmapFactory.decodeStream(inputStream);
-////                img_foto.setImageBitmap(bitmap);
-////            } catch (FileNotFoundException e) {
-////                e.printStackTrace();
-////            }
-////
-////        }
-////        super.onActivityResult(requestCode, resultCode, data);
 
         super.onActivityResult(requestCode, resultCode, data);
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, new EasyImage.Callbacks() {
@@ -193,6 +204,8 @@ public class UploadFotoActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void loaddetail()//ini buat nampilin saldo
     {

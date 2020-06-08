@@ -29,10 +29,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TopupActivity extends AppCompatActivity {
-    TextView rp50, rp100;
+    TextView rp50, rp100, rp150, rp200;
     EditText isi;
     Button btn;
-    String id_user;
+    String id_user, nama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,15 @@ public class TopupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_topup);
 
         id_user = getIntent().getStringExtra("id_user");
+        nama = getIntent().getStringExtra("nama_user");
 
         rp50 = findViewById(R.id.rp50);
         rp100 = findViewById(R.id.rp100);
+        rp150 = findViewById(R.id.rp150);
+        rp200 = findViewById(R.id.rp200);
         isi = findViewById(R.id.uang_e);
         btn = findViewById(R.id.btn_isisaldo);
+
 
         rp50.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,52 +56,44 @@ public class TopupActivity extends AppCompatActivity {
                 isi.setText("50000");
             }
         });
+        rp100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isi.setText("100000");
+            }
+        });
+        rp150.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isi.setText("150000");
+            }
+        });
+        rp200.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isi.setText("200000");
+            }
+        });
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (isi.getText().toString().equals(""))
+                {
+                    Toast.makeText(TopupActivity.this,"Silahkan Pilih Jumlah Top Up", Toast.LENGTH_SHORT).show();
+                }
+                else {
 //                loaddetail();
-                Intent intent = new Intent(TopupActivity.this, UploadFotoActivity.class);
-                intent.putExtra("jumlah_inginkan", isi.getText().toString());
-                intent.putExtra("id_user", id_user);
-            startActivity(intent);
+                    Intent intent = new Intent(TopupActivity.this, UploadFotoActivity.class);
+                    intent.putExtra("jumlah_inginkan", isi.getText().toString());
+                    Log.e("uang", "" + intent.putExtra("jumlah_inginkan", isi.getText().toString()));
+                    intent.putExtra("id_user", id_user);
+                    intent.putExtra("nama_user", nama);
+                    startActivity(intent);
+                }
             }
         });
     }
 
-//    private void loaddetail()//ini buat nampilin saldo
-//    {
-//        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "top_up/index_post",
-//                new Response.Listener<String>(){
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject res = new JSONObject(response);
-//                            if (res.optString("status").equals("true")) {
-//                                Toast.makeText(TopupActivity.this, res.getString("pesan"), Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(TopupActivity.this, MainActivity.class);
-//                                startActivity(intent);
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Log.d("volley", "errornya : " + error.getMessage());
-//                    }
-//                }) {
-//            protected Map<String, String> getParams(){
-//                Map<String , String> params = new HashMap<>();
-//                params.put("id_user" , id_user);
-//                params.put("jumlah_inginkan" , isi.getText().toString());
-//                params.put("foto" , "");
-//                return params;
-//            }
-//
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        requestQueue.add(senddata);
-//    }
 }

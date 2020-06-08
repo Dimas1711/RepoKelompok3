@@ -14,6 +14,11 @@ class Model_user extends CI_Model
             return $cek;
             
         }
+        public function updateUser($data, $id)
+        {
+            $this->db->update('user', $data, ['id_user' => $id]);
+            return $this->db->affected_rows();
+        }    
         public function getAcc($id = null){
                 if ($id === null) {
                      return $this->db->get('akun_bank')->result_array();

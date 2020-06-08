@@ -51,10 +51,11 @@
       <span>Permintaan Verifikasi</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="<?= base_url('panti/akun_panti') ?>">
-      <i class="fas fa-fw fa-user-edit"></i>
-      <span>Edit Akun</span></a>
+    <a class="nav-link" href="<?= base_url('panti/profilpanti') ?>">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Profil</span></a>
   </li>
+  
   <li class="nav-item">
             <a class="nav-link" href="<?= base_url('auth/logout') ?>" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt"></i>

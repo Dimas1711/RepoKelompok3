@@ -2,49 +2,116 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#dae8e2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TopupActivity">
 
-    <EditText
-        android:id="@+id/uang_e"
+    <TextView
+        android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Silahkan Pilih Saldo Top Up"
+        android:textColor="#030303"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/uang_e"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/border2"
+        android:hint="Besar Jumlah Top up"
+        android:textColor="#030303"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@+id/rp200" />
 
     <TextView
         android:id="@+id/rp50"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="50000"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="100dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:text="50.000"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/rp100"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100000"
-        android:layout_marginTop="16dp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/border"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="100.000"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rp50"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
+    <TextView
+        android:id="@+id/rp150"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="48dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:text="150.000"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rp50" />
+    <TextView
+        android:id="@+id/rp200"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:text="200.000"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rp150"
+        app:layout_constraintTop_toBottomOf="@+id/rp100" />
     <Button
         android:id="@+id/btn_isisaldo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
-        android:text="ISI"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uang_e" />
-
-
+        android:background="@drawable/btn_lanjut"
+        android:gravity="center"
+        android:text="Lanjutkan Top up"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
