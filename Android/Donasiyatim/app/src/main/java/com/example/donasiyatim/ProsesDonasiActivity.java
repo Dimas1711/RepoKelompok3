@@ -45,8 +45,8 @@ public class ProsesDonasiActivity extends AppCompatActivity {
         Log.e("erronya ","id kasus = "+id_kasus);
         Log.e("erronya ","id user ="+id_user);
 
-        rp50 = findViewById(R.id.rp50_donasi);
-        rp100 = findViewById(R.id.rp100_donasi);
+//        rp50 = findViewById(R.id.rp50_donasi);
+//        rp100 = findViewById(R.id.rp100_donasi);
         isi = findViewById(R.id.uang_e_donasi);
         btn = findViewById(R.id.btn_isidonasi);
 

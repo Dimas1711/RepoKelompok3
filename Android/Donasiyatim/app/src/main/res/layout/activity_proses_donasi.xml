@@ -1,48 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_background"
+    android:padding="10dp"
     tools:context=".ProsesDonasiActivity">
 
-    <EditText
-        android:id="@+id/uang_e_donasi"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/BottomSheetDial"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="92dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/rp50_donasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="50000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Masukkan Jumlah Donasi"
+            android:textColor="#030303"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/rp100_donasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100000"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/rp50_donasi"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!--    <TextView-->
+        <!--        android:id="@+id/rp50_donasi"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_marginStart="16dp"-->
+        <!--        android:layout_marginTop="16dp"-->
+        <!--        android:text="50000"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <Button
-        android:id="@+id/btn_isidonasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
-        android:text="ISI"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uang_e_donasi" />
+        <!--    <TextView-->
+        <!--        android:id="@+id/rp100_donasi"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="100000"-->
+        <!--        android:layout_marginTop="16dp"-->
+        <!--        android:layout_marginStart="16dp"-->
+        <!--        app:layout_constraintStart_toEndOf="@+id/rp50_donasi"-->
+        <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/uang_e_donasi"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btn_isidonasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="28dp"
+            android:text="Donasi"
+            android:background="@drawable/btn_donasi_jalan"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/uang_e_donasi" />
+
+    </LinearLayout>
+
+</LinearLayout>
