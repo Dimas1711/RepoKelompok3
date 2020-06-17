@@ -36,7 +36,7 @@ class data_user extends REST_Controller{
 
     public function index_put()
     {
-        $id = $this->put('id_user');
+        $id = $this->put('id_registrasi');
         $data = [
             'nama_user' => $this->put('nama_user'),
             'alamat' => $this->put('alamat'),
@@ -66,5 +66,38 @@ class data_user extends REST_Controller{
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
+
+    public function index_post()
+    {
+        $id = $this->input->post('id_registrasi');
+        $profil = $_FILES['profil']['name'];
+     
+        $config['allowed_types'] = 'jpg|png|gif|jpeg';
+        $config['max_size'] = '5000';
+        $config['upload_path'] = '././uploads/akun';
+        
+        $this->load->library('upload' , $config);
+        if ($this->upload->do_upload('profil')) {
+            $data = [
+                'profil' => $profil
+            ];
+        if($this->user->updateUserFoto($data, $id) > 0)
+        {
+            $this->response([
+                'status' => 'true',
+                'message' => 'Foto User telah di update'
+            ], REST_Controller::HTTP_OK);
+        }
+        else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Foto User gagal di update'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+
+        }
+    }
     
+
+
 }

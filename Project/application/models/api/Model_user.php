@@ -18,7 +18,12 @@ class Model_user extends CI_Model
         {
             $this->db->update('user', $data, ['id_user' => $id]);
             return $this->db->affected_rows();
-        }    
+        }
+        public function updateUserFoto($data, $id)
+        {
+            $this->db->update('registrasi', $data, ['id_registrasi' => $id]);
+            return $this->db->affected_rows();
+        }
         public function getAcc($id = null){
                 if ($id === null) {
                      return $this->db->get('akun_bank')->result_array();
