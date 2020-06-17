@@ -36,17 +36,6 @@ public class AdapterRiwayatDonasi extends RecyclerView.Adapter<AdapterRiwayatDon
     @Override
     public void onBindViewHolder(@NonNull final HolderData holder, int position) {
         ModelRiwayatDonasi me = mItems.get(position);
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(holder.itemView.getContext(), DetailDonasiActivity.class);
-//                intent.putExtra("id_kasus", holder.id_kasus);
-//                intent.putExtra("id_panti", holder.id_panti);
-//                holder.itemView.getContext().startActivity(intent);
-//            }
-//        });
-
         holder.tgl.setText(me.getTanggal());
         holder.uang.setText(me.getJumlah_donasi());
          }

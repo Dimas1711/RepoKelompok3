@@ -3,7 +3,8 @@
 class Panti_model extends CI_Model
 {
 	public function index_get(){
-        return $this->db->get('panti')->result_array();
+        return $this->db->get_where('panti', [
+            'status' => 1])->result_array();
     }
     public function insertdata($data = array()){
         return $this->db->insert('panti' , $data);
