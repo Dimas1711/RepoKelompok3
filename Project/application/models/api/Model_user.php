@@ -8,6 +8,11 @@ class Model_user extends CI_Model
                 return $this->db->get_where('user' , ['id_registrasi' => $id])->result_array();
             
         }
+        public function data($id){
+      
+            return $this->db->get_where('registrasi' , ['id_registrasi' => $id])->result_array();
+        
+        }
         public function insert($tabel, $arr)
         {
             $cek = $this->db->insert($tabel, $arr);
