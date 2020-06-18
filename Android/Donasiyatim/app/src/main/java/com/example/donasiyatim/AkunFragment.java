@@ -60,8 +60,8 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class AkunFragment extends Fragment {
     ImageView img_profil;
-    TextView btn_ganti_foto;
-    String id_regis, gambar;
+    TextView btn_ganti_foto, btnEditProfil, nama_user;
+    String id_regis, gambar, nama;
     public static final int REQUEST_CODE_CAMERA = 001;
     public static final int REQUEST_CODE_GALLERY = 002;
     Bitmap bitmap;
@@ -74,17 +74,27 @@ public class AkunFragment extends Fragment {
         loadgambar();
         btn_ganti_foto = v.findViewById(R.id.btn_fotoganti);
         img_profil = v.findViewById(R.id.img_profil);
+        nama_user = v.findViewById(R.id.nama_user);
+        btnEditProfil = v.findViewById(R.id.btnEditProfil);
         id_regis = authdata.getInstance(getActivity().getApplicationContext()).getKodeUser();
 
         Log.e("asdfgh", "onCreateView: "+ id_regis);
 
-
-        btn_ganti_foto.setOnClickListener(new View.OnClickListener() {
+        btnEditProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setRequestImage();
+                Intent intent = new Intent(getActivity().getApplicationContext(), ProfilActivity.class);
+                startActivity(intent);
             }
         });
+
+
+//        btn_ganti_foto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setRequestImage();
+//            }
+//        });
 
         return v;
     }
@@ -236,6 +246,8 @@ public class AkunFragment extends Fragment {
                     JSONArray arr = res.getJSONArray("data");
                     JSONObject arr1 = arr.getJSONObject(0);
                     gambar = arr1.getString("profil");
+                    nama = arr1.getString("nama");
+                    nama_user.setText(nama);
                     Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + gambar).into(img_profil);
 
 

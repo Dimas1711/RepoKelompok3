@@ -39,7 +39,8 @@ public class DetailBeritaActivity extends AppCompatActivity {
 
     private void loadBerita()
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "berita/index_get?id_berita="+getIntent().getStringExtra("id_berita"), new Response.Listener<String>(){
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "berita/index_get?id_berita="
+                +getIntent().getStringExtra("id_berita"), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;

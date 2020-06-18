@@ -209,7 +209,8 @@ public class UploadFotoActivity extends AppCompatActivity {
 
     private void loaddetail()//ini buat nampilin saldo
     {
-        final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ServerApi.IPServer + "top_up/index_post",new Response.Listener<NetworkResponse>(){
+        final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ServerApi.IPServer
+                + "top_up/index_post",new Response.Listener<NetworkResponse>(){
                     @Override
                     public void onResponse(NetworkResponse response) {
                         Log.e("asd",""+response);

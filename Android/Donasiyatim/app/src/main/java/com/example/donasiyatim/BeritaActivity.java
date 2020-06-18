@@ -40,7 +40,8 @@ public class BeritaActivity extends AppCompatActivity {
 
     private void retrieveJSONBerita()
     {
-        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "berita/index_get", new Response.Listener<String>() {
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "berita/index_get",
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String responseBerita) {
                 Log.d("strrrrr", ">>" + responseBerita);

@@ -21,7 +21,7 @@ class Model_user extends CI_Model
         }
         public function updateUser($data, $id)
         {
-            $this->db->update('user', $data, ['id_user' => $id]);
+            $this->db->update('user', $data, ['id_registrasi' => $id]);
             return $this->db->affected_rows();
         }
         public function updateUserFoto($data, $id)

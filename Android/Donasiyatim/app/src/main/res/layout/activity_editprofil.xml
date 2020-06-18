@@ -42,6 +42,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtprofil" />
 
+        <ImageView
+            android:id="@+id/btn_ganti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_a_photo_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.374"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/profil" />
+
+        <TextView
+            android:id="@+id/btn_fotoganti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Ganti Foto Profil"
+            android:textColor="#030303 "
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="3dp"
+            app:layout_constraintStart_toEndOf="@+id/btn_ganti"
+            app:layout_constraintTop_toBottomOf="@+id/profil" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,10 +74,10 @@
         android:layout_height="wrap_content"
         android:text="Nama Lengkap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edtnama" />
+        app:layout_constraintTop_toTopOf="@+id/editnama" />
 
     <EditText
-        android:id="@+id/edtnama"
+        android:id="@+id/editnama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -68,11 +91,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
-        app:layout_constraintStart_toStartOf="@+id/edtemail"
-        app:layout_constraintTop_toTopOf="@+id/edtemail" />
+        app:layout_constraintStart_toStartOf="@+id/editemail"
+        app:layout_constraintTop_toTopOf="@+id/editemail" />
 
     <EditText
-        android:id="@+id/edtemail"
+        android:id="@+id/editemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -81,26 +104,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtnama" />
+        app:layout_constraintTop_toBottomOf="@+id/editnama" />
 
-    <TextView
-        android:id="@+id/tekspass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kata Sandi"
-        app:layout_constraintStart_toStartOf="@+id/edtpass"
-        app:layout_constraintTop_toBottomOf="@+id/edtemail" />
 
-    <EditText
-        android:id="@+id/edtpass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:inputType="textPassword"
-        android:maxLength="20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtemail" />
 
     <Button
         android:id="@+id/simpan"
