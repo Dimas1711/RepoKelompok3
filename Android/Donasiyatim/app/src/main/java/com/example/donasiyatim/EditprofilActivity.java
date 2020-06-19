@@ -90,7 +90,7 @@ public class EditprofilActivity extends AppCompatActivity {
         pekerjaan = getIntent().getStringExtra("pekerjaan");
         finansial = getIntent().getStringExtra("finansial");
 
-        ednama = findViewById(R.id.editnama);
+
         edemail = findViewById(R.id.editemail);
 
         back = findViewById(R.id.kembali);
