@@ -67,6 +67,28 @@ class data_user extends REST_Controller{
         }
     }
 
+
+    public function put_email()
+    {
+        $id = $this->put('id_registrasi');
+        $data = [
+            'email' => $this->put('email')
+        ];
+        if($this->user->updateEmail($data, $id) > 0)
+        {
+            $this->response([
+                'status' => 'true',
+                'message' => 'Email telah di update'
+            ], REST_Controller::HTTP_OK);
+        }
+        else {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Email gagal di update'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
     public function index_post()
     {
         $id = $this->input->post('id_registrasi');
