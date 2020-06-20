@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GantiPassActivity"></activity>
+        <activity android:name=".ResetPassActivity"></activity>
+        <activity android:name=".GantiPassActivity" />
         <activity android:name=".EditDataActivity" />
         <activity android:name=".EditprofilActivity" />
         <activity android:name=".UploadFotoActivity" />
