@@ -13,28 +13,21 @@ class="btn btn-sm btn-info btn-icon-split shadow-sm">
 </a> <br><br><br><br>
 
  
-  <div class="card-deck">
+
     <div class="card">
-      <img src="<?= base_url("uploads/panti/images.png")?>" style="width: 40%" class="card-img-top">
+      <img src="<?= base_url("uploads/panti/images.png")?>" style="width: 20%" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">0</h5>
+        <?php
+                    foreach ($totkasus as $row){  
+                    ?>
+          <h5 class="card-title font-weight-bold"><?= $row['jmlkasus']?></h5>
+                    <?php } ?>
           <p class="card-text">Jumlah Kasus</p>
           <a href="<?= base_url('panti/listKasusPanti') ?>" class="btn btn-primary">Lihat</a>
     </div>
-  
- </div>
-
-    <div class="card">
-      <img src="<?= base_url("uploads/panti/uang.png")?>" style="width: 40%" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">Rp 0,- </h5>
-          <p class="card-text">Jumlah Saldo</p>
-          <a href="<?= base_url('panti/tariksaldo') ?>" class="btn btn-primary">Lihat</a>
-    </div>
- </div>
- </div>
-
-        <br><br><br><br>
+ 
+    
+        <br><br><br>
 <div>
 <?php echo $this->session->flashdata('pesan')?>
 </div>

@@ -10,9 +10,5 @@ class Kasus_model extends CI_Model
 	{
 		return $query = $this->db->query("SELECT kasus.id_kasus, kasus.judul, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori")->result_array();
     }
-    public function total_kasus() 
-    {
-        return $query = $this->db->query("SELECT * FROM kasus WHERE status = '1'")->result_array();
-    }
-}
+   }
 ?>
