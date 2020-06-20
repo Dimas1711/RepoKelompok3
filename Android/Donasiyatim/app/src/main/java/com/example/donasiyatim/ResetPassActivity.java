@@ -15,8 +15,7 @@ public class ResetPassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_pass);
 
         web_view = findViewById(R.id.web_view);
-        web_view.loadUrl("http://192.168.1.4/RepoKelompok3/Project/auth/forgot_password");
+        web_view.loadUrl("http://yatim.flow-byte.com/auth/forgot_password");
         web_view.setWebViewClient(new WebViewClient());
-
     }
 }

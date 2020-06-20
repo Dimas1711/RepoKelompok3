@@ -1,6 +1,6 @@
 <?php 
 
-    class akun_model extends CI_Model{
+    class Akun_Model extends CI_Model{
 
         public function detail($id){
             return $this->db->get_where("registrasi" , [

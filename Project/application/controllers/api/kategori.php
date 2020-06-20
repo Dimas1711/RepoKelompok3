@@ -11,7 +11,7 @@ class Kategori extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('api/model_kategori' , 'kat');
+        $this->load->model('api/Model_Kategori' , 'kat');
     }
     public function index_get(){
         $id = $this->get('id_kategori');

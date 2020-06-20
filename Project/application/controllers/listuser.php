@@ -10,14 +10,14 @@ class listuser extends CI_Controller {
             redirect("auth/login");
         }
 
-        $this->load->model('dede');
+        $this->load->model('Dede');
     }
     
     public function index()
     {
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();
-        $data_user['user'] = $this->dede->get();
+        $data_user['user'] = $this->Dede->get();
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
         $this->load->view("ListUser/listuser",$data_user);
@@ -28,7 +28,7 @@ class listuser extends CI_Controller {
     {
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
-        $data_userr['user'] = $this->dede->detail($id);
+        $data_userr['user'] = $this->Dede->detail($id);
         if (count($data_userr["user"])<1)
             {
                 redirect("listuser");
@@ -45,8 +45,8 @@ class listuser extends CI_Controller {
     {
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
-        $this->load->model("dede");
-        $delete = array('user' => $this->dede->delete($id_user));
+        $this->load->model("Dede");
+        $delete = array('user' => $this->Dede->delete($id_user));
        $kembali = site_url("listuser");
        redirect($kembali);
     }

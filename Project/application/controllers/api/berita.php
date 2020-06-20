@@ -12,7 +12,7 @@ use Restserver\Libraries\REST_Controller;
 
         public function __construct(){
             parent::__construct();
-            $this->load->model('api/model_berita' , 'berita');
+            $this->load->model('api/Model_Berita' , 'berita');
         }
 
         public function index_get(){

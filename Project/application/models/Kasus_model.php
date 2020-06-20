@@ -1,6 +1,6 @@
 <?php 
  
-class Kasus_model extends CI_Model
+class Kasus_Model extends CI_Model
 {
     public function tampil_kasus()
     {

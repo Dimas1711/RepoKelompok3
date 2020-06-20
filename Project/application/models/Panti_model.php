@@ -1,6 +1,6 @@
 <?php 
  
-class Panti_model extends CI_Model
+class Panti_Model extends CI_Model
 {
 	public function index_get(){
         return $this->db->get_where('panti', [

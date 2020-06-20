@@ -8,11 +8,11 @@ require APPPATH . 'libraries/REST_Controller.php';
 // use namespace
 use Restserver\Libraries\REST_Controller;
 
-class data_regis extends REST_Controller{
+class Data_Regis extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('api/Model_regis' , 'regis');
+        $this->load->model('api/Model_Regis' , 'regis');
     }
     public function index_get()
     {

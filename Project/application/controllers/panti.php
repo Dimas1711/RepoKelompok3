@@ -8,10 +8,10 @@
         {
             redirect("auth/login");
         }
-        $this->load->model('Verif_model');
-        $this->load->model('Panti_model', 'b');
+        $this->load->model('Verif_Model');
+        $this->load->model('Panti_Model', 'b');
         $this->load->model('Lokasi');
-        $this->load->model('akun_model', 'z');
+        $this->load->model('Akun_Model', 'z');
     }
 
         public function index()

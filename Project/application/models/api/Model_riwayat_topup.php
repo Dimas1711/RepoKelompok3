@@ -1,6 +1,6 @@
 <?php 
 
-    class Model_riwayat_topup extends CI_Model
+    class Model_Riwayat_Topup extends CI_Model
     {
         public function index($id = null){
             // if ($id === null){
