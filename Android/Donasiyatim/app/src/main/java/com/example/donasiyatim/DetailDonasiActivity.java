@@ -42,7 +42,8 @@ public class DetailDonasiActivity extends AppCompatActivity {
     TextView uang_terkumpul, tujuan_dana, deskripsi, tanggal, judul, nama_panti, tenggat_waktu, isi;
     ImageView imgView, imgPanti;
     Button donasiSekarang, btn_donasi;
-    String id_kasus, id_user, id_regis;
+    String id_kasus, id_user, id_regis, saldo;
+    Integer uangAkun;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,18 +65,28 @@ public class DetailDonasiActivity extends AppCompatActivity {
         donasiSekarang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                uangAkun = Integer.parseInt(saldo);
+
                 final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(DetailDonasiActivity.this, R.style.BottomSheet);
                 View bottomSheet = LayoutInflater.from(getApplicationContext())
                         .inflate(R.layout.activity_proses_donasi, (LinearLayout) findViewById(R.id.BottomSheetDial));
 
                 isi = bottomSheet.findViewById(R.id.uang_e_donasi);
 
+                Log.e("saldo",""+isi);
+                Log.e("saldo", ""+uangAkun);
+
                 bottomSheet.findViewById(R.id.btn_isidonasi).setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View view) {
                         if (isi.getText().toString().equals(""))
                         {
                             Toast.makeText(DetailDonasiActivity.this, "Silahkan isi jumlah donasi", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (Integer.parseInt(isi.getText().toString()) > uangAkun)
+                        {
+                            Toast.makeText(DetailDonasiActivity.this, "Saldo Tidak Cukup", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
@@ -228,7 +239,8 @@ public class DetailDonasiActivity extends AppCompatActivity {
                     JSONArray arr = res.getJSONArray("data");
                     JSONObject arr1 = arr.getJSONObject(0);
                     id_user = arr1.getString("id_user");
-                    Log.e("saldo", ""+id_user);
+                    saldo = arr1.getString("finansial");
+                    Log.e("saldo", ""+saldo);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

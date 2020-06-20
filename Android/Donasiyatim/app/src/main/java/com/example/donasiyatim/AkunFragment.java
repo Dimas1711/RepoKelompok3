@@ -60,22 +60,20 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class AkunFragment extends Fragment {
     ImageView img_profil;
-    TextView btn_ganti_foto, btnEditProfil, nama_user;
-    String id_regis, gambar, nama;
-    public static final int REQUEST_CODE_CAMERA = 001;
-    public static final int REQUEST_CODE_GALLERY = 002;
-    Bitmap bitmap;
+    TextView btn_ganti_foto, btnEditProfil, nama_user, btnEditData;
+    String id_regis, email, gambar, nama, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_akun, container, false);
 
-        requestMultiplePermissions();
         loadgambar();
+        loaddata();
         btn_ganti_foto = v.findViewById(R.id.btn_fotoganti);
         img_profil = v.findViewById(R.id.img_profil);
         nama_user = v.findViewById(R.id.nama_user);
-        btnEditProfil = v.findViewById(R.id.btnEditProfil);
+        btnEditProfil = v.findViewById(R.id.editProfil);
+        btnEditData = v.findViewById(R.id.editData);
         id_regis = authdata.getInstance(getActivity().getApplicationContext()).getKodeUser();
 
         Log.e("asdfgh", "onCreateView: "+ id_regis);
@@ -83,159 +81,50 @@ public class AkunFragment extends Fragment {
         btnEditProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), ProfilActivity.class);
-                startActivity(intent);
+                Intent edt = new Intent(getActivity().getApplicationContext(), EditprofilActivity.class);
+                edt.putExtra("alamat", alamat);
+                edt.putExtra("no_telp", no_telp);
+                edt.putExtra("no_rek", no_rek);
+                edt.putExtra("nama_rek", nama_rek);
+                edt.putExtra("nama_bank", nama_bank);
+                edt.putExtra("tanggal_lahir", tanggal_lahir);
+                edt.putExtra("jenis_kelamin", jenis_kelamin);
+                edt.putExtra("tempat_lahir", tempat_lahir);
+                edt.putExtra("nik", nik);
+                edt.putExtra("nama", nama);
+                edt.putExtra("email", email);
+                edt.putExtra("pekerjaan", pekerjaan);
+                edt.putExtra("finansial", finansial);
+                startActivity(edt);
             }
         });
 
-
-//        btn_ganti_foto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                setRequestImage();
-//            }
-//        });
-
+        btnEditData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edt = new Intent(getActivity().getApplicationContext(), EditDataActivity.class);
+                edt.putExtra("alamat", alamat);
+                edt.putExtra("no_telp", no_telp);
+                edt.putExtra("no_rek", no_rek);
+                edt.putExtra("nama_rek", nama_rek);
+                edt.putExtra("nama_bank", nama_bank);
+                edt.putExtra("tanggal_lahir", tanggal_lahir);
+                edt.putExtra("jenis_kelamin", jenis_kelamin);
+                edt.putExtra("tempat_lahir", tempat_lahir);
+                edt.putExtra("nik", nik);
+                edt.putExtra("nama", nama);
+                edt.putExtra("email", email);
+                edt.putExtra("pekerjaan", pekerjaan);
+                edt.putExtra("finansial", finansial);
+                startActivity(edt);
+            }
+        });
         return v;
     }
 
-    private void setRequestImage(){
-        CharSequence[] item = {"Kamera", "Galeri"};
-        AlertDialog.Builder request = new AlertDialog.Builder(getActivity())
-                .setTitle("Add Image")
-                .setItems(item, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        switch (i){
-                            case 0:
-                                //Membuka Kamera Untuk Mengambil Gambar
-                                EasyImage.openCamera(AkunFragment.this, REQUEST_CODE_CAMERA);
-                                break;
-                            case 1:
-                                //Membuaka Galeri Untuk Mengambil Gambar
-                                EasyImage.openGallery(AkunFragment.this, REQUEST_CODE_GALLERY);
-                                break;
-                        }
-                    }
-                });
-        request.create();
-        request.show();
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE_GALLERY)
-        {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, "select image"), REQUEST_CODE_GALLERY);
-            }
-            else
-            {
-                Toast.makeText(getActivity().getApplicationContext(), "you don't have permission", Toast.LENGTH_LONG).show();
-            }
-            return;
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        EasyImage.handleActivityResult(requestCode, resultCode, data, getActivity(), new EasyImage.Callbacks() {
-
-            @Override
-            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
-                //Method Ini Digunakan Untuk Menghandle Error pada Image
-            }
-
-            @Override
-            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
-                //Method Ini Digunakan Untuk Menghandle Image
-                switch (type){
-                    case REQUEST_CODE_CAMERA:
-                        Glide.with(getActivity())
-                                .load(imageFile)
-                                .centerCrop()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .into(img_profil);
-                        bitmap = BitmapFactory.decodeFile(imageFile.getPath());
-                        Log.e("asd",""+bitmap);
-                        showDialog();
-                        break;
-
-                    case REQUEST_CODE_GALLERY:
-                        Glide.with(getActivity())
-                                .load(imageFile)
-                                .centerCrop()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .into(img_profil);
-                        bitmap = BitmapFactory.decodeFile(imageFile.getPath());
-                        showDialog();
-                        break;
-                }
-            }
-
-            @Override
-            public void onCanceled(EasyImage.ImageSource source, int type) {
-                //Batalkan penanganan, Anda mungkin ingin menghapus foto yang diambil jika dibatalkan
-            }
-        });
-    }
-
-
-    private void  requestMultiplePermissions(){
-        Dexter.withActivity(getActivity())
-                .withPermissions(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                .withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        // check if all permissions are granted
-                        if (report.areAllPermissionsGranted()) {
-//                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
-                        }
-
-                        // check for permanent denial of any permission
-                        if (report.isAnyPermissionPermanentlyDenied()) {
-                            // show alert dialog navigating to Settings
-                            //openSettingsDialog();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).
-                withErrorListener(new PermissionRequestErrorListener() {
-                    @Override
-                    public void onError(DexterError error) {
-                        Toast.makeText(getActivity(), "Some Error! ", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .onSameThread()
-                .check();
-    }
-
-
-
-    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
-    }
-
-    private void loadgambar()//ini buat nampilin saldo
+    private void loaddata()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_regis/index_get?id_registrasi="
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="
                 +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
@@ -245,10 +134,20 @@ public class AkunFragment extends Fragment {
                     Log.e("responnya ",""+response);
                     JSONArray arr = res.getJSONArray("data");
                     JSONObject arr1 = arr.getJSONObject(0);
-                    gambar = arr1.getString("profil");
-                    nama = arr1.getString("nama");
-                    nama_user.setText(nama);
-                    Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + gambar).into(img_profil);
+                    id_regis = arr1.getString("id_registrasi");
+                    nama = arr1.getString("nama_user");
+                    alamat = arr1.getString("alamat");
+                    no_telp = arr1.getString("no_telp");
+                    email = arr1.getString("email");
+                    no_rek = arr1.getString("no_rekening");
+                    nama_rek = arr1.getString("nama_rekening");
+                    nama_bank = arr1.getString("nama_bank");
+                    tanggal_lahir = arr1.getString("tanggal_lahir");
+                    jenis_kelamin = arr1.getString("jenis_kelamin");
+                    tempat_lahir = arr1.getString("tempat_lahir");
+                    nik = arr1.getString("nik");
+                    pekerjaan = arr1.getString("pekerjaan");
+                    finansial = arr1.getString("finansial");
 
 
                 } catch (JSONException e) {
@@ -270,22 +169,29 @@ public class AkunFragment extends Fragment {
     }
 
 
-    private void loaddetail()//ini buat nampilin saldo
-    {
-        final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,
-                ServerApi.IPServer + "data_user/index_post",new Response.Listener<NetworkResponse>(){
-            @Override
-            public void onResponse(NetworkResponse response) {
-                Log.e("asd",""+response);
-                try {
-                    Log.e("asd", ""+response);
-                    Toast.makeText(getActivity().getApplicationContext(), "Upload Foto Profil Berhasil ", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
 
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Upload Foto Profil Gagal ", Toast.LENGTH_SHORT).show();
+    private void loadgambar()//ini buat nampilin saldo
+    {
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_regis/index_get?id_registrasi="
+                +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                JSONObject res = null;
+                try {
+                    res = new JSONObject(response);
+                    Log.e("responnya ",""+response);
+                    JSONArray arr = res.getJSONArray("data");
+                    JSONObject arr1 = arr.getJSONObject(0);
+                    gambar = arr1.getString("profil");
+                    nama = arr1.getString("nama");
+                    email = arr1.getString("email");
+                    nama_user.setText(nama);
+                    Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + gambar).into(img_profil);
+
+
+                } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("erronya ",""+e);
                 }
             }
         },
@@ -295,57 +201,10 @@ public class AkunFragment extends Fragment {
                         Log.d("volley", "errornya : " + error.getMessage());
                     }
                 }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String , String> params = new HashMap<>();
-                params.put("id_registrasi" , id_regis);
-                return params;
-            }
 
-            @Override
-            protected Map<String, DataPart> getByteData() throws AuthFailureError {
-                Map<String, DataPart> params = new HashMap<>();
-                long imagename = System.currentTimeMillis();
-                params.put("profil", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
-                Log.e("asd",""+imagename);
-                return params;
-            }
         };
-        Volley.newRequestQueue(getActivity().getApplicationContext()).add(volleyMultipartRequest);
-    }
-
-
-    private void showDialog(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                getContext());
-
-        // set title dialog
-        alertDialogBuilder.setTitle("Simpan Perubahan?");
-
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setMessage("Klik Ya untuk simpan!")
-                .setIcon(R.mipmap.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // jika tombol diklik, maka akan menutup activity ini
-                        loaddetail();
-                    }
-                })
-                .setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // jika tombol ini diklik, akan menutup dialog
-                        // dan tidak terjadi apa2
-                        loadgambar();
-                        dialog.cancel();
-                    }
-                });
-
-        // membuat alert dialog dari builder
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // menampilkan alert dialog
-        alertDialog.show();
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(senddata);
     }
 
 }

@@ -58,7 +58,7 @@
                   <p>Foto</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <img src="<?= $row['foto'] ?>" alt="fotoe">
+                  <img src="<?= base_url('uploads/topup/') . $row['foto'] ?>" alt="fotoe" width="150">
                 </div>
               </div>  
           <?php }?>

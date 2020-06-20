@@ -28,12 +28,15 @@ public class DonasiActivity extends AppCompatActivity{
     RecyclerView rv;
     List<ModelData> modelDataList;
     ListAdapter listAdapter;
+    String saldo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donasi);
         rv = findViewById(R.id.rv);
+
+        saldo = getIntent().getStringExtra("saldo");
 
         retrieveJSON();
     }

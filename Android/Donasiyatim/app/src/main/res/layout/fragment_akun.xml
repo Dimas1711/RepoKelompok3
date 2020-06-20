@@ -77,16 +77,98 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ImageView
+    android:id="@+id/akun"
+    android:layout_width="90dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="20dp"
+    android:src="@drawable/prof"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+
     <TextView
-        android:id="@+id/btnEditProfil"
+        android:id="@+id/editProfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lihat Profil"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="8dp"
-        android:textColor="#030303"
-        android:textSize="20sp"
+        android:layout_marginBottom="2dp"
+        android:text="Edit Profil"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/akun"
+        app:layout_constraintStart_toEndOf="@+id/akun"
+        app:layout_constraintTop_toTopOf="@+id/akun"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/edit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+        app:layout_constraintTop_toBottomOf="@+id/akun" />
+
+    <TextView
+        android:id="@+id/editData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Data User"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit"
+        app:layout_constraintStart_toEndOf="@+id/edit"
+        app:layout_constraintTop_toTopOf="@+id/edit" />
+
+    <ImageView
+        android:id="@+id/privacy"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/privacy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/privacy"
+        app:layout_constraintStart_toEndOf="@+id/privacy"
+        app:layout_constraintTop_toTopOf="@+id/privacy" />
+
+    <ImageView
+        android:id="@+id/tentang"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/tentang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacy" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tentang Kami"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tentang"
+        app:layout_constraintStart_toEndOf="@+id/tentang"
+        app:layout_constraintTop_toTopOf="@+id/tentang" />
+
+    <ImageView
+        android:id="@+id/keluar"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/log"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tentang" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keluar"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/keluar"
+        app:layout_constraintStart_toEndOf="@+id/keluar"
+        app:layout_constraintTop_toTopOf="@+id/keluar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

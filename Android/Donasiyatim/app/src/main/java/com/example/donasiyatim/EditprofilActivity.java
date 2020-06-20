@@ -57,11 +57,11 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 public class EditprofilActivity extends AppCompatActivity {
     ImageView img_profil;
     TextView btn_ganti_foto;
-    String id_regis, gambar, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
+    String id_regis, nama, gambar, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
     public static final int REQUEST_CODE_CAMERA = 001;
     public static final int REQUEST_CODE_GALLERY = 002;
     Bitmap bitmap;
-    EditText ednama, edemail;
+    EditText edemail;
     Button simpan, back;
 
     @Override
@@ -72,12 +72,8 @@ public class EditprofilActivity extends AppCompatActivity {
         requestMultiplePermissions();
         loadgambar();
 
-
-        btn_ganti_foto = findViewById(R.id.btn_fotoganti);
-        img_profil = findViewById(R.id.profil);
         id_regis = authdata.getInstance(EditprofilActivity.this).getKodeUser();
-
-
+        nama = getIntent().getStringExtra("nama");
         alamat = getIntent().getStringExtra("alamat");
         no_telp = getIntent().getStringExtra("no_telp");
         no_rek = getIntent().getStringExtra("no_rek");
@@ -87,13 +83,28 @@ public class EditprofilActivity extends AppCompatActivity {
         jenis_kelamin = getIntent().getStringExtra("jenis_kelamin");
         tempat_lahir = getIntent().getStringExtra("tempat_lahir");
         nik = getIntent().getStringExtra("nik");
-        pekerjaan = getIntent().getStringExtra("pekerjaan");
         finansial = getIntent().getStringExtra("finansial");
 
+        Log.e("asd", "id regis e"+id_regis);
+        Log.e("asd", "nama e"+nama);
+        Log.e("asd", "no telp e"+no_telp);
+        Log.e("asd", "no rek e"+no_rek);
+        Log.e("asd", "nama rek e"+nama_rek);
+        Log.e("asd", "nama bank e"+nama_bank);
+        Log.e("asd", "tanggal lahir e"+tanggal_lahir);
+        Log.e("asd", "tempat lahir e"+tempat_lahir);
+        Log.e("asd", "nik e"+nik);
+        Log.e("asd", "finansial e"+finansial);
 
+
+
+        btn_ganti_foto = findViewById(R.id.btn_fotoganti);
+        img_profil = findViewById(R.id.profil);
+        simpan = findViewById(R.id.save);
+        back = findViewById(R.id.back);
         edemail = findViewById(R.id.editemail);
 
-        back = findViewById(R.id.kembali);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,11 +113,20 @@ public class EditprofilActivity extends AppCompatActivity {
 
             }
         });
-        simpan = findViewById(R.id.simpan);
+
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update();
+                if (edemail.getText().toString().equals(""))
+                {
+                    Toast.makeText(EditprofilActivity.this, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Log.e("asd", "email e"+edemail.getText().toString());
+                    update();
+                }
+
             }
         });
 
@@ -120,121 +140,18 @@ public class EditprofilActivity extends AppCompatActivity {
     }
 
 
-//    private void getdata()
-//    {
-//        //Log.e("TAG" , authdata.getInstance(getApplicationContext()).getAksesData());
-//        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer+"data_user/index_get?id_registrasi="
-//                + authdata.getInstance(this).getKodeUser(), new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-////                pd.cancel();
-//                JSONObject res = null;
-//                try {
-//                    res = new JSONObject(response);
-//                    Log.e("responnya ",""+response);
-//                    JSONObject arr = res.getJSONObject("data");
-//                    alamat = arr.getString("alamat");
-//                    no_telp = arr.getString("no_telp");
-//                    no_rek = arr.getString("no_rekening");
-//                    nama_rek = arr.getString("nama_rekening");
-//                    nama_bank = arr.getString("nama_bank");
-//                    tanggal_lahir = arr.getString("tanggal_lahir");
-//                    jenis_kelamin = arr.getString("jenis_kelamin");
-//                    tempat_lahir = arr.getString("tempat_lahir");
-//                    nik = arr.getString("nik");
-//                    pekerjaan = arr.getString("pekerjaan");
-//                    finansial = arr.getString("finansial");
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Log.e("erronya ",""+e);
-//                }
-//            }
-//        },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Log.d("volley", "errornya : " + error.getMessage());
-//                    }
-//                }) {
-//
-//            @Override
-//            public Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//
-//                return params;
-//            }
-//        };
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//
-//        requestQueue.add(senddata);
-//    }
-
-
-//    private void update(){
-//        StringRequest senddata = new StringRequest(Request.Method.PUT, ServerApi.IPServer+"data_user/index_put"
-//                + authdata.getInstance(getApplicationContext()).getKodeUser(), new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                try {
-//                    JSONObject res = new JSONObject(response);
-//                    Log.d("error di ", response);
-//                    JSONObject respon = res.getJSONObject("respon");
-//                    if (respon.getBoolean("status")) {
-//                        Toast.makeText(getApplicationContext(), respon.getString("pesan"), Toast.LENGTH_SHORT).show();
-////                        Intent akun = new Intent(ActivityEditDataDiri.this , FragmentAkun.class);
-////                        startActivity(akun);
-//
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), respon.getString("pesan"), Toast.LENGTH_SHORT).show();
-//
-//
-//                    }
-//
-//                } catch (JSONException e) {
-////                                e.printStackTrace();
-//                    Log.e("errorgan", e.getMessage());
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-////                            pd.cancel();
-//
-//                Log.e("errornyaa ", "" + error);
-//                Toast.makeText(getApplicationContext(), "Gagal, " + error, Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("email", email.getText().toString());
-//                params.put("nama_user",nama.getText().toString());
-//                //params.put("password_baru",pass.getText().toString());
-//
-//
-//                return params;
-//            }
-//        };
-//        AppController.getInstance().addToRequestQueue(senddata);
-//    }
-
 
     private void update()
     {
-        StringRequest senddata = new StringRequest(Request.Method.PUT, ServerApi.IPServer + "data_user/index_put",
+        StringRequest senddata = new StringRequest(Request.Method.PUT, ServerApi.IPServer + "update_email/index_put",
                 new Response.Listener<String>(){
 
                     @Override
                     public void onResponse(String response) {
                         try {
-                                Toast.makeText(EditprofilActivity.this, "Update User Berhasil", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(EditprofilActivity.this, ProfilActivity.class);
-                                startActivity(intent);
+                            Toast.makeText(EditprofilActivity.this, "Ubah Email Berhasil", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditprofilActivity.this, MainActivity.class);
+                            startActivity(intent);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -250,19 +167,7 @@ public class EditprofilActivity extends AppCompatActivity {
             protected Map<String, String> getParams(){
                 Map<String , String> params = new HashMap<>();
                 params.put("id_registrasi", id_regis);
-                params.put("nama_user" , ednama.getText().toString());
-                params.put("alamat" , alamat);
-                params.put("no_telp" , no_telp);
                 params.put("email" , edemail.getText().toString());
-                params.put("no_rekening" , no_rek);
-                params.put("nama_rekening" , nama_rek);
-                params.put("nama_bank" , nama_bank);
-                params.put("tanggal_lahir", tanggal_lahir);
-                params.put("jenis_kelamin", jenis_kelamin);
-                params.put("tempat_lahir", tempat_lahir);
-                params.put("nik", nik);
-                params.put("pekerjaan", pekerjaan);
-                params.put("finansial", finansial);
                 return params;
 
             }
@@ -444,7 +349,7 @@ public class EditprofilActivity extends AppCompatActivity {
     }
 
 
-    private void loaddetail()//ini buat nampilin saldo
+    private void loaddetail()
     {
         final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,
                 ServerApi.IPServer + "data_user/index_post",new Response.Listener<NetworkResponse>(){
