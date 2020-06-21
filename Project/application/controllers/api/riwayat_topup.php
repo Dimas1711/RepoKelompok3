@@ -7,7 +7,7 @@ require APPPATH . '/libraries/REST_Controller.php';
 
 // use namespace
 use Restserver\Libraries\REST_Controller;
-class Riwayat_topup extends REST_Controller{
+class Riwayat_Topup extends REST_Controller{
 
     public function __construct(){
         parent::__construct();

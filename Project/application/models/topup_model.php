@@ -1,6 +1,6 @@
 <?php 
  
-class topup_model extends CI_Model
+class Topup_Model extends CI_Model
 {
     public function tampil_verif_topup()
 	{

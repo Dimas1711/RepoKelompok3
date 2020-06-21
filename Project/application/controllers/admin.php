@@ -8,13 +8,14 @@ class Admin extends CI_Controller
         parent::__construct();
         if(!$this->session->userdata('email'))
         {
-            redirect("auth/login");
+            redirect("Auth/Login");
         }
 
         $this->load->model('Verif_model');
         $this->load->model('Kasus_model');
         $this->load->model('topup_model');
         $this->load->model('dede');
+
     }
 
 	public function index()
@@ -47,7 +48,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();
 
-        $data['admin'] = $this->Verif_model->index_admin();
+        $data['admin'] = $this->Verif_Model->index_admin();
         
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
@@ -60,7 +61,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();
 
-        $data['admin'] = $this->Verif_model->index_admin();
+        $data['admin'] = $this->Verif_Model->index_admin();
         
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
@@ -73,7 +74,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();
 
-        $data['admin'] = $this->Verif_model->databank();
+        $data['admin'] = $this->Verif_Model->databank();
         
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
@@ -95,7 +96,7 @@ class Admin extends CI_Controller
             $this->load->view("template/footer");
         }else{
 
-            $data = $this->Verif_model->insertdata(array(
+            $data = $this->Verif_Model->insertdata(array(
                 'id_admin' => '5',
                 'nama_rekening' => $this->input->post('nama_rekening'),
                 'no_rekening' => $this->input->post('no_rekening'),
@@ -116,7 +117,7 @@ class Admin extends CI_Controller
        
     }
     public function hapus($id){
-        $data = $this->Verif_model->hapusdata($id);
+        $data = $this->Verif_Model->hapusdata($id);
 
         if ($data) {
             $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
@@ -139,13 +140,13 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nama_bank', 'Nama Bank' , 'required');
 
         if ($this->form_validation->run() == false) {
-            $data['admin'] = $this->Verif_model->detail_finansial($id);
+            $data['admin'] = $this->Verif_Model->detail_finansial($id);
             $this->load->view("template/sidebar");
             $this->load->view("template/header",$data);
             $this->load->view("admin/setting/edit_finansial" , $data);
             $this->load->view("template/footer");
         }else {
-            $update = $this->Verif_model->update_finansial(array(
+            $update = $this->Verif_Model->update_finansial(array(
                 'nama_rekening' => $this->input->post('nama_rekening'),
                 'no_rekening' => $this->input->post('no_rekening'),
                 'nama_bank' => $this->input->post('nama_bank')
@@ -169,7 +170,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
         $this->session->userdata('email')])->row_array();
 
-        $data['admin'] = $this->Verif_model->detail_admin($id);
+        $data['admin'] = $this->Verif_Model->detail_admin($id);
         
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
@@ -181,7 +182,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['kasus'] = $this->Kasus_model->tampil_kasus();
+        $data['kasus'] = $this->Kasus_Model->tampil_kasus();
 
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
@@ -194,7 +195,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['kasus'] = $this->Kasus_model->tampil_verif_kasus();
+        $data['kasus'] = $this->Kasus_Model->tampil_verif_kasus();
 
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
@@ -207,7 +208,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $dataa['dompet'] = $this->topup_model->tampil_verif_topup();
+        $dataa['dompet'] = $this->Topup_Model->tampil_verif_topup();
 
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
@@ -220,11 +221,11 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['kasus'] = $this->Verif_model->verif_kasus_detail($id);
+        $data['kasus'] = $this->Verif_Model->verif_kasus_detail($id);
 
         if(isset($_POST['setuju']))
         {
-            $this->Verif_model->ubah_status_setuju_kasus($id);
+            $this->Verif_Model->ubah_status_setuju_kasus($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Persetujuan kasus donasi diterima !
             </div>');
@@ -232,7 +233,7 @@ class Admin extends CI_Controller
         }
         else if(isset($_POST['tolak']))
         {
-            $this->Verif_model->ubah_status_tolak_kasus($id);
+            $this->Verif_Model->ubah_status_tolak_kasus($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                         Persetujuan kasus donasi ditolak !
                         </div>');
@@ -250,11 +251,11 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $dataa['dompet'] = $this->Verif_model->verif_topup_detail($id);
+        $dataa['dompet'] = $this->Verif_Model->verif_topup_detail($id);
 
         if(isset($_POST['setuju']))
         {
-            $this->Verif_model->ubah_status_setuju_topup($id);
+            $this->Verif_Model->ubah_status_setuju_topup($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Persetujuan top up donatur diterima !
             </div>');
@@ -262,7 +263,7 @@ class Admin extends CI_Controller
         }
         else if(isset($_POST['tolak']))
         {
-            $this->Verif_model->ubah_status_tolak_topup($id);
+            $this->Verif_Model->ubah_status_tolak_topup($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                         Persetujuan top up donatur ditolak !
                         </div>');
@@ -280,11 +281,11 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['panti'] = $this->Verif_model->verif_data_detail($id);
+        $data['panti'] = $this->Verif_Model->verif_data_detail($id);
 
         if(isset($_POST['setuju']))
         {
-            $this->Verif_model->ubah_status_setuju($id);
+            $this->Verif_Model->ubah_status_setuju($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Persetujuan panti diterima !
             </div>');
@@ -292,7 +293,7 @@ class Admin extends CI_Controller
         }
         else if(isset($_POST['tolak']))
         {
-            $this->Verif_model->ubah_status_tolak($id);
+            $this->Verif_Model->ubah_status_tolak($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                         Persetujuan panti ditolak !
                         </div>');
@@ -321,7 +322,7 @@ class Admin extends CI_Controller
 
      public function hapus_panti($id)
     {
-        $data = $this->Verif_model->hapusdatapanti($id);
+        $data = $this->Verif_Model->hapusdatapanti($id);
         if ($data) 
         {
             $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">

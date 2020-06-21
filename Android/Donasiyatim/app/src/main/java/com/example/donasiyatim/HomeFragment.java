@@ -3,6 +3,7 @@ package com.example.donasiyatim;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,6 +94,7 @@ public class HomeFragment extends Fragment  {
                 Intent intent = new Intent(getActivity().getApplicationContext(),DompetActivity.class);
                 intent.putExtra("id_regis", idregis);
                 intent.putExtra("id_user", userid);
+                intent.putExtra("saldo", saldoku);
                 startActivity(intent);
             }
         });
@@ -102,6 +104,7 @@ public class HomeFragment extends Fragment  {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), DonasiActivity.class);
                 intent.putExtra("id_user", userid);
+                intent.putExtra("saldo", saldoku);
                 startActivity(intent);
             }
         });
@@ -120,7 +123,6 @@ public class HomeFragment extends Fragment  {
         loaddetail();
         retrieveJSON();
         retrieveJSONBerita();
-
         return v;
     }
 

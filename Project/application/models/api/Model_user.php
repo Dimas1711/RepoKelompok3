@@ -1,12 +1,17 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Model_user extends CI_Model
+class Model_User extends CI_Model
 {
        
         public function index($id){
       
                 return $this->db->get_where('user' , ['id_registrasi' => $id])->result_array();
             
+        }
+        public function data($id){
+      
+            return $this->db->get_where('registrasi' , ['id_registrasi' => $id])->result_array();
+        
         }
         public function insert($tabel, $arr)
         {
@@ -16,9 +21,19 @@ class Model_user extends CI_Model
         }
         public function updateUser($data, $id)
         {
-            $this->db->update('user', $data, ['id_user' => $id]);
+            $this->db->update('user', $data, ['id_registrasi' => $id]);
             return $this->db->affected_rows();
-        }    
+        }
+        public function updateEmail($data, $id)
+        {
+            $this->db->query("UPDATE user SET email = '$data' WHERE id_registrasi = '$id'");
+            return $this->db->affected_rows();
+        }
+        public function updateUserFoto($data, $id)
+        {
+            $this->db->update('registrasi', $data, ['id_registrasi' => $id]);
+            return $this->db->affected_rows();
+        }
         public function getAcc($id = null){
                 if ($id === null) {
                      return $this->db->get('akun_bank')->result_array();

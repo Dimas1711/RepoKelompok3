@@ -1,6 +1,6 @@
 <?php 
 
-    class Model_kategori extends CI_Model
+    class Model_Kategori extends CI_Model
     {
         public function index($id = null){
             if ($id === null){

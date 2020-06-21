@@ -8,7 +8,7 @@ require APPPATH . 'libraries/REST_Controller.php';
 // use namespace
 use Restserver\Libraries\REST_Controller;
 
-class kabupaten extends REST_Controller{
+class Kabupaten extends REST_Controller{
 
     public function __construct(){
         parent::__construct();

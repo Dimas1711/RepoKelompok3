@@ -13,7 +13,7 @@ class Auth extends REST_Controller{
     public function __construct() {
         parent::__construct();
         // Load User Model
-        $this->load->model('api/User_model', 'UserModel');
+        $this->load->model('api/User_Model', 'UserModel');
     }
 
     public function index_post(){

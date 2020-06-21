@@ -1,11 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout8"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="FRAGMENT AKUN"/>
+        android:layout_height="250dp"
+        android:background="@drawable/grad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/edtprofil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Profil"
+            android:textColor="@color/colorku"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profil"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/circle"
+            android:padding="3dp"
+            android:src="@drawable/aku"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtprofil" />
+
+        <TextView
+            android:id="@+id/nama_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nama user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_profil"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="#030303"/>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/btn_ganti"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_add_a_photo_black_24dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.374"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/img_profil" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/btn_fotoganti"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Ganti Foto Profil"-->
+<!--            android:textColor="#030303 "-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:layout_marginStart="3dp"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/btn_ganti"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/img_profil" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+    android:id="@+id/akun"
+    android:layout_width="90dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="20dp"
+    android:src="@drawable/prof"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+
+    <TextView
+        android:id="@+id/editProfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="Edit Profil"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/akun"
+        app:layout_constraintStart_toEndOf="@+id/akun"
+        app:layout_constraintTop_toTopOf="@+id/akun"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/akun" />
+
+    <TextView
+        android:id="@+id/editData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Data User"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit"
+        app:layout_constraintStart_toEndOf="@+id/edit"
+        app:layout_constraintTop_toTopOf="@+id/edit" />
+
+    <ImageView
+        android:id="@+id/privacy"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/privacy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/privacy"
+        app:layout_constraintStart_toEndOf="@+id/privacy"
+        app:layout_constraintTop_toTopOf="@+id/privacy" />
+
+    <ImageView
+        android:id="@+id/tentang"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/tentang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacy" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tentang Kami"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tentang"
+        app:layout_constraintStart_toEndOf="@+id/tentang"
+        app:layout_constraintTop_toTopOf="@+id/tentang" />
+
+    <ImageView
+        android:id="@+id/keluar"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/log"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tentang" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keluar"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/keluar"
+        app:layout_constraintStart_toEndOf="@+id/keluar"
+        app:layout_constraintTop_toTopOf="@+id/keluar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

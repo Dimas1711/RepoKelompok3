@@ -1,6 +1,6 @@
 <?php 
 
-    class Berita_model extends CI_Model{
+    class Berita_Model extends CI_Model{
 
         public function index_get(){
             return $this->db->get('berita')->result_array();

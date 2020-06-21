@@ -1,6 +1,6 @@
 <?php 
  
-class Verif_model extends CI_Model
+class Verif_Model extends CI_Model
 {
 	public function verif_data_panti()
 	{

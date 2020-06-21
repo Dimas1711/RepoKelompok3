@@ -41,9 +41,10 @@ class User_Model extends CI_Model
             $kode=1;
         }
         $kode_max=str_pad($kode,3,"0",STR_PAD_LEFT);
-        $kode_jadi="A00".$kode_max;
+        $kode_jadi="R00".$kode_max;
         return $kode_jadi;
     }
+  
     function randomkode($maxlength) {
         $chary = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
                         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",

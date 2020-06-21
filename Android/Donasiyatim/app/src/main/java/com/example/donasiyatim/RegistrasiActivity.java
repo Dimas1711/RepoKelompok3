@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.donasiyatim.configfile.ServerApi;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,6 @@ public class RegistrasiActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String NameHolder, EmailHolder, PasswordHolder ;
     ProgressDialog progressDialog;
-    String HttpUrl = "http://192.168.1.2/RepoKelompok3/Android/php/Registration.php";
     Boolean CheckEditText;
     TextView masuk;
 
@@ -81,12 +81,12 @@ public class RegistrasiActivity extends AppCompatActivity {
     public void setRegister(){
         progressDialog.setMessage("Tunggu Sebentar , Data Anda Sedang Ditambahkan Ke Dalam Server");
         progressDialog.show();
-        StringRequest stringRequest =new StringRequest(Request.Method.POST, HttpUrl,
+        StringRequest stringRequest =new StringRequest(Request.Method.POST, ServerApi.IPServer+"registrasi/index_get",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        Toast.makeText(RegistrasiActivity.this, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegistrasiActivity.this, "Registrasi Berhasil", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {

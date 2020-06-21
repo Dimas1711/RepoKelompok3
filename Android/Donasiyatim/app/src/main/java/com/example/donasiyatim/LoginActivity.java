@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar pd;
     ProgressDialog progressDialog;
     String nama_user;
-    TextView dftr;
+    TextView dftr, lupa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         pd.setVisibility(View.GONE);
         email = findViewById(R.id.edt_email);
         password = findViewById(R.id.edt_password_login);
+        lupa = findViewById(R.id.tvLupaPassword);
         login = findViewById(R.id.buttonLogin);
 //        pb = findViewById(R.id.progressbar);
         login.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +73,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent regis = new Intent(LoginActivity.this , RegistrasiActivity.class);
                 startActivity(regis);
+            }
+        });
+
+        lupa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent lupapass = new Intent(LoginActivity.this , LupaPass.class);
+                startActivity(lupapass);
             }
         });
 

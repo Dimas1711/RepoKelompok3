@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         {
             parent::__construct();
             $this->load->library('form_validation');
-            $this->load->model('Verif_model' , 'v');
+            $this->load->model('Verif_Model' , 'v');
         }
         public function login(){
             $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
@@ -39,7 +39,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         $this->session->set_userdata($data);
                         if ($user['role_id'] == 1) {
                             redirect('admin');
-                        } else {
+                        }
+                        else if($user['role_id'] == 3)
+                        {
+                            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                        Please Login as User From Android !
+                        </div>');
+                        redirect('auth/login');
+                        } 
+                        else {
                             if ($user['status'] == 1) {
                                 redirect('panti');
                             }else {

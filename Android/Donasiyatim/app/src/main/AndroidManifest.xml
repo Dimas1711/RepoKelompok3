@@ -3,7 +3,7 @@
     package="com.example.donasiyatim">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UploadFotoActivity"></activity>
+        <activity android:name=".ResetPassActivity"></activity>
+        <activity android:name=".GantiPassActivity" />
+        <activity android:name=".EditDataActivity" />
+        <activity android:name=".EditprofilActivity" />
+        <activity android:name=".UploadFotoActivity" />
         <activity android:name=".ProsesDonasiActivity" />
         <activity android:name=".TopupActivity" />
         <activity android:name=".DompetActivity" />

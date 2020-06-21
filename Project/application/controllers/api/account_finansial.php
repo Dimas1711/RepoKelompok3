@@ -8,11 +8,11 @@ require APPPATH . 'libraries/REST_Controller.php';
 // use namespace
 use Restserver\Libraries\REST_Controller;
 
-class account_finansial extends REST_Controller{
+class Account_Finansial extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('api/Model_user' , 'user');
+        $this->load->model('api/Model_User' , 'user');
     }
     public function index_get()
     {

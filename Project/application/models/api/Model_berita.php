@@ -1,7 +1,7 @@
 <?php 
 
 
-    class Model_berita extends CI_Model{
+    class Model_Berita extends CI_Model{
         
         public function getBerita($id = null){
             if ($id === null) {
