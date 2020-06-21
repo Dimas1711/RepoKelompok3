@@ -14,6 +14,7 @@ class Admin extends CI_Controller
         $this->load->model('Verif_model');
         $this->load->model('Kasus_model');
         $this->load->model('topup_model');
+        $this->load->model('dede');
     }
 
 	public function index()
@@ -29,8 +30,12 @@ class Admin extends CI_Controller
         $data['panti'] = $this->db->query("select count(status) as hasil from panti WHERE status = 0")->row_array();
         $data['dompet'] = $this->db->query("select count(status) as hasil from dompet WHERE status = 0")->row_array();
         $data['activepanti'] = $this->db->query("select count(status) as hasil from panti WHERE status = 1")->row_array();
-        $data['kasus1'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 1")->row_array();
-        $data['kasus2'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 2")->row_array();
+        $data['kasus1'] = $this->db->query("select count(is_active) as hasil from kasus WHERE is_active = 2")->row_array();
+        $data['kasus2'] = $this->db->query("select count(is_active) as hasil from kasus WHERE is_active = 1")->row_array();
+
+        $data['piechart']=$this->dede->get_data_stok(); 
+       
+
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
         $this->load->view("template/dashboard",$data);

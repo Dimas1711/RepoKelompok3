@@ -20,4 +20,19 @@ class Dede extends CI_Model
             $this->db->where("id_user", $id_user);
             return $this->db->delete("user");
         }
+
+        function get_data_stok()
+        {
+            $query = $this->db->query("select count(is_active) from kasus WHERE is_active = 2 UNION ALL select count(is_active) from kasus WHERE is_active = 1 UNION ALL select count(is_active) from kasus WHERE is_active = 0
+            ");
+              
+            if($query->num_rows() > 0)
+            {
+                foreach($query->result() as $data)
+                {
+                    $hasil[] = $data;
+                }
+                return $hasil;
+            }
+        }    
 }

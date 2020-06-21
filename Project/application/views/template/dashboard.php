@@ -66,7 +66,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a class="dropdown-item" href="<?= base_url("admin/verif_kasus")?>">Selesai (<?php foreach($kasus1 as $row){?> <?=$row?> <?php }?>)</a>
-                              <a class="dropdown-item" href="<?= site_url("admin/verif_topup")?>">Belum Selesai (<?php foreach($kasus2 as $row){?> <?=$row?> <?php }?>)</a>
+                              <a class="dropdown-item" href="<?= site_url("admin/verif_topup")?>">Berjalan (<?php foreach($kasus2 as $row){?> <?=$row?> <?php }?>)</a>
                             </div>
                           </div>
                       <div class="row no-gutters align-items-center">
@@ -177,9 +177,50 @@
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+                    <canvas id="PieChart"></canvas>
                   </div>
-                  <div class="mt-4 text-center small">
+                
+                  
+
+                  <?php foreach($piechart as $data){?> <?=$row?> <?php }?>
+
+                  <!-- <?php foreach($piechart as $row){
+                     $grafik[] = $row->is_active;} ?> -->
+                 
+                  <script type="text/javascript" src="<?php echo base_url("assets/js/Chart")?>"></script>
+                  <!-- <script type="text/javascript" src="assets/js/Chart"></script> -->
+                  <script>
+
+                  var ctx = document.getElementById("PieChart").getContext("2d");
+
+                  var data = {
+                  // labels : <?php echo json_encode($data);?>,
+                    datasets : [
+                      
+                                  {
+                                      data : <?php echo json_encode($data);?>
+                                      backgroundColor: 
+                                      [
+                                        '',
+                                        '',
+                                        ''
+                                      ]
+                                      
+                                  }
+  
+                                ]
+                 
+                              };
+  
+                  var PieChart = new Chart(ctx, {
+                  type: 'pie',
+                  data: data,
+                  options:{responsive: true}
+                  });
+                  </script>
+                
+                
+                  <!-- <div class="mt-4 text-center small">
                     <span class="mr-2">
                       <i class="fas fa-circle text-primary"></i> Direct
                     </span>
@@ -189,7 +230,7 @@
                     <span class="mr-2">
                       <i class="fas fa-circle text-info"></i> Referral
                     </span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

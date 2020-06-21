@@ -22,6 +22,8 @@ class listuser extends CI_Controller {
         $this->load->view("template/header",$data);
         $this->load->view("ListUser/listuser",$data_user);
         $this->load->view("template/footer");
+
+        
     }
 
     public function detail($id)
