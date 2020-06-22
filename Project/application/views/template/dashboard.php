@@ -40,7 +40,7 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">User</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      <?php foreach($activepanti as $row){?>
+                      <?php foreach($activeuser as $row){?>
                         <?=$row?> 
                         <?php }?>
                       </div>
