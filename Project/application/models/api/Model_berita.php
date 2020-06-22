@@ -1,6 +1,4 @@
 <?php 
-
-
     class Model_Berita extends CI_Model{
         
         public function getBerita($id = null){

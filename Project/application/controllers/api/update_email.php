@@ -12,7 +12,7 @@ class update_email extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('api/Model_user' , 'user');
+        $this->load->model('api/Model_User' , 'user');
     }
 
     public function index_put()

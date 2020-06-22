@@ -3,7 +3,7 @@ class tampilPanti extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Panti_model' , 'b');
+        $this->load->model('Panti_Model' , 'b');
     }
 
     public function index(){

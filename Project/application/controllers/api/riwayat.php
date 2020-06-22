@@ -11,7 +11,7 @@ class Riwayat extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('api/Model_riwayat' , 'riwayat');
+        $this->load->model('api/Model_Riwayat' , 'riwayat');
     }
     //riwayat donasi
     public function index_get(){

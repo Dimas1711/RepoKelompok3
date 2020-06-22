@@ -13,8 +13,8 @@ class Admin extends CI_Controller
 
         $this->load->model('Verif_Model');
         $this->load->model('Kasus_Model');
-        $this->load->model('topup_model');
-        $this->load->model('dede');
+        $this->load->model('Topup_Model');
+        $this->load->model('Dede');
 
     }
 

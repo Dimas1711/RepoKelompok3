@@ -9,6 +9,6 @@
             //     return $this->db->get_where('donasi' , ['id_user' => $id])->result_array();
             // }
             return $this->db->get_where('donasi' , ['id_user' => $id])->result_array();
-            // $query = $this->db->query('SELECT * FROM tb_donasi , tb_');
+
         }
     }

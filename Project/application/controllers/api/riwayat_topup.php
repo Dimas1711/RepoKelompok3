@@ -11,7 +11,7 @@ class Riwayat_Topup extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('api/Model_riwayat_topup' , 'riwayatTP');
+        $this->load->model('api/Model_Riwayat_Topup' , 'riwayatTP');
     }
     public function index_get(){
         $id = $this->get('id_user');
