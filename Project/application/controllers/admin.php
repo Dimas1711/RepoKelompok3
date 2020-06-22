@@ -11,8 +11,8 @@ class Admin extends CI_Controller
             redirect("Auth/Login");
         }
 
-        $this->load->model('Verif_model');
-        $this->load->model('Kasus_model');
+        $this->load->model('Verif_Model');
+        $this->load->model('Kasus_Model');
         $this->load->model('topup_model');
         $this->load->model('dede');
 
@@ -197,7 +197,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['kasus'] = $this->Kasus_model->tampil_verif_kasus();
+        $data['kasus'] = $this->Kasus_Model->tampil_verif_kasus();
 
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);

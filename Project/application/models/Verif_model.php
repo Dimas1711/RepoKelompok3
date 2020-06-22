@@ -92,6 +92,7 @@ class Verif_Model extends CI_Model
 	{
 		$this->db->where('id_kasus', $this->input->post('id_kasus'));
 		$this->db->update('kasus', ['status' => 1]);
+		$this->db->update('kasus', ['is_active' => 1]);
 	}
 
 	public function ubah_status_tolak_kasus($id)
