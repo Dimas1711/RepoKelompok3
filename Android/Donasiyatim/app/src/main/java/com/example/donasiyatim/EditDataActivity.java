@@ -40,12 +40,7 @@ public class EditDataActivity extends AppCompatActivity {
         simpan = findViewById(R.id.simpaned);
 
         ednama = findViewById(R.id.ednama);
-        edalamat = findViewById(R.id.edalamat);
         edno_telp = findViewById(R.id.ednomor);
-        edpekerjaan = findViewById(R.id.edkerja);
-        ednama_bank = findViewById(R.id.edbank);
-        edno_rek = findViewById(R.id.ednorek);
-        ednama_rek = findViewById(R.id.ednamarek);
 
 
         id_regis = authdata.getInstance(EditDataActivity.this).getKodeUser();
@@ -55,6 +50,13 @@ public class EditDataActivity extends AppCompatActivity {
         nik = getIntent().getStringExtra("nik");
         finansial = getIntent().getStringExtra("finansial");
         email = getIntent().getStringExtra("email");
+        pekerjaan = getIntent().getStringExtra("pekerjaan");
+        no_rek = getIntent().getStringExtra("no_rek");
+        nama_bank = getIntent().getStringExtra("nama_bank");
+        nama_rek = getIntent().getStringExtra("nama_rek");
+        alamat = getIntent().getStringExtra("alamat");
+        no_telp = getIntent().getStringExtra("no_telp");
+        nama = getIntent().getStringExtra("nama_user");
 
         Log.e("asd",""+id_regis);
         Log.e("asd",""+tanggal_lahir);
@@ -119,17 +121,17 @@ public class EditDataActivity extends AppCompatActivity {
                 Map<String , String> params = new HashMap<>();
                 params.put("id_registrasi", id_regis);
                 params.put("nama_user" , ednama.getText().toString());
-                params.put("alamat" , edalamat.getText().toString());
+                params.put("alamat" , alamat);
                 params.put("no_telp" , edno_telp.getText().toString());
                 params.put("email" , email);
-                params.put("no_rekening" , edno_rek.getText().toString());
-                params.put("nama_rekening" , ednama_rek.getText().toString());
-                params.put("nama_bank" , ednama_bank.getText().toString());
+                params.put("no_rekening" , no_rek);
+                params.put("nama_rekening" , nama_rek);
+                params.put("nama_bank" , nama_bank);
                 params.put("tanggal_lahir", tanggal_lahir);
                 params.put("jenis_kelamin", jenis_kelamin);
                 params.put("tempat_lahir", tempat_lahir);
                 params.put("nik", nik);
-                params.put("pekerjaan", edpekerjaan.getText().toString());
+                params.put("pekerjaan", pekerjaan);
                 params.put("finansial", finansial);
                 return params;
 
