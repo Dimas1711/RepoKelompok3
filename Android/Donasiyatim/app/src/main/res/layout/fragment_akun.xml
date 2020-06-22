@@ -20,6 +20,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="Profil"
+            android:fontFamily="@font/segoe_ui"
             android:textColor="@color/colorku"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -49,6 +50,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_profil"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/segoe_ui"
             android:textSize="18sp"
             android:textColor="#030303"/>
 
@@ -93,6 +95,7 @@
         android:layout_marginBottom="2dp"
         android:text="Edit Profil"
         android:textSize="25dp"
+        android:fontFamily="@font/segoe_ui"
         app:layout_constraintBottom_toBottomOf="@+id/akun"
         app:layout_constraintStart_toEndOf="@+id/akun"
         app:layout_constraintTop_toTopOf="@+id/akun"
@@ -112,6 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Data User"
+        android:fontFamily="@font/segoe_ui"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/edit"
         app:layout_constraintStart_toEndOf="@+id/edit"
@@ -131,6 +135,7 @@
         android:layout_height="wrap_content"
         android:text="Privacy Policy"
         android:textSize="25dp"
+        android:fontFamily="@font/segoe_ui"
         app:layout_constraintBottom_toBottomOf="@+id/privacy"
         app:layout_constraintStart_toEndOf="@+id/privacy"
         app:layout_constraintTop_toTopOf="@+id/privacy" />
@@ -149,6 +154,7 @@
         android:layout_height="wrap_content"
         android:text="Tentang Kami"
         android:textSize="25dp"
+        android:fontFamily="@font/segoe_ui"
         app:layout_constraintBottom_toBottomOf="@+id/tentang"
         app:layout_constraintStart_toEndOf="@+id/tentang"
         app:layout_constraintTop_toTopOf="@+id/tentang" />
@@ -167,6 +173,7 @@
         android:layout_height="wrap_content"
         android:text="Keluar"
         android:textSize="25dp"
+        android:fontFamily="@font/segoe_ui"
         app:layout_constraintBottom_toBottomOf="@+id/keluar"
         app:layout_constraintStart_toEndOf="@+id/keluar"
         app:layout_constraintTop_toTopOf="@+id/keluar" />

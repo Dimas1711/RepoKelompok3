@@ -39,7 +39,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/segoe_ui"
                 android:layout_marginEnd="8dp"
+
                 android:background="@drawable/donasi_judul"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +76,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="tulisan e"
+                    android:fontFamily="@font/segoe_ui"
                     android:textColor="#41d997"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -85,6 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:fontFamily="@font/segoe_ui"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="8dp"
                     android:text="Terkumpul dari"
@@ -99,6 +103,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/segoe_ui"
                     android:text="tulisan tujuan dana"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -126,6 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/segoe_ui"
                     android:text="Waktu Donasi"
                     android:textColor="#030303"
                     app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +146,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="tanggal"
                     android:textColor="#030303"
+                    android:fontFamily="@font/segoe_ui"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -151,6 +158,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="sampai"
+                    android:fontFamily="@font/segoe_ui"
                     app:layout_constraintStart_toEndOf="@+id/tv_tanggal"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -162,6 +170,7 @@
                     android:layout_marginTop="8dp"
                     android:text="tenggat waktu"
                     android:textColor="#030303"
+                    android:fontFamily="@font/segoe_ui"
                     app:layout_constraintStart_toEndOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -208,6 +217,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
                     android:text="nama panti"
+                    android:fontFamily="@font/segoe_ui"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/img_panti"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -234,6 +244,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:text="Deskripsi"
+                    android:fontFamily="@font/segoe_ui"
                     android:textColor="#030303"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -246,6 +257,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="Deskripsine"
+                    android:fontFamily="@font/segoe_ui"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView8" />

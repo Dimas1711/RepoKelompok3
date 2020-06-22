@@ -21,6 +21,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/segoe_ui"
             android:text="Silahkan Pilih Saldo Top Up"
             android:textColor="#030303"
             android:textSize="25sp"
@@ -64,6 +65,7 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="50dp"
                 android:textSize="20dp"
+
                 android:textStyle="bold"
                 android:gravity="center"
                 android:background="@drawable/border"
