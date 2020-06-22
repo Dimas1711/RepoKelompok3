@@ -15,7 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ResetPassActivity"></activity>
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ResetPassActivity" />
         <activity android:name=".GantiPassActivity" />
         <activity android:name=".EditDataActivity" />
         <activity android:name=".EditprofilActivity" />
@@ -31,13 +38,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".RegistrasiActivity" />
         <activity android:name=".DonasiFragment" />
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".LoginActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
