@@ -13,7 +13,9 @@ class Admin extends CI_Controller
 
         $this->load->model('Verif_Model');
         $this->load->model('Kasus_Model');
-        $this->load->model('Topup_Model');
+        $this->load->model('topup_model');
+        $this->load->model('dede');
+
     }
 
 	public function index()
@@ -29,8 +31,14 @@ class Admin extends CI_Controller
         $data['panti'] = $this->db->query("select count(status) as hasil from panti WHERE status = 0")->row_array();
         $data['dompet'] = $this->db->query("select count(status) as hasil from dompet WHERE status = 0")->row_array();
         $data['activepanti'] = $this->db->query("select count(status) as hasil from panti WHERE status = 1")->row_array();
-        $data['kasus1'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 1")->row_array();
-        $data['kasus2'] = $this->db->query("select count(status) as hasil from kasus WHERE status = 2")->row_array();
+        $data['kasus1'] = $this->db->query("select count(is_active) as hasil from kasus WHERE is_active = 1")->row_array();
+        $data['kasus2'] = $this->db->query("select count(is_active) as hasil from kasus WHERE is_active = 2")->row_array();
+        $data['kasus3'] = $this->db->query("select count(is_active) as hasil from kasus WHERE is_active = 0")->row_array();
+        $data['activeuser'] = $this->db->query("SELECT count(*) AS jumlah FROM user")->row_array();
+
+        // $data['piechart']=$this->db->query("select count(is_active) from kasus WHERE is_active = 2 UNION ALL select count(is_active) from kasus WHERE is_active = 1 UNION ALL select count(is_active) from kasus WHERE is_active = 0")->row_array();
+        
+
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
         $this->load->view("template/dashboard",$data);
@@ -202,7 +210,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $dataa['dompet'] = $this->Topup_Model->tampil_verif_topup();
+        $dataa['dompet'] = $this->topup_model->tampil_verif_topup();
 
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);

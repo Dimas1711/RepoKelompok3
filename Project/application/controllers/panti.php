@@ -123,7 +123,7 @@
                         'tanggal' => $this->input->post('tanggal'),
                         'deskripsi' =>$this->input->post('deskripsi'),
                         'status' => 0,
-                        'is_active' => 1
+                        'is_active' => 0
                         
                     );
                     if ($this->b->insertkasus($dataPost)) {
