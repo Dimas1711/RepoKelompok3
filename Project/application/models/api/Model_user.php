@@ -24,9 +24,10 @@ class Model_User extends CI_Model
             $this->db->update('user', $data, ['id_registrasi' => $id]);
             return $this->db->affected_rows();
         }
-        public function updateEmail($data, $id)
+        public function updateEmail($email, $password, $id)
         {
-            $this->db->query("UPDATE user SET email = '$data' WHERE id_registrasi = '$id'");
+            $this->db->query("UPDATE user SET email = '$email' WHERE id_registrasi = '$id'");
+            $this->db->query("UPDATE registrasi SET email = '$email', password = '$password' WHERE id_registrasi = '$id'");
             return $this->db->affected_rows();
         }
         public function updateUserFoto($data, $id)

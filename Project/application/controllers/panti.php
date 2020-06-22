@@ -14,6 +14,16 @@
         $this->load->model('Akun_Model', 'z');
     }
 
+    public function gantistatus()
+    {
+        $tz_object = new DateTimeZone('Asia/Jakarta');
+        $datetime = new DateTime();
+        $datetime->setTimezone($tz_object);
+        $gettgl = $datetime->format('Y-m-d');
+        $query = $this->db->query("UPDATE kasus set is_active = 2 WHERE status = 1 and tenggat_waktu like '%$gettgl%'");
+        echo $query;
+    }
+
         public function index()
         {
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
