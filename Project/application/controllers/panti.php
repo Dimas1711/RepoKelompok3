@@ -123,10 +123,11 @@
         
                 $this->load->library('upload' , $config);
                 if ($this->upload->do_upload('foto')) {
+                    $foto_namaBaru = $this->upload->data('file_name');
                     $dataPost = array(
                         'id_panti' =>$this->input->post('id_panti'),
                         'id_kategori' => $this->input->post('id_kategori'),
-                        'gambar' => $foto,
+                        'gambar' => $foto_namaBaru,
                         'judul'=> $this->input->post('judul'),
                         'tujuan_dana' => $this->input->post('tujuan_dana'),
                         'tenggat_waktu' => $this->input->post('tenggat_waktu'),
@@ -190,6 +191,7 @@
                
     
                 if ($this->upload->do_upload('foto') && $this->upload->do_upload('surat_pengesahan') ) {
+                    $foto_namaBaru = $this->upload->data('file_name');
                     $insert = array(
                         'nama_panti' => $this->input->post('nama_panti'),
                         'alamat_panti' => $this->input->post('alamat_panti'),
@@ -200,7 +202,7 @@
                         'nama_bank' => $this->input->post('nama_bank'),
                         'email' => $this->input->post('email'),
                         'tanggal_berdiri' => $this->input->post('tanggal_berdiri'),
-                        'foto' => $foto,
+                        'foto' => $foto_namaBaru,
                         'surat_pengesahan' => trim($pdf)
                     );
                     if ($this->b->insertdata($insert)) {
@@ -254,6 +256,7 @@
         
                 $this->load->library('upload' , $config);
                 if ($this->upload->do_upload('foto') ) {
+                    $foto_namaBaru = $this->upload->data('file_name');
                     $dataPost = array(
                         'id_registrasi' =>$this->input->post('id'),
                         'nama_panti' => $this->input->post('nama_panti'),
@@ -263,7 +266,7 @@
                         'no_telp' => $this->input->post('no_telp'),
                         'nama_yayasanInduk' => $this->input->post('ketua_panti'),
                         'tanggal_berdiri' => $this->input->post('tgl'),
-                        'foto' => $foto,
+                        'foto' => $foto_namaBaru,
                         'nama_rekening' => $this->input->post('nama_rekening'),
                         'nama_bank' => $this->input->post('nama_bank'),
                         'no_rekening' =>$this->input->post('nomor_rekening'),

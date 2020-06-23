@@ -55,17 +55,19 @@ public class HomeFragment extends Fragment  {
     TextView nama_user, saldo, showAllKasus, showAllBerita;
     ImageView img;
     Button btn_dompet;
-    String saldoku, userid, idregis, auth;
+    String saldoku, userid, idregis, auth, image;
     RecyclerView rv, rvBerita;
     List<ModelData> modelDataList;
     List<ModelDataBerita> modelDataBeritaList;
     ListAdapter listAdapter;
     ListAdapterBerita listAdapterBerita;
+    ImageView imageView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         nama_user = v.findViewById(R.id.tv_namauser);
+        imageView = v.findViewById(R.id.imageView);
         saldo = v.findViewById(R.id.tv_saldo);
         btn_dompet = v.findViewById(R.id.btn_dompet);
         rv = v.findViewById(R.id.rv);
@@ -75,6 +77,7 @@ public class HomeFragment extends Fragment  {
         carouselView.setPageCount(sampleImage.length);
         showAllKasus = v.findViewById(R.id.btn_showAll_kasus);
         showAllBerita = v.findViewById(R.id.btn_showAll_berita);
+
 
        auth = authdata.getInstance(getActivity()).getAksesData();
        Log.e("kode user", ""+auth);
@@ -121,6 +124,7 @@ public class HomeFragment extends Fragment  {
         Log.e("val","testes" + val);
         //nama_user.setText(jenenge);
         loaddetail();
+        loadgambar();
         retrieveJSON();
         retrieveJSONBerita();
         return v;
@@ -188,7 +192,7 @@ public class HomeFragment extends Fragment  {
                         JSONObject dataobj = data.getJSONObject(i);
                         playerModel.setID_berita(dataobj.getString("id_berita"));
                         playerModel.setJudul_berita(dataobj.getString("judul"));
-                        playerModel.setTanggal_berita(dataobj.getString("tanggal_berita"));
+                        playerModel.setTanggal_berita(Util.settanggal(dataobj.getString("tanggal_berita")));
                         playerModel.setGambar_berita(dataobj.getString("gambar"));
 
                         modelDataBeritaList.add(playerModel);
@@ -246,11 +250,49 @@ public class HomeFragment extends Fragment  {
                     saldo.setText(Util.setformatrupiah(arr1.getString("finansial")));
                     nama_user.setText(arr1.getString("nama_user"));
                     idregis = arr1.getString("id_registrasi");
+                    image = arr1.getString("profil");
+                    Log.e("gambar",""+image);
                     userid = arr1.getString("id_user");
                     Log.e("saldo", ""+userid);
                     saldoku = arr1.getString("finansial");
+                    Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + image).into(imageView);
                     Log.e("saldo", ""+saldoku);
 
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("erronya ",""+e);
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "errornya : " + error.getMessage());
+                    }
+                }) {
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(senddata);
+    }
+
+    private void loadgambar()//ini buat nampilin saldo
+    {
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_regis/index_get?id_registrasi="
+                +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                JSONObject res = null;
+                try {
+                    res = new JSONObject(response);
+                    Log.e("responnya ",""+response);
+                    JSONArray arr = res.getJSONArray("data");
+                    JSONObject arr1 = arr.getJSONObject(0);
+                    idregis = arr1.getString("id_registrasi");
+                    image = arr1.getString("profil");
+                    Log.e("gambar",""+image);
+                    Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + image).into(imageView);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

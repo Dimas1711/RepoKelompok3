@@ -65,6 +65,12 @@ public class EditDataActivity extends AppCompatActivity {
         Log.e("asd",""+nik);
         Log.e("asd",""+finansial);
         Log.e("asd",""+email);
+        Log.e("asd",""+no_rek);
+        Log.e("asd",""+pekerjaan);
+        Log.e("asd",""+nama_bank);
+        Log.e("asd",""+nama_rek);
+        Log.e("asd",""+alamat);
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,10 +84,7 @@ public class EditDataActivity extends AppCompatActivity {
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ednama.getText().toString().equals("") || edalamat.getText().toString().equals("") ||
-                        edno_telp.getText().toString().equals("") || edpekerjaan.getText().toString().equals("") ||
-                        edno_rek.getText().toString().equals("") || ednama_rek.getText().toString().equals("")
-                        || ednama_bank.getText().toString().equals(""))
+                if (ednama.getText().toString().equals("") || edno_telp.getText().toString().equals(""))
                 {
                     Toast.makeText(EditDataActivity.this,"Field tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }

@@ -99,8 +99,10 @@ public class RiwayatFragment extends Fragment {
                     {
                         ModelRiwayatDonasi playerModel = new ModelRiwayatDonasi();
                         JSONObject dataobj = data.getJSONObject(i);
-                        playerModel.setTanggal(dataobj.getString("tanggal"));
+                        playerModel.setTanggal(Util.settanggal(dataobj.getString("tanggal")));
+                        playerModel.setJudul(dataobj.getString("judul"));
                         playerModel.setJumlah_donasi(Util.setformatrupiah(dataobj.getString("jumlah_donasi")));
+
 
                         modelDataList.add(playerModel);
                     }

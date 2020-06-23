@@ -39,9 +39,12 @@
                             <td><?= $row['jumlah_uang_terkumpul']?></td>
                             <td><?= $row['tenggat_waktu']?></td>
                             <td><?php if ($row['is_active'] == 0) {
-                            echo '<div class="badge badge-danger badge-pill">Batas Waktu Habis</div>';
+                            echo '<div class="badge badge-primary badge-pill">Pending</div>';
                             } elseif ($row['is_active'] == 1) {
                             echo '<div class="badge badge-success badge-pill">Berlangsung</div>';
+                            }
+                            elseif ($row['is_active'] == 2) {
+                                echo '<div class="badge badge-danger badge-pill">Batas Waktu Habis</div>';
                             }
                             ?></td>
                             <td>

@@ -24,6 +24,7 @@
                         <th>Tujuan Dana</th>
                         <th>Jumlah Pendonasi</th>
                         <th>Jumlah Uang Terkumpul</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,15 @@
                         <td><?= $row['tujuan_dana']?></td>
                         <td><?= $row['jumlah_pendonasi']?></td>
                         <td><?= $row['jumlah_uang_terkumpul']?></td>
+                        <td><?php if ($row['is_active'] == 0) {
+                            echo '<div class="badge badge-primary badge-pill">Pending</div>';
+                            } elseif ($row['is_active'] == 1) {
+                            echo '<div class="badge badge-success badge-pill">Berlangsung</div>';
+                            }
+                            elseif ($row['is_active'] == 2) {
+                                echo '<div class="badge badge-danger badge-pill">Batas Waktu Habis</div>';
+                            }
+                            ?></td>
                     </tr>
                      <?php }?>
                 </tbody>

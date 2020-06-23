@@ -27,11 +27,12 @@ class Top_Up extends REST_Controller{
         
         $this->load->library('upload' , $config);
         if ($this->upload->do_upload('foto')) {
+            $fotoNama = $this->upload->data('file_name');
         $arr = [
             'id_dompet' => $kode,
             'id_user' => $id_user,
             'jumlah_inginkan' => $jumlah,
-            'foto' => $foto,
+            'foto' => $fotoNama,
             'tanggal' => date("Y-m-d"),
             'status' => 0,
         ];
