@@ -52,7 +52,8 @@ class Data_User extends REST_Controller{
             'pekerjaan' => $this->put('pekerjaan'),
             'finansial' => $this->put('finansial')
         ];
-        if($this->user->updateUser($data, $id) > 0)
+        $nama = $this->put('nama_user');
+        if($this->user->updateUser($data,$nama, $id) > 0)
         {
             $this->response([
                 'status' => 'true',

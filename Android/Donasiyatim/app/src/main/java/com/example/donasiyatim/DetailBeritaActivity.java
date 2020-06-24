@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.donasiyatim.configfile.ServerApi;
+import com.example.donasiyatim.configfile.Util;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -51,7 +52,7 @@ public class DetailBeritaActivity extends AppCompatActivity {
                     JSONObject arr1 = arr.getJSONObject(0);
                     judul_berita.setText(arr1.getString("judul"));
                     isi_berita.setText(arr1.getString("isi"));
-                    tanggal_berita.setText(arr1.getString("tanggal_berita"));
+                    tanggal_berita.setText(Util.settanggal(arr1.getString("tanggal_berita")));
                     Picasso.get().load(ServerApi.IPServer + "../" + "uploads/berita/"+ arr1.getString("gambar")).into(img_berita);
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -13,8 +13,8 @@ class Admin extends CI_Controller
 
         $this->load->model('Verif_Model');
         $this->load->model('Kasus_Model');
-        $this->load->model('topup_model');
-        $this->load->model('dede');
+        $this->load->model('Topup_Model');
+        $this->load->model('Dede');
 
     }
 
@@ -210,7 +210,7 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $dataa['dompet'] = $this->topup_model->tampil_verif_topup();
+        $dataa['dompet'] = $this->Topup_Model->tampil_verif_topup();
 
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);

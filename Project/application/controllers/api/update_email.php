@@ -12,14 +12,15 @@ class update_email extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('api/Model_user' , 'user');
+        $this->load->model('api/Model_User' , 'user');
     }
 
     public function index_put()
     {
         $id = $this->put('id_registrasi');
-        $data = $this->put('email');
-        if($this->user->updateEmail($data, $id) > 0)
+        $email = $this->put('email');
+        $password = $this->put('password');
+        if($this->user->updateEmail($email, md5($password), $id) > 0)
         {
             $this->response([
                 'status' => 'true',
