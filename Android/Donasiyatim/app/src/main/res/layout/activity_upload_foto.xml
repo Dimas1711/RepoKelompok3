@@ -94,6 +94,49 @@
                 app:layout_constraintStart_toEndOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/tanggal" />
 
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Silahkan Transfer Ke Bank"
+                android:textColor="#030303"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+            <TextView
+                android:id="@+id/bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Bank e"
+                android:textColor="#f70202"
+                app:layout_constraintStart_toEndOf="@+id/textView18"
+                app:layout_constraintTop_toBottomOf="@+id/jumlah_topup" />
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="No Rekening"
+                android:textColor="#030303"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <TextView
+                android:id="@+id/va_e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="No Rekening e"
+                android:textColor="#f70202"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/bank" />
+
             <ImageView
                 android:id="@+id/img_foto"
                 android:layout_width="100dp"
@@ -102,7 +145,7 @@
                 android:layout_marginTop="30dp"
                 android:src="@drawable/imageno"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -113,7 +156,7 @@
                 android:text="Upload Bukti Transfer "
                 android:textColor="#030303"
                 app:layout_constraintStart_toEndOf="@+id/img_foto"
-                app:layout_constraintTop_toBottomOf="@+id/jumlah_topup" />
+                app:layout_constraintTop_toBottomOf="@+id/va_e" />
 
             <Button
                 android:id="@+id/btn_choose"

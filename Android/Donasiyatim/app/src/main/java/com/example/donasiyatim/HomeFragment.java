@@ -78,7 +78,10 @@ public class HomeFragment extends Fragment  {
         showAllKasus = v.findViewById(R.id.btn_showAll_kasus);
         showAllBerita = v.findViewById(R.id.btn_showAll_berita);
 
-
+        loaddetail();
+        loadgambar();
+        retrieveJSON();
+        retrieveJSONBerita();
        auth = authdata.getInstance(getActivity()).getAksesData();
        Log.e("kode user", ""+auth);
 
@@ -123,10 +126,7 @@ public class HomeFragment extends Fragment  {
         String val = authdata.getInstance(getActivity()).getKodeUser();
         Log.e("val","testes" + val);
         //nama_user.setText(jenenge);
-        loaddetail();
-        loadgambar();
-        retrieveJSON();
-        retrieveJSONBerita();
+
         return v;
     }
 
@@ -237,7 +237,7 @@ public class HomeFragment extends Fragment  {
 
     private void loaddetail()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Data_User/index_get?id_registrasi="
                 +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
@@ -250,12 +250,10 @@ public class HomeFragment extends Fragment  {
                     saldo.setText(Util.setformatrupiah(arr1.getString("finansial")));
                     nama_user.setText(arr1.getString("nama_user"));
                     idregis = arr1.getString("id_registrasi");
-                    image = arr1.getString("profil");
                     Log.e("gambar",""+image);
                     userid = arr1.getString("id_user");
-                    Log.e("saldo", ""+userid);
+                    Log.e("asd","user id home"+userid);
                     saldoku = arr1.getString("finansial");
-                    Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + image).into(imageView);
                     Log.e("saldo", ""+saldoku);
 
 

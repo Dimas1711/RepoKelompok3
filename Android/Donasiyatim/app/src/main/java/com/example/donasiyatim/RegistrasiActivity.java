@@ -34,7 +34,7 @@ public class RegistrasiActivity extends AppCompatActivity {
     EditText fullname, pass, konfirm, email, nomer;
     Button register;
     RequestQueue requestQueue;
-    String NameHolder, EmailHolder, PasswordHolder ;
+    String NameHolder, EmailHolder, PasswordHolder, nama_user, eemail, password, konf_password ;
     Boolean CheckEditText;
     TextView masuk;
     ProgressDialog progressDialog;
@@ -48,8 +48,8 @@ public class RegistrasiActivity extends AppCompatActivity {
         email = findViewById(R.id.edt_email);
         pass = findViewById(R.id.edt_password);
         konfirm = findViewById(R.id.edt_konfrimasi);
-        nomer = findViewById(R.id.edt_nomor);
         masuk = findViewById(R.id.masuk);
+
         requestQueue = Volley.newRequestQueue(RegistrasiActivity.this);
         progressDialog = new ProgressDialog(this);
         progressBar = new ProgressBar(RegistrasiActivity.this);
@@ -62,98 +62,65 @@ public class RegistrasiActivity extends AppCompatActivity {
             }
         });
         register = findViewById(R.id.btn_daftar);
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                UserRegistration();
+                NameHolder = fullname.getText().toString();
+                EmailHolder = email.getText().toString();
+                PasswordHolder = pass.getText().toString();
+                if (NameHolder.equals("") || EmailHolder.equals("") || PasswordHolder.equals(""))
+                {
+                    Toast.makeText(RegistrasiActivity.this, "Inputan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    UserRegistration();
+                }
+
             }
         });
     }
 
     public void UserRegistration() {
-        final String nama_user = this.fullname.getText().toString().trim();
-        final String email = this.email.getText().toString().trim();
-        final String no_telp = this.nomer.getText().toString().trim();
-        final String password = this.pass.getText().toString().trim();
-        final String konfirm_pass = this.konfirm.getText().toString().trim();
 
-        if (nama_user.matches("")){
-            Toast.makeText(this, "Masukkan Nama Lengkap Anda", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (email.matches("")){
-            Toast.makeText(this, "Masukkan email Anda", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (no_telp.matches("")){
-            Toast.makeText(this, "Masukkan No Telpon Anda", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (password.matches("")){
-            Toast.makeText(this, "Masukkan password Anda", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (konfirm_pass.matches("")) {
-            Toast.makeText(this, "Masukkan password Anda lagi", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        progressBar.setVisibility(View.GONE);
-        masuk.setVisibility(View.GONE);
+        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "registrasi/index_get",
+                new Response.Listener<String>(){
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerApi.URL_REGIS,
-                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String status = jsonObject.getString("status");
-                            String error = jsonObject.getString("error");
-                            String message = jsonObject.getString("message");
-
-                            if (status.equals("200") && error.equals("false")) {
-                                Toast.makeText(RegistrasiActivity.this, message, Toast.LENGTH_SHORT).show();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent2 = new Intent(RegistrasiActivity.this, LoginActivity.class);
-                                        startActivity(intent2);
-                                    }
-                                }, 1500);
-                            } else {
-                                Toast.makeText(RegistrasiActivity.this, message, Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
-                                masuk.setVisibility(View.VISIBLE);
+                            JSONObject res = new JSONObject(response);
+                            if (res.optString("status").equals("true")) {
+                                Toast.makeText(RegistrasiActivity.this, res.getString("pesan"), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegistrasiActivity.this, LoginActivity.class);
+                                startActivity(intent);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progressBar.setVisibility(View.GONE);
-                            Intent intent3 = new Intent(RegistrasiActivity.this, LoginActivity.class);
-                            startActivity(intent3);
-                            Toast.makeText(RegistrasiActivity.this, "Registrasi Berhasil", Toast.LENGTH_SHORT).show();
                         }
+
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegistrasiActivity.this, "Error! " + error.toString(), Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
-                        masuk.setVisibility(View.VISIBLE);
+                        Log.d("volley", "errornya : " + error.getMessage());
                     }
-                })
-        {
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("nama_user",nama_user);
-                params.put("email",email);
-                params.put("no_telp",no_telp);
-                params.put("password",password);
+                }) {
+            protected Map<String, String> getParams(){
+                Map<String , String> params = new HashMap<>();
+                params.put("nama" , NameHolder);
+                params.put("password" , PasswordHolder);
+                params.put("email" , EmailHolder);
+
                 return params;
             }
-        };
 
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        requestQueue.add(senddata);
     }
 
 

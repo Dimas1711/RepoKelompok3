@@ -56,8 +56,8 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class EditprofilActivity extends AppCompatActivity {
     ImageView img_profil;
-    TextView btn_ganti_foto;
-    String id_regis, nama, gambar, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
+    TextView btn_ganti_foto, ganti_pass;
+    String id_regis, nama, password, gambar, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
     public static final int REQUEST_CODE_CAMERA = 001;
     public static final int REQUEST_CODE_GALLERY = 002;
     Bitmap bitmap;
@@ -103,6 +103,7 @@ public class EditprofilActivity extends AppCompatActivity {
         simpan = findViewById(R.id.save);
         back = findViewById(R.id.back);
         edemail = findViewById(R.id.editemail);
+        ganti_pass = findViewById(R.id.gantipass);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +131,16 @@ public class EditprofilActivity extends AppCompatActivity {
             }
         });
 
+        ganti_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditprofilActivity.this, GantiPassActivity.class);
+                intent.putExtra("password", password);
+                intent.putExtra("id_regis",id_regis);
+                startActivity(intent);
+            }
+        });
+
 
         btn_ganti_foto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +154,7 @@ public class EditprofilActivity extends AppCompatActivity {
 
     private void update()
     {
-        StringRequest senddata = new StringRequest(Request.Method.PUT, ServerApi.IPServer + "update_email/index_put",
+        StringRequest senddata = new StringRequest(Request.Method.PUT, ServerApi.IPServer + "Update_Email/index_put",
                 new Response.Listener<String>(){
 
                     @Override
@@ -176,6 +187,7 @@ public class EditprofilActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(senddata);
     }
+
 
 
 
@@ -327,6 +339,8 @@ public class EditprofilActivity extends AppCompatActivity {
                     JSONArray arr = res.getJSONArray("data");
                     JSONObject arr1 = arr.getJSONObject(0);
                     gambar = arr1.getString("profil");
+                    password = arr1.getString("password");
+                    Log.e("asd","password e"+password);
                     Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + gambar).into(img_profil);
 
 

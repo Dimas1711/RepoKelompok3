@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         lupa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent lupapass = new Intent(LoginActivity.this , LupaPass.class);
+                Intent lupapass = new Intent(LoginActivity.this , ResetPassActivity.class);
                 startActivity(lupapass);
             }
         });
@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            pd.cancel();
                 progressDialog.dismiss();
                 Log.e("errornyaa ", "" + error);
-                Toast.makeText(LoginActivity.this, "Gagal Login, " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Gagal Login, " + "Email atau password salah !", Toast.LENGTH_SHORT).show();
 
 
             }

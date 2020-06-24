@@ -1,9 +1,11 @@
 package com.example.donasiyatim;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,12 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.donasiyatim.configfile.AppController;
 import com.example.donasiyatim.configfile.ServerApi;
 import com.example.donasiyatim.configfile.Util;
 import com.example.donasiyatim.configfile.authdata;
@@ -31,17 +35,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DompetActivity extends AppCompatActivity {
 
-    TextView saldo;
-    EditText isi;
+    TextView saldo, bca, bni, bri;
+    EditText isi, akunbank;
     List<ModelDataRiwayatTopup> modelDataRiwayatTopup;
     ListAdapterRiwayatTopup listAdapterRiwayatTopup;
     RecyclerView rv_riwayat;
     Button isi_saldo, btn;
-    String id_user,id_regis,nama, saldoku;
+    View dialogview;
+    String id_user,id_regis,nama, saldoku, id_akun, koded, ku;
+    ArrayList<String> databank=new ArrayList<String>();
+    ArrayList<String> indexdatabank=new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +61,12 @@ public class DompetActivity extends AppCompatActivity {
         isi_saldo = findViewById(R.id.btn_isi);
         id_regis = getIntent().getStringExtra("id_regis");
         saldoku = getIntent().getStringExtra("saldo");
+        id_user = getIntent().getStringExtra("id_user");
         Log.e("asd", ""+saldoku);
-
+        Log.e("asd", "id user e"+id_user);
         loaddetail();
         retrieveJSONRiwayatTopup();
+        getdatabank();
 
         isi_saldo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +81,9 @@ public class DompetActivity extends AppCompatActivity {
                 View bottomSheet = LayoutInflater.from(getApplicationContext())
                         .inflate(R.layout.activity_topup, (LinearLayout) findViewById(R.id.BottomSheetDial));
 
+                akunbank = bottomSheet.findViewById(R.id.textakunbank);
                 isi = bottomSheet.findViewById(R.id.uang_e);
+                btn = bottomSheet.findViewById(R.id.buttonakunbank);
 
                 bottomSheet.findViewById(R.id.rp50).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -97,6 +110,24 @@ public class DompetActivity extends AppCompatActivity {
                     }
                 });
 
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(DompetActivity.this);
+                        pictureDialog.setTitle("Pilih Kategori Bank");
+                        pictureDialog.setItems(databank.toArray(new String[0]), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        koded = indexdatabank.get(i);
+                                        Log.e("kodenya",""+koded);
+                                        akunbank.setText(databank.get(i));
+                                    }
+                                });
+                        pictureDialog.show();
+                                //showDialog();
+                    }
+                });
+
                 bottomSheet.findViewById(R.id.btn_isisaldo).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -106,12 +137,21 @@ public class DompetActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Intent intent = new Intent(DompetActivity.this, UploadFotoActivity.class);
-                            intent.putExtra("jumlah_inginkan", isi.getText().toString());
-                            Log.e("uang", "" + intent.putExtra("jumlah_inginkan", isi.getText().toString()));
-                            intent.putExtra("id_user", id_user);
-                            intent.putExtra("nama_user", nama);
-                            startActivity(intent);
+                            if (akunbank.getText().toString().equals(""))
+                            {
+                                Toast.makeText(DompetActivity.this, "Silahkan pilih akun bank", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(DompetActivity.this, UploadFotoActivity.class);
+                                intent.putExtra("jumlah_inginkan", isi.getText().toString());
+                                Log.e("uang", "" + intent.putExtra("jumlah_inginkan", isi.getText().toString()));
+                                intent.putExtra("id_user", id_user);
+                                intent.putExtra("nama_user", nama);
+                                intent.putExtra("id_akun",koded);
+                                Log.e("asd","intent kode "+koded);
+                                startActivity(intent);
+                            }
                         }
                     }
                 });
@@ -156,7 +196,7 @@ public class DompetActivity extends AppCompatActivity {
 
     private void retrieveJSONRiwayatTopup()
     {
-        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Riwayat_topup/index_get?id_user="+getIntent().getStringExtra("id_user"),
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Riwayat_Topup/index_get?id_user="+id_user,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String responseRiwayat) {
@@ -203,5 +243,59 @@ public class DompetActivity extends AppCompatActivity {
         rv_riwayat.setLayoutManager(layoutManager);
         rv_riwayat.setAdapter(listAdapterRiwayatTopup);
     }
+
+
+    private void getdatabank()
+    {
+
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_finansial/index_get", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject res = null;
+                try {
+                    res = new JSONObject(response);
+                        JSONArray arr = res.getJSONArray("data");
+                        for (int i = 0; i < arr.length(); i++) {
+                            try {
+                                JSONObject datakom = arr.getJSONObject(i);
+                                ku = datakom.getString("nama_bank");
+                                koded = datakom.getString("id_akun");
+                                Log.e("asd","nama bank"+ku);
+                                Log.e("asd","id akun"+koded);
+                                databank.add(ku);
+                                indexdatabank.add(koded);
+                            } catch (Exception ea) {
+                                ea.printStackTrace();
+
+                            }
+                        }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "errornya : " + error.getMessage());
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_akun", koded);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(senddata);
+        //AppController.getInstance().addToRequestQueue(senddata);
+    }
+
+
+
 
 }

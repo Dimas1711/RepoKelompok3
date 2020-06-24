@@ -17,7 +17,6 @@ class Data_User extends REST_Controller{
     public function index_get()
     {
         $id = $this->get('id_registrasi');
-        
      
         $user = $this->user->index($id);
  
