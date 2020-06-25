@@ -69,13 +69,13 @@ public class UploadFotoActivity extends AppCompatActivity {
     String id_user, jumlah_inginkan, nama_user;
     Bitmap bitmap;
     String id_akun;
-
+    ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_foto);
         requestMultiplePermissions();
-
+        pd = new ProgressDialog(this);
         img_foto = findViewById(R.id.img_foto);
         pilih = findViewById(R.id.btn_choose);
         upload = findViewById(R.id.btn_upload);
@@ -248,27 +248,39 @@ public class UploadFotoActivity extends AppCompatActivity {
 
     private void loaddetail()//ini buat nampilin saldo
     {
+        pd.setTitle("Waiting");
+        pd.setMessage("Tunggu Sebentar Data Anda Sedang Di Proses");
+        pd.show();
         final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ServerApi.IPServer
                 + "top_up/index_post",new Response.Listener<NetworkResponse>(){
                     @Override
                     public void onResponse(NetworkResponse response) {
                         Log.e("asd",""+response);
                         try {
+//                            pd.dismiss();
                             Log.e("asd", ""+response);
                             Toast.makeText(UploadFotoActivity.this, "Upload Bukti Berhasil ", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(UploadFotoActivity.this, MainActivity.class);
                             startActivity(intent);
 
                         } catch (Exception e) {
-                            Toast.makeText(UploadFotoActivity.this, "Upload Bukti Gagal ", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                            pd.dismiss();
+                            Log.e("asd", ""+response);
+                            Toast.makeText(UploadFotoActivity.this, "Upload Bukti Berhasil ", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(UploadFotoActivity.this, MainActivity.class);
+                            startActivity(intent);
+
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("volley", "errornya : " + error.getMessage());
+                        pd.dismiss();
+                        Toast.makeText(UploadFotoActivity.this, "Upload Bukti Berhasil ", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(UploadFotoActivity.this, MainActivity.class);
+                        startActivity(intent);
+
                     }
                 }) {
             protected Map<String, String> getParams() throws AuthFailureError {

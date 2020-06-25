@@ -9,7 +9,7 @@ public class authdata {
     public static final String SHARED_PREF_NAME = "sharedonasi";
     private static final String sudahlogin = "n";
 
-    private static final String level = "level";
+    private static final String level = "role_id";
     private static final String kode_user = "kode_user";
     private static final String nama_user = "nama_user";
     private static final String akses_data = "akses_data";
@@ -27,7 +27,7 @@ public class authdata {
         return mInstance;
     }
 
-    public boolean setdatauser(String xstatus, String xkode_user, String xnama_user, String tokennya){
+    public boolean setdatauser(String xstatus, String xkode_user, String xnama_user, String tokennya , String role_id){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -36,6 +36,7 @@ public class authdata {
         editor.putString(nama_user, xnama_user);
         editor.putString(sudahlogin, "y");
         editor.putString(token, tokennya);
+        editor.putString(level, role_id);
 
         editor.apply();
 
