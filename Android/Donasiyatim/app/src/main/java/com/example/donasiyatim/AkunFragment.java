@@ -60,8 +60,8 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class AkunFragment extends Fragment {
     ImageView img_profil;
-    TextView btn_ganti_foto, btnEditProfil, nama_user, btnEditData;
-    String id_regis, email, gambar, nama, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
+    TextView btn_ganti_foto, btnEditProfil, nama_user, btnEditData, btnLogout, nama_email;
+    String id_regis,pass, email, gambar, nama, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,8 +72,10 @@ public class AkunFragment extends Fragment {
         btn_ganti_foto = v.findViewById(R.id.btn_fotoganti);
         img_profil = v.findViewById(R.id.img_profil);
         nama_user = v.findViewById(R.id.nama_user);
+        nama_email = v.findViewById(R.id.email);
         btnEditProfil = v.findViewById(R.id.editProfil);
         btnEditData = v.findViewById(R.id.editData);
+        btnLogout = v.findViewById(R.id.btn_logout);
         id_regis = authdata.getInstance(getActivity().getApplicationContext()).getKodeUser();
 
         Log.e("asdfgh", "onCreateView: "+ id_regis);
@@ -119,8 +121,19 @@ public class AkunFragment extends Fragment {
                 startActivity(edt);
             }
         });
+
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+
         return v;
     }
+
+
 
     private void loaddata()//ini buat nampilin saldo
     {
@@ -185,7 +198,10 @@ public class AkunFragment extends Fragment {
                     gambar = arr1.getString("profil");
                     nama = arr1.getString("nama");
                     email = arr1.getString("email");
+                    pass = arr1.getString("password");
+                    Log.e("asd", "pass e "+pass);
                     nama_user.setText(nama);
+                    nama_email.setText(email);
                     Picasso.get().load(ServerApi.IPServer + "../" + "uploads/akun/" + gambar).into(img_profil);
 
 
@@ -205,6 +221,41 @@ public class AkunFragment extends Fragment {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(senddata);
+    }
+
+    private void showDialog(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        // set title dialog
+        alertDialogBuilder.setTitle("Yakin Logout Akun?");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage("Klik Ya untuk logout!")
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // jika tombol diklik, maka akan menutup activity ini
+                        authdata.getInstance(getActivity().getApplicationContext()).logout();
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // jika tombol ini diklik, akan menutup dialog
+                        // dan tidak terjadi apa2
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
     }
 
 }

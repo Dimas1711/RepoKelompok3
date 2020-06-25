@@ -123,10 +123,11 @@
         
                 $this->load->library('upload' , $config);
                 if ($this->upload->do_upload('foto')) {
+                    $foto_namaBaru = $this->upload->data('file_name');
                     $dataPost = array(
                         'id_panti' =>$this->input->post('id_panti'),
                         'id_kategori' => $this->input->post('id_kategori'),
-                        'gambar' => $foto,
+                        'gambar' => $foto_namaBaru,
                         'judul'=> $this->input->post('judul'),
                         'tujuan_dana' => $this->input->post('tujuan_dana'),
                         'tenggat_waktu' => $this->input->post('tenggat_waktu'),
@@ -185,11 +186,14 @@
                 $config['max_size'] = '2048';
                 $config['upload_path'] = './uploads/panti/';
                 $pdf = $_FILES['surat_pengesahan']['name'];
+                $config['remove_spaces'] = TRUE;
+                $config['encrypt_name'] = TRUE;
                 
                 $this->load->library('upload' , $config);
                
     
                 if ($this->upload->do_upload('foto') && $this->upload->do_upload('surat_pengesahan') ) {
+                    $foto_namaBaru = $this->upload->data('file_name');
                     $insert = array(
                         'nama_panti' => $this->input->post('nama_panti'),
                         'alamat_panti' => $this->input->post('alamat_panti'),
@@ -200,7 +204,7 @@
                         'nama_bank' => $this->input->post('nama_bank'),
                         'email' => $this->input->post('email'),
                         'tanggal_berdiri' => $this->input->post('tanggal_berdiri'),
-                        'foto' => $foto,
+                        'foto' => $foto_namaBaru,
                         'surat_pengesahan' => trim($pdf)
                     );
                     if ($this->b->insertdata($insert)) {
@@ -222,7 +226,8 @@
         }
 
         //panel panti
-        public function permintaan_verifikasi(){
+        public function permintaan_verifikasi()
+        {
             $this->form_validation->set_rules('nama_panti','Nama Panti','required');
             $this->form_validation->set_rules('alamat','Alamat','required');
             $this->form_validation->set_rules('no_telp','No Telp','required');
@@ -251,9 +256,13 @@
                 $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
                 $config['max_size'] = '3000';
                 $config['upload_path'] = 'uploads/panti';
+                $config['remove_spaces'] = TRUE;
+                $config['encrypt_name'] = TRUE;
+
         
                 $this->load->library('upload' , $config);
                 if ($this->upload->do_upload('foto') ) {
+                    $foto_namaBaru = $this->upload->data('file_name');
                     $dataPost = array(
                         'id_registrasi' =>$this->input->post('id'),
                         'nama_panti' => $this->input->post('nama_panti'),
@@ -263,7 +272,7 @@
                         'no_telp' => $this->input->post('no_telp'),
                         'nama_yayasanInduk' => $this->input->post('ketua_panti'),
                         'tanggal_berdiri' => $this->input->post('tgl'),
-                        'foto' => $foto,
+                        'foto' => $foto_namaBaru,
                         'nama_rekening' => $this->input->post('nama_rekening'),
                         'nama_bank' => $this->input->post('nama_bank'),
                         'no_rekening' =>$this->input->post('nomor_rekening'),
@@ -304,30 +313,13 @@
         }
 
         //edit akun
-        public function akun_panti()
-        {
-            $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
-            $this->session->userdata('email')])->row_array();
-
-       $id_registrasi = $this->session->userdata('id_registrasi');
-           $data['akun'] = $this->db->query("SELECT foto, no_ktp, ktp_pemilik FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
-
-
-         //$data['akun'] = $this->db->query("SELECT nama_panti, email, tanggal_berdiri, foto FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
-
-            $this->load->view("template/sidebar2");
-            $this->load->view("template/header",$data);
-            $this->load->view("panti/akun_panti",$data);
-            $this->load->view("template/footer");
-        }
-
         public function profilpanti()
         {
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
 
-       $id_registrasi = $this->session->userdata('id_registrasi');
-           $data['akun'] = $this->db->query("SELECT foto, no_ktp, ktp_pemilik FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
+     //  $id_registrasi = $this->session->userdata('id_registrasi');
+          // $data['akun'] = $this->db->query("SELECT foto, no_ktp, ktp_pemilik FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
 
 
          //$data['akun'] = $this->db->query("SELECT nama_panti, email, tanggal_berdiri, foto FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
@@ -367,6 +359,8 @@
                     $config['allowed_types'] = 'jpg|png|gif|jpeg';
                     $config['max_size'] = '2048';
                     $config['upload_path'] = './uploads/akun/';
+                    $config['remove_spaces'] = TRUE;
+                    $config['encrypt_name'] = TRUE;
 
                     $this->load->library('upload', $config);
 
@@ -398,6 +392,102 @@
                 redirect('panti/profilpanti');
             }
         }
+    }
+
+   
+
+    public function detaildata() {
+        $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
+        $this->session->userdata('email')])->row_array();
+
+        //$id_registrasi = $this->session->userdata('id_registrasi');
+        //$data2['datapanti'] = $this->db->query("SELECT panti.nama_panti, panti.alamat_panti, panti.no_telp, panti.nama_yayasanInduk, panti.nama_rekening, panti.no_rekening, panti.nama_bank, panti.email, panti.ktp_pemilik FROM panti WHERE panti.id_registrasi = '$id_registrasi'")->result_array();
+        $id_registrasi = $this->session->userdata('id_registrasi');
+        $data['datapanti'] = $this->b->getDataPanti($id_registrasi);
+     //$data['akun'] = $this->db->query("SELECT nama_panti, email, tanggal_berdiri, foto FROM panti WHERE id_registrasi = '$id_registrasi'")->result_array();
+
+        $this->load->view("template/sidebar2");
+        $this->load->view("template/header",$data);
+        $this->load->view("panti/detail_panti",$data);
+        $this->load->view("template/footer");
+            
+    }
+
+    public function editdata($id) {
+        
+        $this->form_validation->set_rules('nama_panti','Nama Panti','required');
+        $this->form_validation->set_rules('alamat_panti','Alamat Panti','required');
+        $this->form_validation->set_rules('no_telp','No Telepon','required');
+        $this->form_validation->set_rules('nama_yayasanInduk','Nama Ketua Panti','required');
+        $this->form_validation->set_rules('nama_rekening','Nama Rekening','required');
+        $this->form_validation->set_rules('no_rekening','Nomor Rekening','required');
+        $this->form_validation->set_rules('nama_bank','Nama Bank','required');
+        $this->form_validation->set_rules('email','Email','required');
+
+          
+            $data['registrasi'] = $this->db->get_where('registrasi',['email' => $this->session->userdata('email')])->row_array();
+            $edit['please'] = $this->b->detail($id);
+            if ($this->form_validation->run() == false) {
+            
+              $this->load->view("template/sidebar2");
+              $this->load->view("template/header",$data);
+              $this->load->view("panti/edit_data",$edit);
+              $this->load->view("template/footer");
+            
+            }else{
+               $update = $this->b->gantiDatapanti(array(
+                'email' => $this->input->post('email'),
+                          'nama_panti' => $this->input->post('nama_panti'),
+                          'alamat_panti' => $this->input->post('alamat_panti'),
+                          'no_telp' => $this->input->post('no_telp'),
+                          'nama_yayasanInduk' => $this->input->post('nama_yayasanInduk'),
+                          'nama_rekening' => $this->input->post('nama_rekening'),
+                          'no_rekening' => $this->input->post('no_rekening'),
+                          'nama_bank' => $this->input->post('nama_bank')
+                          ), $id);
+
+               if ($update) {
+                   
+                $ubahfoto = $_FILES['ktp_pemilik']['name'];
+
+                if ($ubahfoto) {
+                    $config['allowed_types'] = 'jpg|png|gif|jpeg';
+                    $config['max_size'] = '2048';
+                    $config['upload_path'] = 'uploads/panti';
+                    $config['remove_spaces'] = TRUE;
+                    $config['encrypt_name'] = TRUE;
+
+                    $this->load->library('upload', $config);
+
+                    if ($this->upload->do_upload('ktp_pemilik')) {
+                        $user = $this->db->get_where('registrasi', ['id_registrasi'=>$id])->row_array();
+                        $fotolama = $user['ktp_pemilik'];
+                        if ($fotolama) {
+                            unlink(FCPATH . 'uploads/panti' . $fotolama);
+                        }
+                        $fotobaru = $this->upload->data('file_name');
+                        $this->db->set('ktp_pemilik', $fotobaru);
+                        $this->db->where('panti', $id);
+                        $this->db->update('panti');
+                    } else {
+                        $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">'
+                        . $this->upload->display_errors() .
+                        '</div>');
+                        redirect('panti/detaildata');
+                    }
+            }
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+            Berhasil Mengubah Data!
+            </div>');
+            redirect('panti/detaildata');
+            }else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                    Gagal Mengubah Data!
+                    </div>');
+                redirect('panti/detaildata');
+            }
+        }
+            
     }
 } 
 

@@ -1,8 +1,11 @@
 package com.example.donasiyatim;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -79,13 +82,32 @@ public class LoginActivity extends AppCompatActivity {
         lupa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent lupapass = new Intent(LoginActivity.this , LupaPass.class);
+                Intent lupapass = new Intent(LoginActivity.this , ResetPassActivity.class);
                 startActivity(lupapass);
             }
         });
 
 
     }
+
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_home)
+                .setTitle("Keluar Aplikasi")
+                .setMessage("Apakah Anda Ingin Keluar Dari Aplikasi?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.finishAffinity(LoginActivity.this);
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("Tidak", null)
+                .show();
+    }
+
     public void login(){
 
 
@@ -104,7 +126,8 @@ public class LoginActivity extends AppCompatActivity {
                             datalogin.getString("status"),
                             datalogin.getString("id_registrasi"),
                             datalogin.getString("nama"),
-                            datalogin.getString("token")
+                            datalogin.getString("token"),
+                            datalogin.getString("role_id")
                     );
                     nama_user = datalogin.getString("nama");
                     Log.e("Nama" , "user" + nama_user);
@@ -137,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            pd.cancel();
                 progressDialog.dismiss();
                 Log.e("errornyaa ", "" + error);
-                Toast.makeText(LoginActivity.this, "Gagal Login, " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Gagal Login, " + "Email atau password salah !", Toast.LENGTH_SHORT).show();
 
 
             }

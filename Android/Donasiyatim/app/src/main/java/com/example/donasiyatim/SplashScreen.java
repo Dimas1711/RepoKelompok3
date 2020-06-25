@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.example.donasiyatim.configfile.authdata;
 
@@ -25,8 +26,14 @@ public class SplashScreen extends AppCompatActivity {
                     SplashScreen.this.finish();
 
                     if (authdata.getInstance(getApplicationContext()).ceklogin()) {
-                        Intent home = new Intent(SplashScreen.this, MainActivity.class);
-                        startActivity(home);
+                        if(authdata.getInstance(getApplicationContext()).getLevel().equals("3")){
+                            Intent home = new Intent(SplashScreen.this, MainActivity.class);
+                            startActivity(home);
+                        }else {
+                            Intent home = new Intent(SplashScreen.this, LoginActivity.class);
+                            startActivity(home);
+                        }
+
                     } else {
 
                         Intent home = new Intent(SplashScreen.this, LoginActivity.class);

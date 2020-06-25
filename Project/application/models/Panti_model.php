@@ -13,8 +13,8 @@ class Panti_Model extends CI_Model
         return $this->db->insert('kasus' , $data);
     }
     public function detail($id){
-        return $this->db->get_where("panti" , [
-            'id_panti' => $id
+        return $this->db->get_where('panti' , [
+            'id_registrasi' => $id
         ])->result_array();
     }
     public function hapusdata($id){
@@ -25,5 +25,13 @@ class Panti_Model extends CI_Model
         $this->load->database();
         return $this->db->update("panti",$data , ["id_panti"=>$id]);
     }
+    public function getDataPanti($id = null){
+            return $this->db->get_where('panti' , ['id_registrasi' => $id])->result_array();
+    }
+
+    public function gantiDatapanti($data= array(),$id){
+        $this->load->database();
+        return $this->db->update("panti",$data , ["id_panti"=>$id]);
+     }
 }
 ?>

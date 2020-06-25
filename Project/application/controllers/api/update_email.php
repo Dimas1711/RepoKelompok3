@@ -8,7 +8,7 @@ require APPPATH . 'libraries/REST_Controller.php';
 // use namespace
 use Restserver\Libraries\REST_Controller;
 
-class update_email extends REST_Controller{
+class Update_Email extends REST_Controller{
 
     public function __construct(){
         parent::__construct();
@@ -19,8 +19,7 @@ class update_email extends REST_Controller{
     {
         $id = $this->put('id_registrasi');
         $email = $this->put('email');
-        $password = $this->put('password');
-        if($this->user->updateEmail($email, md5($password), $id) > 0)
+        if($this->user->updateEmail($email, $id) > 0)
         {
             $this->response([
                 'status' => 'true',

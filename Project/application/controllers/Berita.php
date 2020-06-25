@@ -115,11 +115,12 @@ class Berita extends CI_Controller {
                 $this->load->library('upload' , $config);
 
                 if ($this->upload->do_upload('gambar')) {
+                    $foto_namaBaru = $this->upload->data('file_name');
                     $insert = array(
                         'judul' => $this->input->post('judul'),
                         'isi' => $this->input->post('isi'),
                         'tanggal_berita' => $this->input->post('tgl'),
-                        'gambar' => $gambar
+                        'gambar' => $foto_namaBaru
                     );
                     if ($this->b->insertdata($insert)) {
                         $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">

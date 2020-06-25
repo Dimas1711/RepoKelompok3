@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.donasiyatim.configfile.ServerApi;
+import com.example.donasiyatim.configfile.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,7 +57,7 @@ public class BeritaActivity extends AppCompatActivity {
                         JSONObject dataobj = data.getJSONObject(i);
                         playerModel.setID_berita(dataobj.getString("id_berita"));
                         playerModel.setJudul_berita(dataobj.getString("judul"));
-                        playerModel.setTanggal_berita(dataobj.getString("tanggal_berita"));
+                        playerModel.setTanggal_berita(Util.settanggal(dataobj.getString("tanggal_berita")));
                         playerModel.setGambar_berita(dataobj.getString("gambar"));
 
                         modelDataBeritaList.add(playerModel);

@@ -3,6 +3,7 @@ package com.example.donasiyatim;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -44,6 +45,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
     Button donasiSekarang, btn_donasi;
     String id_kasus, id_user, id_regis, saldo;
     Integer uangAkun;
+    ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +171,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
                     tenggat_waktu.setText(Util.settanggal(arr1.getString("tenggat_waktu")));
                     judul.setText(arr1.getString("judul"));
                     Picasso.get().load(ServerApi.IPServer + "../"+ "uploads/panti/" +arr1.getString("gambar")).into(imgView);
-                    if (arr1.getString("is_active").equals("0"))
+                    if (arr1.getString("is_active").equals("2"))
                     {
                         donasiSekarang.setEnabled(false);
                         donasiSekarang.setText("Donasi Telah Selesai");

@@ -38,6 +38,7 @@ public class AdapterRiwayatDonasi extends RecyclerView.Adapter<AdapterRiwayatDon
         ModelRiwayatDonasi me = mItems.get(position);
         holder.tgl.setText(me.getTanggal());
         holder.uang.setText(me.getJumlah_donasi());
+        holder.judul.setText(me.getJudul());
          }
 
     @Override
@@ -46,11 +47,12 @@ public class AdapterRiwayatDonasi extends RecyclerView.Adapter<AdapterRiwayatDon
     }
 
     public class HolderData extends RecyclerView.ViewHolder {
-        TextView tgl , uang;
+        TextView tgl , uang, judul;
         public HolderData(@NonNull View itemView) {
             super(itemView);
             tgl = itemView.findViewById(R.id.tv_tanggal);
             uang = itemView.findViewById(R.id.tv_uang);
+            judul = itemView.findViewById(R.id.tv);
         }
     }
 

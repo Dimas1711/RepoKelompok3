@@ -147,7 +147,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.googlemail.com',
                 'smtp_user' => 'donasiyatimk3@gmail.com',
-                'smtp_pass' => 'IbanezRG',
+                'smtp_pass' => 'IbanezRG1',
                 'smtp_port' => 465,
                 'mailtype' => 'html',
                 'charset' => 'utf-8',

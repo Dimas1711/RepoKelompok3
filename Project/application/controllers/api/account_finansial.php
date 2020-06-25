@@ -18,7 +18,6 @@ class Account_Finansial extends REST_Controller{
     {
         $id = $this->get('id_akun');
         
-     
         if ($id === null){
             $user = $this->user->getAcc();
         }else{

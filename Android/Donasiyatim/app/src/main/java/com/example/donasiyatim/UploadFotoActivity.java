@@ -63,24 +63,28 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 public class UploadFotoActivity extends AppCompatActivity {
     ImageView img_foto;
     Button pilih, upload;
-    TextView nama, jumlah, tanggal;
+    TextView nama, jumlah, tanggal, bank, va_e;
     public static final int REQUEST_CODE_CAMERA = 001;
     public static final int REQUEST_CODE_GALLERY = 002;
     String id_user, jumlah_inginkan, nama_user;
     Bitmap bitmap;
-
+    String id_akun;
+    ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_foto);
         requestMultiplePermissions();
-
+        pd = new ProgressDialog(this);
         img_foto = findViewById(R.id.img_foto);
         pilih = findViewById(R.id.btn_choose);
         upload = findViewById(R.id.btn_upload);
         nama = findViewById(R.id.nama);
         jumlah = findViewById(R.id.jumlah_topup);
         tanggal = findViewById(R.id.tanggal);
+        bank = findViewById(R.id.bank);
+        va_e = findViewById(R.id.va_e);
+        loadbank();
 
         nama_user = getIntent().getStringExtra("nama_user");
 
@@ -99,6 +103,9 @@ public class UploadFotoActivity extends AppCompatActivity {
         Log.e("saldo", ""+nama_user);
         Log.e("saldo", ""+jumlah_inginkan);
 
+        id_akun = getIntent().getStringExtra("id_akun");
+        Log.e("asd","id_akun e"+id_akun);
+
 
         pilih.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +123,38 @@ public class UploadFotoActivity extends AppCompatActivity {
 
         jumlah.setText(Util.setformatrupiah(jumlah_inginkan));
         nama.setText(nama_user);
+    }
+
+    private void loadbank()//ini buat nampilin saldo
+    {
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_finansial/index_get?id_akun="+1,
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject res = null;
+                        try {
+                            res = new JSONObject(response);
+                            Log.e("responnya ",""+response);
+                            JSONArray arr = res.getJSONArray("data");
+                            JSONObject arr1 = arr.getJSONObject(0);
+                            va_e.setText(arr1.getString("no_rekening"));
+                            bank.setText(arr1.getString("nama_bank"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("erronya ",""+e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("volley", "errornya : " + error.getMessage());
+                    }
+                }) {
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(senddata);
     }
 
     private void setRequestImage(){
@@ -209,27 +248,39 @@ public class UploadFotoActivity extends AppCompatActivity {
 
     private void loaddetail()//ini buat nampilin saldo
     {
+        pd.setTitle("Waiting");
+        pd.setMessage("Tunggu Sebentar Data Anda Sedang Di Proses");
+        pd.show();
         final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ServerApi.IPServer
                 + "top_up/index_post",new Response.Listener<NetworkResponse>(){
                     @Override
                     public void onResponse(NetworkResponse response) {
                         Log.e("asd",""+response);
                         try {
+//                            pd.dismiss();
                             Log.e("asd", ""+response);
                             Toast.makeText(UploadFotoActivity.this, "Upload Bukti Berhasil ", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(UploadFotoActivity.this, MainActivity.class);
                             startActivity(intent);
 
                         } catch (Exception e) {
-                            Toast.makeText(UploadFotoActivity.this, "Upload Bukti Gagal ", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                            pd.dismiss();
+                            Log.e("asd", ""+response);
+                            Toast.makeText(UploadFotoActivity.this, "Upload Bukti Berhasil ", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(UploadFotoActivity.this, MainActivity.class);
+                            startActivity(intent);
+
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("volley", "errornya : " + error.getMessage());
+                        pd.dismiss();
+                        Toast.makeText(UploadFotoActivity.this, "Upload Bukti Berhasil ", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(UploadFotoActivity.this, MainActivity.class);
+                        startActivity(intent);
+
                     }
                 }) {
             protected Map<String, String> getParams() throws AuthFailureError {

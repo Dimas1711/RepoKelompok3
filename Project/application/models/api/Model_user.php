@@ -19,17 +19,38 @@ class Model_User extends CI_Model
             return $cek;
             
         }
-        public function updateUser($data, $id)
+        public function updateUser($data,$nama, $id)
         {
             $this->db->update('user', $data, ['id_registrasi' => $id]);
+            $this->db->query("UPDATE registrasi SET nama = '$nama' WHERE id_registrasi = '$id'");
             return $this->db->affected_rows();
         }
-        public function updateEmail($email, $password, $id)
+        public function updateEmail($email, $id)
         {
             $this->db->query("UPDATE user SET email = '$email' WHERE id_registrasi = '$id'");
-            $this->db->query("UPDATE registrasi SET email = '$email', password = '$password' WHERE id_registrasi = '$id'");
+            $this->db->query("UPDATE registrasi SET email = '$email' WHERE id_registrasi = '$id'");
             return $this->db->affected_rows();
         }
+        public function updatePass($password,$passwordbaru, $id)
+        {
+            $this->db->where('id_registrasi', $id);
+        $q = $this->db->get("registrasi");
+
+        if( $q->num_rows() ) 
+        {
+            $passlama = $q->row('password');
+            if($password === $passlama)
+            {
+                $this->db->query("UPDATE registrasi SET password = '$passwordbaru' WHERE id_registrasi = '$id'");
+                return $this->db->affected_rows();
+            }
+            return FALSE;
+        }else{
+            return FALSE;
+        }
+        }
+
+        
         public function updateUserFoto($data, $id)
         {
             $this->db->update('registrasi', $data, ['id_registrasi' => $id]);

@@ -12,6 +12,7 @@
             $this->load->database();
             return $this->db->update("registrasi",$data , ["id_registrasi"=>$id]);
          }
+
     }
 
 ?>
