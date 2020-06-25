@@ -102,6 +102,7 @@
                 </div>
                 <div class="my-auto col-sm-9">
                   <p><?= $row['email'] ?></p>
+                  <input type="hidden"id="email" name="email" value="<?= $row['email']?>">
                 </div>
               </div>
 

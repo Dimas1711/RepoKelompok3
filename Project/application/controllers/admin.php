@@ -287,6 +287,7 @@ class Admin extends CI_Controller
 
         if(isset($_POST['setuju']))
         {
+            $this->send_mail_aktif();
             $this->Verif_Model->ubah_status_setuju($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Persetujuan panti diterima !
@@ -295,6 +296,7 @@ class Admin extends CI_Controller
         }
         else if(isset($_POST['tolak']))
         {
+            $this->send_mail_failed();
             $this->Verif_Model->ubah_status_tolak($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                         Persetujuan panti ditolak !
@@ -308,6 +310,63 @@ class Admin extends CI_Controller
         $this->load->view("template/footer");
         
     }
+    public function send_mail_aktif() { 
+
+        $from_email = "donasiyatimk3@gmail.com"; 
+        $to_email = $this->input->post('email'); 
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'donasiyatimk3@gmail.com',
+            'smtp_pass' => 'IbanezRG1',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n",
+    );
+    $this->email->initialize($config);
+    $this->email->from('donasiyatimk3@gmail.com','Donasi Panti');//pengirim
+    $this->email->to($to_email);
+    $this->email->subject('Activation Your Account From DonasiYatim');
+    $this->email->message('Congrats Your Account Has been Active ,  Please Login :) ');
+
+    if ($this->email->send()) {
+        return true;
+    }else {
+        echo $this->email->print_debugger();
+        die;
+    }
+    }
+    public function send_mail_failed() { 
+
+        $from_email = "donasiyatimk3@gmail.com"; 
+        $to_email = $this->input->post('email'); 
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'donasiyatimk3@gmail.com',
+            'smtp_pass' => 'IbanezRG1',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n",
+    );
+    $this->email->initialize($config);
+    $this->email->from('donasiyatimk3@gmail.com','Donasi Panti');//pengirim
+    $this->email->to($to_email);
+    $this->email->subject('Activation Your Account From Donasi Yatim');
+    $this->email->message('Sorry Your Account Hasbeen Disabled from Admin , Please Register');
+
+    if ($this->email->send()) {
+        return true;
+    }else {
+        echo $this->email->print_debugger();
+        die;
+    }
+}
+
 
     public function verifikasi_panti()
         {
