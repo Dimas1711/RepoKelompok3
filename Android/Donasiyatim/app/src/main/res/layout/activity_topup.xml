@@ -91,7 +91,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/btn_donasi_jalan"
             android:gravity="center"
-            android:text="Pilih akun bank"
+            android:text="Pilih Bank"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
