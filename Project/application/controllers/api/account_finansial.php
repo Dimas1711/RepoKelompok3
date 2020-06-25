@@ -24,6 +24,7 @@ class Account_Finansial extends REST_Controller{
         }else{
             $user = $this->user->getAcc($id);
         }
+        
         if ($user) {
             $this->response([
                 'status' => TRUE,
