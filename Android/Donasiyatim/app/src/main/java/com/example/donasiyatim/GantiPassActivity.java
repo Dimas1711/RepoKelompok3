@@ -55,15 +55,15 @@ public class GantiPassActivity extends AppCompatActivity {
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (passlama.getText().toString() != password)
-//                {
-//                    Toast.makeText(GantiPassActivity.this, "salah e", Toast.LENGTH_SHORT).show();
-//                }
-//                else
-//                {
-//                    Toast.makeText(GantiPassActivity.this, "bener e", Toast.LENGTH_SHORT).show();
-//                }
-                ubahpass();
+                if (passlama.getText().toString().equals("") || passbaru.getText().toString().equals("") || passkonf.getText().toString().equals(""))
+                {
+                    Toast.makeText(GantiPassActivity.this, "Field tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    ubahpass();
+                }
+
             }
         });
 
