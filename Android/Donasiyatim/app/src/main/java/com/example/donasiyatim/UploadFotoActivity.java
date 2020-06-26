@@ -127,7 +127,7 @@ public class UploadFotoActivity extends AppCompatActivity {
 
     private void loadbank()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_finansial/index_get?id_akun="+1,
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_Finansial/index_get?id_akun="+1,
                 new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response) {
@@ -252,7 +252,7 @@ public class UploadFotoActivity extends AppCompatActivity {
         pd.setMessage("Tunggu Sebentar Data Anda Sedang Di Proses");
         pd.show();
         final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, ServerApi.IPServer
-                + "top_up/index_post",new Response.Listener<NetworkResponse>(){
+                + "Top_Up/index_post",new Response.Listener<NetworkResponse>(){
                     @Override
                     public void onResponse(NetworkResponse response) {
                         Log.e("asd",""+response);

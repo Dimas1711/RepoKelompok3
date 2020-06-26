@@ -280,7 +280,7 @@ public class HomeFragment extends Fragment  {
 
     private void loadgambar()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_regis/index_get?id_registrasi="
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Data_Regis/index_get?id_registrasi="
                 +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {

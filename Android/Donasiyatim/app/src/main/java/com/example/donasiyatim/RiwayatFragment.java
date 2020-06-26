@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,12 +48,12 @@ public class RiwayatFragment extends Fragment {
         //nama_user.setText(jenenge);
 
         loaddetail();
-//        retrieveJSON();
+        //retrieveJSON();
         return v;
     }
     public void loaddetail()
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Data_User/index_get?id_registrasi="
                 +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
@@ -86,7 +87,7 @@ public class RiwayatFragment extends Fragment {
 
     private void retrieveJSON()
     {
-        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "riwayat/index_get?id_user=" +userid  , new Response.Listener<String>() {
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "riwayat/index_get?id_user="+userid  , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("strrrrr", ">>" + response);
@@ -132,6 +133,5 @@ public class RiwayatFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(listAdapter);
-
     }
 }

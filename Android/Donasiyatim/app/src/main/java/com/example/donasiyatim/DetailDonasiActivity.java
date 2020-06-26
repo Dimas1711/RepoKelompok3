@@ -230,7 +230,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
 
     private void loaduser()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Data_User/index_get?id_registrasi="
                 +authdata.getInstance(getApplicationContext()).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {

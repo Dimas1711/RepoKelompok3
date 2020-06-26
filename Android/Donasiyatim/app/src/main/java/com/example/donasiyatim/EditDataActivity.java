@@ -99,7 +99,7 @@ public class EditDataActivity extends AppCompatActivity {
 
     private void update()
     {
-        StringRequest senddata = new StringRequest(Request.Method.PUT, ServerApi.IPServer + "data_user/index_put",
+        StringRequest senddata = new StringRequest(Request.Method.PUT, ServerApi.IPServer + "Data_User/index_put",
                 new Response.Listener<String>(){
 
                     @Override

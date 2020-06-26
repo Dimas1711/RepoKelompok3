@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -63,6 +64,7 @@ public class EditprofilActivity extends AppCompatActivity {
     Bitmap bitmap;
     EditText edemail;
     Button simpan, back;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class EditprofilActivity extends AppCompatActivity {
 
         requestMultiplePermissions();
         loadgambar();
+        pd = new ProgressDialog(this);
+
 
         id_regis = authdata.getInstance(EditprofilActivity.this).getKodeUser();
         nama = getIntent().getStringExtra("nama");
@@ -328,7 +332,7 @@ public class EditprofilActivity extends AppCompatActivity {
 
     private void loadgambar()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_regis/index_get?id_registrasi="
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Data_Regis/index_get?id_registrasi="
                 +authdata.getInstance(EditprofilActivity.this).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
@@ -365,16 +369,21 @@ public class EditprofilActivity extends AppCompatActivity {
 
     private void loaddetail()
     {
+        pd.setTitle("Waiting");
+        pd.setMessage("Tunggu Sebentar Data Anda Sedang Di Proses");
+        pd.show();
         final VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,
-                ServerApi.IPServer + "data_user/index_post",new Response.Listener<NetworkResponse>(){
+                ServerApi.IPServer + "Data_User/index_post",new Response.Listener<NetworkResponse>(){
             @Override
             public void onResponse(NetworkResponse response) {
                 Log.e("asd",""+response);
                 try {
+                    pd.dismiss();
                     Log.e("asd", ""+response);
                     Toast.makeText(EditprofilActivity.this, "Upload Foto Profil Berhasil ", Toast.LENGTH_SHORT).show();
 
                 } catch (Exception e) {
+                    pd.dismiss();
                     Toast.makeText(EditprofilActivity.this, "Upload Foto Profil Gagal ", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }

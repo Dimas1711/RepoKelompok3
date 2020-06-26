@@ -163,7 +163,7 @@ public class DompetActivity extends AppCompatActivity {
     }
     private void loaddetail()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "data_user/index_get?id_registrasi="+id_regis,
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Data_User/index_get?id_registrasi="+id_regis,
                 new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
@@ -248,7 +248,7 @@ public class DompetActivity extends AppCompatActivity {
     private void getdatabank()
     {
 
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_finansial/index_get", new Response.Listener<String>() {
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_Finansial/index_get", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
