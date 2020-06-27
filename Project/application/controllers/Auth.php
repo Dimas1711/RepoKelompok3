@@ -51,7 +51,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             if ($user['status'] == 1) {
                                 redirect('panti');
                             }else {
-                                redirect('panti/permintaan_verifikasi');
+                                redirect('panti/dashboard_panti');
                             }
                         }
                     } else {
