@@ -85,7 +85,7 @@
     Akun
   </div>
   <!-- Nav Item - Tables -->
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link" href="<?= site_url("admin/profil")?>">
       <i class="fas fa-fw fa-cog"></i>
       <span>Profil</span></a>
@@ -94,7 +94,7 @@
     <a class="nav-link" href="<?= site_url("admin/settingakun")?>">
       <i class="fas fa-fw fa-cog"></i>
       <span>Edit Profil</span></a>
-  </li>
+  </li> -->
   <li class="nav-item">
     <a class="nav-link" href="<?= site_url("admin/data_bank")?>">
       <i class="fas fa-fw fa-cog"></i>
