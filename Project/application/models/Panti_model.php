@@ -31,7 +31,7 @@ class Panti_Model extends CI_Model
 
     public function gantiDatapanti($data= array(),$id){
         $this->load->database();
-        return $this->db->update("panti",$data , ["id_panti"=>$id]);
+        return $this->db->update("panti",$data , ["id_registrasi"=>$id]);
      }
 }
 ?>

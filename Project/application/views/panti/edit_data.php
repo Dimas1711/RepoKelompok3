@@ -14,6 +14,7 @@
                         id="nama_panti"
                         name="nama_panti"
                                 class="form-control border-dark small mb-3"
+                                placeholder="Masukkan Nama Panti"
                                 value="<?= $a['nama_panti']?>"
                                 aria-describedby="basic-addon2">
                         </div>
@@ -28,7 +29,7 @@
                     id="no_telp"
                     name="no_telp"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan Judul"
+                           placeholder="Masukkan Nomor Telepon"
                            value="<?= $a['no_telp']?>"
                            aria-describedby="basic-addon2">
                   </div>
@@ -44,7 +45,7 @@
                     id="email"
                     name="email"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan Isi Berita"
+                           placeholder="Masukkan Email"
                            aria-describedby="basic-addon2"><?= $a['email']?></textarea>
                   </div>
                   <?= form_error('email', '<small class="text-danger">', '</small>')?> 
@@ -60,7 +61,7 @@
                     id="nama_yayasanInduk"
                     name="nama_yayasanInduk"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan Isi Berita"
+                           placeholder="Masukkan Nama Ketua Panti"
                            aria-describedby="basic-addon2"><?= $a['nama_yayasanInduk']?></textarea>
                   </div>
                   <?= form_error('nama_yayasanInduk', '<small class="text-danger">', '</small>')?> 
@@ -75,7 +76,7 @@
                     id="alamat_panti"
                     name="alamat_panti"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan Isi Berita"
+                           placeholder="Masukkan Alamat Panti"
                            aria-describedby="basic-addon2"><?= $a['alamat_panti']?></textarea>
                   </div>
                   <?= form_error('alamat_panti', '<small class="text-danger">', '</small>')?> 
@@ -90,7 +91,7 @@
                     id="nama_rekening"
                     name="nama_rekening"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan Isi Berita"
+                           placeholder="Masukkan Nama Rekening"
                            aria-describedby="basic-addon2"><?= $a['nama_rekening']?></textarea>
                   </div>
                   <?= form_error('nama_rekening', '<small class="text-danger">', '</small>')?> 
@@ -105,7 +106,7 @@
                     id="no_rekening"
                     name="no_rekening"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan Isi Berita"
+                           placeholder="Masukkan Nomor Rekening"
                            aria-describedby="basic-addon2"><?= $a['no_rekening']?></textarea>
                   </div>
                   <?= form_error('no_rekening', '<small class="text-danger">', '</small>')?> 
@@ -120,10 +121,25 @@
                     id="nama_bank"
                     name="nama_bank"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan Isi Berita"
+                           placeholder="Masukkan Nama Bank"
                            aria-describedby="basic-addon2"><?= $a['nama_bank']?></textarea>
                   </div>
                   <?= form_error('nama_bank', '<small class="text-danger">', '</small>')?> 
+                </div>
+                </div>
+
+                <div class="row">
+              <div class="col">
+                <p>Nomor KTP</p>
+                  <div class="input-group">
+                    <textarea type="number"
+                    id="no_ktp"
+                    name="no_ktp"
+                           class="form-control border-dark small mb-3"
+                           placeholder="Masukkan Nomor Ktp"
+                           aria-describedby="basic-addon2"><?= $a['no_ktp']?></textarea>
+                  </div>
+                  <?= form_error('no_ktp', '<small class="text-danger">', '</small>')?> 
                 </div>
                 </div>
 
@@ -148,7 +164,7 @@
                 </span>
                 <span class="text">Kirim Data</span>
               </button>
-              <a href="<?= base_url('panti/editdata') ?>" class="btn btn-danger btn-icon-split">
+              <a href="<?= base_url('panti/detaildata') ?>" class="btn btn-danger btn-icon-split">
                 <span class="icon text-white-50">
                   <i class="fas fa-reply"></i>
                 </span>

@@ -14,10 +14,12 @@
         $this->load->model('Akun_Model', 'z');
     }
 
+
+
     public function gantistatus()
     {
         $tz_object = new DateTimeZone('Asia/Jakarta');
-        $datetime = new DateTime();
+        $datetime = new DateTime(); 
         $datetime->setTimezone($tz_object);
         $gettgl = $datetime->format('Y-m-d');
         $query = $this->db->query("UPDATE kasus set is_active = 2 WHERE status = 1 and tenggat_waktu like '%$gettgl%'");
@@ -443,7 +445,8 @@
                           'nama_yayasanInduk' => $this->input->post('nama_yayasanInduk'),
                           'nama_rekening' => $this->input->post('nama_rekening'),
                           'no_rekening' => $this->input->post('no_rekening'),
-                          'nama_bank' => $this->input->post('nama_bank')
+                          'nama_bank' => $this->input->post('nama_bank'),
+                          'no_ktp' => $this->input->post('no_ktp')
                           ), $id);
 
                if ($update) {
@@ -452,7 +455,7 @@
 
                 if ($ubahfoto) {
                     $config['allowed_types'] = 'jpg|png|gif|jpeg';
-                    $config['max_size'] = '2048';
+                    $config['max_size'] = '3000';
                     $config['upload_path'] = 'uploads/panti';
                     $config['remove_spaces'] = TRUE;
                     $config['encrypt_name'] = TRUE;
@@ -460,14 +463,14 @@
                     $this->load->library('upload', $config);
 
                     if ($this->upload->do_upload('ktp_pemilik')) {
-                        $user = $this->db->get_where('registrasi', ['id_registrasi'=>$id])->row_array();
+                        $user = $this->db->get_where('panti', ['id_registrasi'=>$id])->row_array();
                         $fotolama = $user['ktp_pemilik'];
                         if ($fotolama) {
-                            unlink(FCPATH . 'uploads/panti' . $fotolama);
+                            unlink(FCPATH . '/uploads/panti/' . $fotolama);
                         }
                         $fotobaru = $this->upload->data('file_name');
                         $this->db->set('ktp_pemilik', $fotobaru);
-                        $this->db->where('panti', $id);
+                        $this->db->where('id_registrasi', $id);
                         $this->db->update('panti');
                     } else {
                         $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">'
