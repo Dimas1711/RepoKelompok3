@@ -13,13 +13,13 @@
 </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered mt-3" id="tabel_verif">
+            <table class="table table-bordered mt-3" id="dataTable">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama Panti</th>
                         <th>Judul</th>
-                        <th>Tujuan Dana</th>
+                        <th>Target Dana</th>
                         <th>Jumlah Uang Terkumpul</th>
                         <th>Tenggat Waktu</th>
                         <th>Status</th>

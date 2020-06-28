@@ -7,9 +7,9 @@ class Berita extends CI_Controller {
             parent::__construct();
             $this->load->model('Berita_Model' , 'b');
             is_logged_in();
-            if($cek == '2'){
-                redirect('auth/login');
-            }
+            // if($cek == '2'){
+            //     redirect('auth/login');
+            // }
         }
 
         public function index(){

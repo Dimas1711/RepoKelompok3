@@ -17,7 +17,7 @@
                 <thead>
                     <tr>
                         <th>Judul</th>
-                        <th>Tujuan Dana</th>
+                        <th>Target Dana</th>
                         <th>Jumlah Uang Terkumpul</th>
                         <th>Tenggat Waktu</th>
                     </tr>
@@ -40,7 +40,7 @@
         <div class="card-body">
             <h3>List Pendonasi</h3>
         <div class="table-responsive">
-            <table class="table table-bordered mt-3" id="tabel_verif">
+            <table class="table table-bordered mt-3" id="dataTable">
                 <thead>
                     <tr>
                         <th>No</th>

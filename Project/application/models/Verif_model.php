@@ -4,7 +4,7 @@ class Verif_Model extends CI_Model
 {
 	public function verif_data_panti()
 	{
-		return $query = $this->db->query("SELECT * FROM panti ")->result_array();
+		return $query = $this->db->query("SELECT * FROM panti WHERE status = 0")->result_array();
 	}
 	
 	public function verif_data_detail($id)

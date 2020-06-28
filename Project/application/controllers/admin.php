@@ -202,7 +202,7 @@ class Admin extends CI_Controller
         ['email' => $this->session->userdata('email')])->row_array();
 
         $data['kasus'] = $this->Kasus_Model->tampil_verif_kasus();
-
+        
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
         $this->load->view("admin/verif_kasus",$data);
@@ -214,11 +214,11 @@ class Admin extends CI_Controller
         $data['registrasi'] = $this->db->get_where('registrasi',
         ['email' => $this->session->userdata('email')])->row_array();
 
-        $dataa['dompet'] = $this->Topup_Model->tampil_verif_topup();
+        $data['dompet'] = $this->Topup_Model->tampil_verif_topup();
 
         $this->load->view("template/sidebar");
         $this->load->view("template/header",$data);
-        $this->load->view("admin/veriftopup",$dataa);
+        $this->load->view("admin/veriftopup",$data);
         $this->load->view("template/footer");
     }
 
@@ -377,7 +377,7 @@ class Admin extends CI_Controller
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
             
-            // $data['verif_acc'] = $this->Verif_model->verif_data_panti();
+            $data['verif_acc'] = $this->Verif_Model->verif_data_panti();
 
             $this->load->view("template/sidebar");
             $this->load->view("template/header",$data);
@@ -401,152 +401,4 @@ class Admin extends CI_Controller
             redirect('admin/verifikasi_panti');
         }
     }   
-
-
-    function get_status_verifpanti()
-    {
-        $status = $_GET['status'];
-        if($status == 3)
-        {
-            $data = $this->db->query("SELECT * FROM panti")->result_array();
-        }
-        else
-        {
-            $data = $this->db->query("SELECT * FROM panti WHERE status = '$status' ")->result_array();
-        }
-        if(!empty($data))
-        {
-            $no = 1;
-            foreach($data as $row){
-            ?>
-             <tr>
-               <td><?= $no++?></td>
-               <td><?= $row['nama_panti']?></td>
-               <td><?= $row['no_telp']?></td>
-               <td><?= $row['email']?></td>
-               <td><?= $row['alamat_panti']?></td>
-               <td><?php if ($row['status'] == 0) {
-                 echo '<div class="badge badge-primary badge-pill">Pending</div>';
-               } elseif ($row['status'] == 1) {
-                 echo '<div class="badge badge-success badge-pill">Aktif</div>';
-               }elseif ($row['status'] == 2) {
-                 echo '<div class="badge badge-danger badge-pill">Cancel</div>';
-               }
-                ?></td>
-               <td>
-                 <a href="<?php echo base_url("admin/detail/" .$row['id_panti']);?>"
-                    class="btn btn-sm btn-primary btn-circle">
-                   <i class="fas fa-plus"></i>
-                 </a>
-                 <a href="#"
-                    onclick="confirm_modal('<?= 'hapus_panti/'.$row['id_registrasi'] ?>')"
-                    class="btn btn-sm btn-danger btn-circle"
-                    data-toggle="modal" data-target="#hapusModal">
-                   <i class="fa fa-trash"></i>
-                 </a>
-               </td>
-             </tr>
-             <?php }?> <?php
-        }
-        else
-        {
-            ?>
-                <tr><td colspan="6" align="center">Tidak ada data</td></tr>
-            <?php
-        }               
-    }
-
-
-    function get_status_donasi()
-    {
-        $status = $_GET['status'];
-        if($status == 3)
-        {
-            $data = $this->db->query("SELECT kasus.id_kasus, kasus.judul, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori")->result_array();
-        }
-        else
-        {
-            $data = $this->db->query("SELECT kasus.id_kasus, kasus.judul, kasus.gambar, panti.nama_panti, kategori.kategori, kasus.status FROM kasus,panti,kategori WHERE kasus.id_panti = panti.id_panti AND kasus.id_kategori = kategori.id_kategori AND kasus.status = '$status'")->result_array();
-        }
-        if(!empty($data))
-        {
-            $no = 1;
-             foreach($data as $row){
-             ?>
-            <tr>
-                <td><?= $no++?></td>
-                <td><?= $row['nama_panti']?></td>
-                <td><?= $row['judul']?></td>
-                <td><?= $row['kategori']?></td>
-                <td><?php if ($row['status'] == 0) {
-                  echo '<div class="badge badge-primary badge-pill">Pending</div>';
-                } elseif ($row['status'] == 1) {
-                  echo '<div class="badge badge-success badge-pill">Aktif</div>';
-                }elseif ($row['status'] == 2) {
-                  echo '<div class="badge badge-danger badge-pill">Cancel</div>';
-                }
-                 ?></td>
-                <td><img src="<?=base_url('uploads/panti/') . $row['gambar']?>" alt="gambar" width="100"></td>
-                <td>
-                <a href="<?php echo base_url("admin/verif_kasus_detail/" .$row['id_kasus']);?>"
-                     class="btn btn-sm btn-primary btn-circle">
-                    <i class="fas fa-plus"></i>
-                  </a>
-                </td>
-            </tr>
-             <?php }?> <?php  
-        }
-        else
-        {
-            ?>
-                <tr><td colspan="6" align="center">Tidak ada data</td></tr>
-            <?php
-        }  
-    }
-
-    function get_status_topup()
-    {
-        $status = $_GET['status'];
-        if($status == 3)
-        {
-            $data = $this->db->query("SELECT id_dompet, nama_user, jumlah_inginkan, status, foto FROM dompet, user WHERE dompet.id_user = user.id_user")->result_array();
-        }
-        else
-        {
-            $data = $this->db->query("SELECT id_dompet, nama_user, jumlah_inginkan, status, foto FROM dompet, user WHERE dompet.id_user = user.id_user AND dompet.status = '$status'")->result_array();
-        }
-        if(!empty($data))
-        {
-            $no = 1;
-             foreach($data as $row){
-             ?>
-            <tr>
-                <td><?= $no++?></td>
-                <td><?= $row['nama_user']?></td>
-                <td><?= $row['jumlah_inginkan']?></td>
-                <td><?php if ($row['status'] == 0) {
-                  echo '<div class="badge badge-primary badge-pill">Pending</div>';
-                } elseif ($row['status'] == 1) {
-                  echo '<div class="badge badge-success badge-pill">Aktif</div>';
-                }elseif ($row['status'] == 2) {
-                  echo '<div class="badge badge-danger badge-pill">Cancel</div>';
-                }
-                 ?></td>
-                <td><img src="<?=base_url('uploads/topup/') . $row['foto']?>" alt="foto" width="100"></td>
-                <td>
-                <a href="<?php echo base_url("admin/verif_topup_detail/" .$row['id_dompet']);?>"
-                     class="btn btn-sm btn-primary btn-circle">
-                    <i class="fas fa-plus"></i>
-                  </a>
-                </td>
-            </tr>
-             <?php }?> <?php  
-        }
-        else
-        {
-            ?>
-                <tr><td colspan="6" align="center">Tidak ada data</td></tr>
-            <?php
-        }  
-    }
 }

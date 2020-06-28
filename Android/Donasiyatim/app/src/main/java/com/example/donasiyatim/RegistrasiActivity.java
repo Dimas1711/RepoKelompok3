@@ -84,7 +84,7 @@ public class RegistrasiActivity extends AppCompatActivity {
 
     public void UserRegistration() {
 
-        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "registrasi/index_get",
+        StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.IPServer + "Registrasi/index_post",
                 new Response.Listener<String>(){
 
                     @Override

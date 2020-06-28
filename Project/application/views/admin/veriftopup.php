@@ -12,16 +12,8 @@
                 </div>
 </div>
     <div class="card-body">
-      <div class="col-md-3">
-      <select name="" id="status" class="form-control">
-          <option value="3">Show All</option>
-          <option value="0">Pending</option>
-          <option value="1">Aktif</option>
-          <option value="2">Cancel</option>
-        </select>
-      </div>
         <div class="table-responsive">
-            <table class="table table-bordered mt-3" id="tabel_verif">
+            <table class="table table-bordered mt-3" id="dataTable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -32,39 +24,32 @@
                         <th>Aksi</th> 
                     </tr>
                 </thead>
-                <tbody> 
+                <tbody>
+                <?php 
+                    $no = 1;
+                    foreach ($dompet as $row) {
+                ?>
+                  <tr>
+                      <td><?= $no++?></td>
+                      <td><?= $row['nama_user']?></td>
+                      <td><?= $row['jumlah_inginkan']?></td>
+                      <td>
+                      <?php if ($row['status'] == 0) {
+                        echo '<div class="badge badge-primary badge-pill">Pending</div>';
+                      }
+                      ?>
+                      </td>
+                      <td><img src="<?=base_url('uploads/topup/') . $row['foto']?>" alt="foto" width="100"></td>
+                      <td>
+                      <a href="<?php echo base_url("admin/verif_topup_detail/" .$row['id_dompet']);?>"
+                          class="btn btn-sm btn-primary btn-circle">
+                          <i class="fas fa-plus"></i>
+                        </a>
+                      </td>
+                  </tr>
+                      <?php }?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-
-<script type="text/javascript">
-      $(document).ready(function() {
-        status();
-          $('#status').change(function() {
-              status();
-          });
-      });
-
-      function status()
-      {
-        var status = $("#status").val();
-        $.ajax({
-          url: "<?= base_url('admin/get_status_topup')?>",
-          data: "status=" + status,
-          success: function(data)
-          {
-            $('#tabel_verif tbody').html(data);
-            // console.log(data);
-            //$("#table_verif tbody").html('<tr><td colspan="4" align="center">tidak ada data</td></tr>')
-          } 
-        });
-      }
-</script>
-
-
-
-
