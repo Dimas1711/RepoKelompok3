@@ -12,11 +12,14 @@
         $this->load->model('Panti_Model', 'b');
         $this->load->model('Lokasi');
         $this->load->model('Akun_Model', 'z');
+        $email = $this->session->userdata('email');
         // is_logged_in();
         $cek = $this->session->userdata('role_id');
+      
         if($cek == '1'){
             redirect('auth/login');
         }
+     
     }
 
 
@@ -35,13 +38,12 @@
         {
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
-            
+            $data['cekst'] = $this->db->get_where('registrasi',['status' => $this->session->userdata('email')])->row_array();
             $id_registrasi = $this->session->userdata('id_registrasi');
             $data['totkasus'] = $this->db->query("SELECT COUNT(kasus.id_kasus) AS jmlkasus FROM kasus JOIN panti ON kasus.id_panti= panti.id_panti 
             join registrasi ON panti.id_registrasi= registrasi.id_registrasi WHERE panti.id_panti = kasus.id_panti 
             AND panti.id_registrasi = '$id_registrasi'")->result_array();
-            
-            $this->load->view("template/sidebar2");
+            $this->load->view("template/sidebar2",$data);
             $this->load->view("template/header",$data);
             $this->load->view("template/dashboard_panti", $data);
             $this->load->view("template/footer");
@@ -244,13 +246,14 @@
             $this->form_validation->set_rules('nomor_rekening','No Rekening','required');
             $this->form_validation->set_rules('deskripsi_panti','Deskripsi','required');
             $this->form_validation->set_rules('no_ktp','No KTP','required');
-		
+            $data['cekst'] = $this->db->get_where('registrasi',['status' => $this->session->userdata('email')])->row_array();
+
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => 
             $this->session->userdata('email')])->row_array();
             $data['data']=$this->Lokasi->getprovinsi();
 
             if ($this->form_validation->run() == false) {
-                $this->load->view("template/sidebar2");
+                $this->load->view("template/sidebar2" , $data);
                 $this->load->view("template/header",$data);
                 $this->load->view("panti/permintaan_verifikasi",$data);
                 $this->load->view("template/footer");
