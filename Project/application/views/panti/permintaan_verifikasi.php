@@ -196,7 +196,7 @@
                 </div>
                 
                 <div class="col-sm-6">
-                  <p>Foto Surat Pengesahan</p>
+                  <p>Upload File Surat Pengesahan</p>
                   <div class="input-group">
                     <input name="surat_pengesahan" id="surat_pengesahan"
                            type="file"
