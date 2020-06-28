@@ -21,7 +21,7 @@
                         <th>Kategori</th>
                         <th>Tanggal Permohonan</th>
                         <th>Tenggat Waktu</th>
-                        <th>Tujuan Dana</th>
+                        <th>Target Dana</th>
                         <th>Jumlah Pendonasi</th>
                         <th>Jumlah Uang Terkumpul</th>
                         <th>Status</th>
