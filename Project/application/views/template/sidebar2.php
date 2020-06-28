@@ -14,7 +14,7 @@
 
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
-  <?php if(!$cekst['status'] == 0){?>
+  <?php if(!$registrasi['status'] == 0){?>
   <!-- Nav Item - Dashboard -->
   <li class="nav-item">
     <a class="nav-link" href="<?= base_url("panti")?>">
