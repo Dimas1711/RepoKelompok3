@@ -56,7 +56,7 @@
                   <p>Foto KTP Ketua Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                   <p><a href="<?= base_url('uploads/panti/'). $row['ktp_pemilik']?>">Download File</a></p>
+                   <p><a href="<?= base_url('./uploads/panti/'). $row['ktp_pemilik']?>">Download File</a></p>
                 </div>
               </div>
 
@@ -129,7 +129,7 @@
                   <p>Logo Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                  <img src="<?=base_url('uploads/panti/') . $row['foto'] ?>" alt="foto" width="50">
+                  <img src="<?=base_url('./uploads/panti/') . $row['foto'] ?>" alt="foto" width="50">
                 </div>
               </div>
 
@@ -138,7 +138,7 @@
                   <p>Surat Pengesahan Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                <p><a href="<?= base_url('uploads/panti/'). $row['surat_pengesahan']?>">Download File</a></p>
+                <p><a href="<?= base_url('./uploads/panti/'). $row['surat_pengesahan']?>">Download File</a></p>
                 </div>
               </div>
 

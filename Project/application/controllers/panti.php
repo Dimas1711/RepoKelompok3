@@ -262,14 +262,13 @@
 
                 $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
                 $config['max_size'] = '3000';
-                $config['upload_path'] = 'uploads/panti';
-                $config['remove_spaces'] = TRUE;
-                $config['encrypt_name'] = TRUE;
+                $config['upload_path'] = './uploads/panti/';
+                // $config['remove_spaces'] = TRUE;
+                // $config['encrypt_name'] = TRUE;
 
         
                 $this->load->library('upload' , $config);
-                if ($this->upload->do_upload('foto') ) {
-                    $foto_namaBaru = $this->upload->data('file_name');
+                if ($this->upload->do_upload('foto') && $this->upload->do_upload('ktp_pemilik') && $this->upload->do_upload('surat_pengesahan')) {
                     $dataPost = array(
                         'id_registrasi' =>$this->input->post('id'),
                         'nama_panti' => $this->input->post('nama_panti'),
@@ -279,7 +278,7 @@
                         'no_telp' => $this->input->post('no_telp'),
                         'nama_yayasanInduk' => $this->input->post('ketua_panti'),
                         'tanggal_berdiri' => $this->input->post('tgl'),
-                        'foto' => $foto_namaBaru,
+                        'foto' => $foto,
                         'nama_rekening' => $this->input->post('nama_rekening'),
                         'nama_bank' => $this->input->post('nama_bank'),
                         'no_rekening' =>$this->input->post('nomor_rekening'),
@@ -430,10 +429,11 @@
         $this->form_validation->set_rules('no_rekening','Nomor Rekening','required');
         $this->form_validation->set_rules('nama_bank','Nama Bank','required');
         $this->form_validation->set_rules('email','Email','required');
+        $this->form_validation->set_rules('no_ktp','Nomor KTP','required');
 
           
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => $this->session->userdata('email')])->row_array();
-            $edit['please'] = $this->b->detail($id);
+            $edit['please'] = $this->b->getDataPanti($id);
             if ($this->form_validation->run() == false) {
             
               $this->load->view("template/sidebar2");
@@ -468,7 +468,7 @@
                     $this->load->library('upload', $config);
 
                     if ($this->upload->do_upload('ktp_pemilik')) {
-                        $user = $this->db->get_where('panti', ['id_registrasi'=>$id])->row_array();
+                        $user = $this->db->get_where('registrasi', ['id_registrasi'=>$id])->row_array();
                         $fotolama = $user['ktp_pemilik'];
                         if ($fotolama) {
                             unlink(FCPATH . '/uploads/panti/' . $fotolama);
