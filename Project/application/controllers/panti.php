@@ -12,6 +12,11 @@
         $this->load->model('Panti_Model', 'b');
         $this->load->model('Lokasi');
         $this->load->model('Akun_Model', 'z');
+        // is_logged_in();
+        $cek = $this->session->userdata('role_id');
+        if($cek == '1'){
+            redirect('auth/login');
+        }
     }
 
 

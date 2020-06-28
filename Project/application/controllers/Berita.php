@@ -6,6 +6,10 @@ class Berita extends CI_Controller {
         public function __construct(){
             parent::__construct();
             $this->load->model('Berita_Model' , 'b');
+            is_logged_in();
+            if($cek == '2'){
+                redirect('auth/login');
+            }
         }
 
         public function index(){
