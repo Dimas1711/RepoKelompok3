@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
 
                     } else {
-                        Toast.makeText(LoginActivity.this, "Aplikasi Hanya Untuk User . Silahkan Login Via Website YukDonasi" , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Aplikasi Hanya Untuk User . Silahkan Login Via Website Donasi Panti" , Toast.LENGTH_SHORT).show();
 
                     }
 //                    } else {

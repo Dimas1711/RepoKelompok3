@@ -1,5 +1,6 @@
 package com.example.donasiyatim;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -65,6 +66,7 @@ public class HomeFragment extends Fragment  {
     ListAdapter listAdapter;
     ListAdapterBerita listAdapterBerita;
     ImageView imageView;
+    ProgressDialog pd;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
@@ -100,7 +102,7 @@ public class HomeFragment extends Fragment  {
         btn_dompet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplicationContext(),DompetActivity.class);
+                Intent intent = new Intent(getContext(),DompetActivity.class);
                 intent.putExtra("id_regis", idregis);
                 intent.putExtra("id_user", userid);
                 intent.putExtra("saldo", saldoku);
@@ -111,7 +113,7 @@ public class HomeFragment extends Fragment  {
         showAllKasus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), DonasiActivity.class);
+                Intent intent = new Intent(getContext(), DonasiActivity.class);
                 intent.putExtra("id_user", userid);
                 intent.putExtra("saldo", saldoku);
                 startActivity(intent);
@@ -121,7 +123,7 @@ public class HomeFragment extends Fragment  {
         showAllBerita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), BeritaActivity.class);
+                Intent intent = new Intent(getContext(), BeritaActivity.class);
                 startActivity(intent);
             }
         });
@@ -173,7 +175,7 @@ public class HomeFragment extends Fragment  {
                     }
                 });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }
 
@@ -217,14 +219,14 @@ public class HomeFragment extends Fragment  {
                     }
                 });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }
 
     private void setupListBerita()
     {
         listAdapterBerita = new ListAdapterBerita(getContext(), modelDataBeritaList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvBerita.setLayoutManager(layoutManager);
         rvBerita.setAdapter(listAdapterBerita);
     }
@@ -232,7 +234,7 @@ public class HomeFragment extends Fragment  {
     private void setupListView()
     {
         listAdapter = new ListAdapter(getContext(), modelDataList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(listAdapter);
 
@@ -274,7 +276,7 @@ public class HomeFragment extends Fragment  {
                 }) {
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(senddata);
     }
 
@@ -309,7 +311,7 @@ public class HomeFragment extends Fragment  {
                 }) {
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(senddata);
     }
 

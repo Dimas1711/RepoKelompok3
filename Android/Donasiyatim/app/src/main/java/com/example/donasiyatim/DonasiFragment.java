@@ -39,7 +39,6 @@ public class DonasiFragment extends Fragment {
     ListAdapter listAdapter;
 
 
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_donasi, container, false);
         recyclerView = v.findViewById(R.id.recyclerview);
@@ -92,13 +91,13 @@ public class DonasiFragment extends Fragment {
                     }
                 });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }
     private void setupListView()
     {
         listAdapter = new ListAdapter(getContext(), modelDataList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(listAdapter);
 

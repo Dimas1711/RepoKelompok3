@@ -76,14 +76,14 @@ public class AkunFragment extends Fragment {
         btnEditProfil = v.findViewById(R.id.editProfil);
         btnEditData = v.findViewById(R.id.editData);
         btnLogout = v.findViewById(R.id.btn_logout);
-        id_regis = authdata.getInstance(getActivity().getApplicationContext()).getKodeUser();
+        id_regis = authdata.getInstance(getActivity()).getKodeUser();
 
         Log.e("asdfgh", "onCreateView: "+ id_regis);
 
         btnEditProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent edt = new Intent(getActivity().getApplicationContext(), EditprofilActivity.class);
+                Intent edt = new Intent(getContext(), EditprofilActivity.class);
                 edt.putExtra("alamat", alamat);
                 edt.putExtra("no_telp", no_telp);
                 edt.putExtra("no_rek", no_rek);
@@ -104,7 +104,7 @@ public class AkunFragment extends Fragment {
         btnEditData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent edt = new Intent(getActivity().getApplicationContext(), EditDataActivity.class);
+                Intent edt = new Intent(getContext(), EditDataActivity.class);
                 edt.putExtra("alamat", alamat);
                 edt.putExtra("no_telp", no_telp);
                 edt.putExtra("no_rek", no_rek);
@@ -177,7 +177,7 @@ public class AkunFragment extends Fragment {
                 }) {
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(senddata);
     }
 
@@ -219,13 +219,13 @@ public class AkunFragment extends Fragment {
                 }) {
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(senddata);
     }
 
     private void showDialog(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                getActivity());
+                getContext());
 
         // set title dialog
         alertDialogBuilder.setTitle("Yakin Logout Akun?");
@@ -238,7 +238,7 @@ public class AkunFragment extends Fragment {
                 .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         // jika tombol diklik, maka akan menutup activity ini
-                        authdata.getInstance(getActivity().getApplicationContext()).logout();
+                        authdata.getInstance(getContext()).logout();
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
                     }
