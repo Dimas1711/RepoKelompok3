@@ -15,7 +15,7 @@ class Riwayat extends REST_Controller{
     }
     //riwayat donasi
     public function index_get(){
-        $id = $this->get('id_user');
+        $id = $this->get('id_registrasi');
 
         if ($id === null || $id === ''){
             $this->response([

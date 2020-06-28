@@ -1,5 +1,6 @@
 package com.example.donasiyatim;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,18 +44,18 @@ public class RiwayatFragment extends Fragment {
         recyclerView = v.findViewById(R.id.rv);
 //        img = v.findViewById(R.id.imagelv);
 
-        val = authdata.getInstance(getActivity()).getAksesData();
+        val = authdata.getInstance(getContext()).getAksesData();
         Log.e("val","testes" + userid);
         //nama_user.setText(jenenge);
 
         loaddetail();
-        //retrieveJSON();
+        retrieveJSON();
         return v;
     }
     public void loaddetail()
     {
         StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Data_User/index_get?id_registrasi="
-                +authdata.getInstance(getActivity()).getKodeUser(), new Response.Listener<String>(){
+                +authdata.getInstance(getContext()).getKodeUser(), new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 JSONObject res = null;
@@ -64,7 +65,7 @@ public class RiwayatFragment extends Fragment {
                     JSONArray arr = res.getJSONArray("data");
                     JSONObject arr1 = arr.getJSONObject(0);
                     userid = arr1.getString("id_user");
-                    retrieveJSON();
+                    //retrieveJSON();
                     Log.e("userid" , "ff" + userid);
 
                 } catch (JSONException e) {
@@ -81,13 +82,14 @@ public class RiwayatFragment extends Fragment {
                 }) {
 
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(senddata);
     }
 
     private void retrieveJSON()
     {
-        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "riwayat/index_get?id_user="+userid  , new Response.Listener<String>() {
+        StringRequest stringRequest  = new StringRequest(Request.Method.GET, ServerApi.IPServer + "riwayat/index_get?id_registrasi="
+                +authdata.getInstance(getActivity()).getKodeUser()  , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("strrrrr", ">>" + response);
@@ -124,13 +126,13 @@ public class RiwayatFragment extends Fragment {
                     }
                 });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }
     private void setupListView()
     {
         listAdapter = new AdapterRiwayatDonasi(getContext(), modelDataList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(listAdapter);
     }
