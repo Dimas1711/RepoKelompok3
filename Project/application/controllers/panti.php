@@ -136,6 +136,8 @@
                 $config['allowed_types'] = 'jpg|png|gif|jpeg';
                 $config['max_size'] = '2048';
                 $config['upload_path'] = './uploads/panti';
+                $config['remove_spaces'] = TRUE;
+                $config['encrypt_name'] = TRUE;
         
                 $this->load->library('upload' , $config);
                 if ($this->upload->do_upload('foto')) {
