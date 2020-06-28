@@ -6,6 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             parent::__construct();
             $this->load->library('form_validation');
             $this->load->model('Verif_Model' , 'v');
+            // is_logged_in();
         }
         public function login(){
             $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');

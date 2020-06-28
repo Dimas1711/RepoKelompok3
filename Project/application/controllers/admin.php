@@ -8,14 +8,18 @@ class Admin extends CI_Controller
         parent::__construct();
         if(!$this->session->userdata('email'))
         {
-            redirect("Auth/Login");
+            redirect("auth/login");
         }
 
         $this->load->model('Verif_Model');
         $this->load->model('Kasus_Model');
         $this->load->model('Topup_Model');
         $this->load->model('Dede');
-
+        // is_logged_in();
+        $cek = $this->session->userdata('role_id');
+        if($cek == '2'){
+            redirect('auth/login');
+        }
     }
 
 	public function index()
