@@ -53,10 +53,10 @@
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Scan KTP Ketua Panti</p>
+                  <p>Foto KTP Ketua Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
-                   <p><a href="<?= base_url('uploads/panti/'). $row['surat_pengesahan']?>">Download File</a></p>
+                   <p><a href="<?= base_url('uploads/panti/'). $row['ktp_pemilik']?>">Download File</a></p>
                 </div>
               </div>
 
@@ -98,7 +98,7 @@
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Email Panti atau Ketua Panti</p>
+                  <p>Email Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
                   <p><?= $row['email'] ?></p>
@@ -117,7 +117,7 @@
 
               <div class="row">
                 <div class="my-auto col-sm-2">
-                  <p>Tanggal Berdiri</p>
+                  <p>Tanggal Berdiri Panti</p>
                 </div>
                 <div class="my-auto col-sm-9">
                   <p><?= $row['tanggal_berdiri'] ?></p>

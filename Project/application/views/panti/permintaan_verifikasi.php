@@ -67,7 +67,7 @@
               name="id"
               id="id"
                  class="form-control border-dark small mb-3"
-                 placeholder="Masukkan Nama Panti"
+                 placeholder="Masukkan Nomor KTP"
                  aria-describedby="basic-addon2"
                  value="<?= $registrasi['id_registrasi']?>"
                  >
@@ -75,7 +75,7 @@
               name="no_ktp"
               id="no_ktp"
                  class="form-control border-dark small mb-3"
-                 placeholder="Masukkan Nama Panti"
+                 placeholder="Masukkan Nomor KTP"
                  aria-describedby="basic-addon2"
                  value="<?php echo set_value('no_ktp')?>"
                  >
@@ -83,7 +83,7 @@
                  <?= form_error('no_ktp', '<small class="text-danger">', '</small>')?>
       </div>
       <div class="col-sm-6">
-                  <p>Scan KTP Ketua Panti</p>
+                  <p>Foto KTP Ketua Panti</p>
                   <div class="input-group">
                     <input name="ktp_pemilik" id="ktp_pemilik"
                            type="file"
@@ -132,7 +132,7 @@
                        id="alamat"
                        name="alamat"
                        class="form-control border-dark small mb-3"
-                       placeholder="Masukkan Alamat"
+                       placeholder="Masukkan Alamat Panti"
                        value="<?php echo set_value('alamat')?>"
                        aria-describedby="basic-addon2"></textarea>
               </div>
@@ -143,7 +143,7 @@
                        id="deskripsi_panti"
                        name="deskripsi_panti"
                        class="form-control border-dark small mb-3"
-                       placeholder="Masukkan Deskripsi Komunitas"
+                       placeholder="Masukkan Deskripsi Panti"
                        value="<?php echo set_value('deskripsi_komunitas')?>"
                        aria-describedby="basic-addon2"></textarea>
               </div>
@@ -151,13 +151,13 @@
 
               <div class="row">
               <div class="col-sm-6">
-                  <p>Tanggal Terbentuk</p>
+                  <p>Tanggal Berdiri Panti</p>
                   <div class="input-group">
                     <input type="date"
                           id="tgl"
                           name="tgl"
                           class="form-control border-dark small mb-3"
-                          placeholder="Masukkan Tanggal Selesai"
+                          placeholder="Masukkan Tanggal Berdiri Panti"
                           aria-describedby="basic-addon2"
                                 value="<?php echo set_value('tgl')?>"
                           >
@@ -196,9 +196,9 @@
                 </div>
                 
                 <div class="col-sm-6">
-                  <p>Upload Surat Pengesahan</p>
+                  <p>Foto Surat Pengesahan</p>
                   <div class="input-group">
-                    <input name="surat_pengesahan" id="surat_pengesahan" id"
+                    <input name="surat_pengesahan" id="surat_pengesahan"
                            type="file"
                            class="form-control border-dark small mb-3"
                            placeholder=""
@@ -208,7 +208,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                  <p>Foto Panti</p>
+                  <p>Logo Panti</p>
                   <div class="input-group">
                     <input name="foto" id="foto"
                            type="file"
@@ -230,7 +230,7 @@
                     id="nama_rekening"
                     name="nama_rekening"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan nama rekening"
+                           placeholder="Masukkan Nama Rekening"
                            value="<?php echo set_value('nama_rekening')?>"
                            aria-describedby="basic-addon2">
                   </div>
@@ -245,7 +245,7 @@
                     id="nama_bank"
                     name="nama_bank"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan nama bank"
+                           placeholder="Masukkan Nama Bank"
                            value="<?php echo set_value('nama_bank')?>"
                            aria-describedby="basic-addon2">
                   </div>
@@ -261,7 +261,7 @@
                     id="nomor_rekening"
                     name="nomor_rekening"
                            class="form-control border-dark small mb-3"
-                           placeholder="Masukkan nama rekening"
+                           placeholder="Masukkan Nomor Rekening"
                            value="<?php echo set_value('nomor_rekening')?>"
                            aria-describedby="basic-addon2">
                   </div>

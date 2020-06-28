@@ -5,10 +5,10 @@ class tampilPanti extends CI_Controller {
         parent::__construct();
         $this->load->model('Panti_Model' , 'b');
         is_logged_in();
-        if($cek == '2'){
-            redirect('auth/login');
+ //       if($cek == '2'){
+          //  redirect('auth/login');
         }
-    }
+    
 
     public function index(){
             $data['registrasi'] = $this->db->get_where('registrasi',['email' => $this->session->userdata('email')])->row_array();

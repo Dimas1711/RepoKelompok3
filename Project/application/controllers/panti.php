@@ -294,7 +294,7 @@
                     );
                     if ($this->b->insertdata($dataPost)) {
                         $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
-                        Data Berhasil Dikirim , Silahkan Tunggu Konfirmasi Dari Admin
+                        Data Berhasil Dikirim , Silahkan Tunggu Konfirmasi Dari Admin Melalui E-mail Anda Yang Terdaftar.
                         </div>');
                         redirect('panti');
                     }else{

@@ -1,7 +1,7 @@
 <div class="container">
     <form action="" method="POST" enctype="multipart/form-data">
     <div>
-    <input type="hidden" name="id_panti" value="<?= $panti['id_panti']?>">
+   <input type="hidden" name="id_panti" value="<?= $panti['id_panti']?>"> 
     </div>
     <div class="form-group">
         <label for="tujuan_dana">Judul</label>
