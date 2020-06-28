@@ -12,9 +12,9 @@ class ListUser extends CI_Controller {
 
         $this->load->model('Dede');
         // is_logged_in();
-        if($cek == '2'){
+   //     if($cek == '2'){
             redirect('auth/login');
-        }
+        
     }
     
     public function index()

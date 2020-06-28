@@ -29,7 +29,7 @@
                     foreach ($listpanti as $b) {
                 ?>
                     <tr>
-                        <td><?= $b['id_panti'];?></td>
+                        <td><?= $no++;?></td>
                         <td><?= $b['nama_panti'];?></td>
                         <td><?= $b['alamat_panti'];?></td>
                         <td><img src="<?= base_url('uploads/panti/') . $b['foto'];?>" alt="Logo Komunitas" class="logo-komunitas mx-auto d-block mb-5" style="width:100"></td>

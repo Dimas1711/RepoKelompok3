@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="tujuan_dana">Tujuan Dana</label>
+        <label for="tujuan_dana">Target Dana</label>
         <div class="col-md-5">
             <input type="text" class="form-control" id="tujuan_dana" name="tujuan_dana" aria-describedby="emailHelp" value="<?php echo set_value('tujuan_dana')?>">
             <?= form_error('tujuan_dana', '<small class="text-danger">', '</small>')?>
