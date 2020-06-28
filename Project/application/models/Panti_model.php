@@ -14,7 +14,7 @@ class Panti_Model extends CI_Model
     }
     public function detail($id){
         return $this->db->get_where('panti' , [
-            'id_registrasi' => $id
+            'id_panti' => $id
         ])->result_array();
     }
     public function hapusdata($id){
