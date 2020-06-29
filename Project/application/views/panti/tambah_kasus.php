@@ -1,4 +1,7 @@
 <div class="container">
+<h2>Tambah Kasus Donasi</h2>
+
+<br><br>
     <form action="" method="POST" enctype="multipart/form-data">
     <div>
    <input type="hidden" name="id_panti" value="<?= $panti['id_panti']?>"> 
