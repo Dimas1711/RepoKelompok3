@@ -22,7 +22,7 @@
                         <th>Target Dana</th>
                         <th>Jumlah Uang Terkumpul</th>
                         <th>Tenggat Waktu</th>
-                        <th>Status</th>
+                        <th>Status Donasi</th>
                         <th>Aksi</th> 
                     </tr>
                 </thead>
@@ -39,14 +39,15 @@
                             <td><?= $row['jumlah_uang_terkumpul']?></td>
                             <td><?= $row['tenggat_waktu']?></td>
                             <td><?php if ($row['is_active'] == 0) {
-                            echo '<div class="badge badge-primary badge-pill">Pending</div>';
+                            echo '<div class="badge badge-primary badge-pill">Belum Berlangsung</div>';
                             } elseif ($row['is_active'] == 1) {
                             echo '<div class="badge badge-success badge-pill">Berlangsung</div>';
                             }
                             elseif ($row['is_active'] == 2) {
                                 echo '<div class="badge badge-danger badge-pill">Batas Waktu Habis</div>';
                             }
-                            ?></td>
+                            ?>
+                            </td>
                             <td>
                                 <a href="<?php echo base_url("panti/kasus_detail/" .$row['id_kasus']);?>"
                                 class="btn btn-sm btn-primary btn-circle">

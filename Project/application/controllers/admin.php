@@ -390,13 +390,13 @@ class Admin extends CI_Controller
         $data = $this->Verif_Model->hapusdatapanti($id);
         if ($data) 
         {
-            $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
-                    Data Berhasil Dihapus
+            $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">
+                    Data Gagal Dihapus
             </div>');
             redirect('admin/verifikasi_panti');
         }else {
-            $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">
-                    Data Gagal Dihapus
+            $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                    Data Berhasil Dihapus
             </div>');
             redirect('admin/verifikasi_panti');
         }
