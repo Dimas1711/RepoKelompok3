@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -74,6 +75,7 @@ public class DetailDonasiActivity extends AppCompatActivity {
                         .inflate(R.layout.activity_proses_donasi, (LinearLayout) findViewById(R.id.BottomSheetDial));
 
                 isi = bottomSheet.findViewById(R.id.uang_e_donasi);
+                isi.addTextChangedListener(new NumberText((EditText) isi));
 
                 Log.e("saldo",""+isi);
                 Log.e("saldo", ""+uangAkun);
