@@ -1,6 +1,7 @@
 <div class="col mt-3">
 <?php if ($registrasi['status'] == 0){?>
   <h1>Selamat Datang Di Aplikasi Donasi Panti.</h1>
+  <h2>Akun Anda Belum Aktif</h2> 
 <?php } else { ?>
     <h1>Selamat Datang Di Aplikasi Donasi Panti.</h1>
     <h1>Anda Login Sebagai Panti</h1> 
