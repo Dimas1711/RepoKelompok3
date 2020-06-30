@@ -33,4 +33,9 @@ class Update_Email extends REST_Controller{
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
+
+    public function index_get()
+    {
+        
+    }
 }

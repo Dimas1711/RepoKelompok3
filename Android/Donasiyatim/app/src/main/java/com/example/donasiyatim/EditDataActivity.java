@@ -91,6 +91,9 @@ public class EditDataActivity extends AppCompatActivity {
                 else
                 {
                     update();
+                    Toast.makeText(EditDataActivity.this, "Update User Berhasil", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(EditDataActivity.this, MainActivity.class);
+                    startActivity(intent);
                     //Toast.makeText(EditDataActivity.this,"Bener e", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -105,9 +108,9 @@ public class EditDataActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Toast.makeText(EditDataActivity.this, "Update User Berhasil", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EditDataActivity.this, MainActivity.class);
-                            startActivity(intent);
+//                            Toast.makeText(EditDataActivity.this, "Update User Berhasil", Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(EditDataActivity.this, MainActivity.class);
+//                            startActivity(intent);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

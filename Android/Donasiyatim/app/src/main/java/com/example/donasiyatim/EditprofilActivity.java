@@ -130,6 +130,9 @@ public class EditprofilActivity extends AppCompatActivity {
                 {
                     Log.e("asd", "email e"+edemail.getText().toString());
                     update();
+                    Intent intent = new Intent(EditprofilActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(EditprofilActivity.this, "Ubah Email Berhasil", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -164,9 +167,9 @@ public class EditprofilActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Toast.makeText(EditprofilActivity.this, "Ubah Email Berhasil", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EditprofilActivity.this, MainActivity.class);
-                            startActivity(intent);
+//                            Toast.makeText(EditprofilActivity.this, "Ubah Email Berhasil", Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(EditprofilActivity.this, MainActivity.class);
+//                            startActivity(intent);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

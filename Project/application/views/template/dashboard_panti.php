@@ -2,6 +2,7 @@
 <?php if ($registrasi['status'] == 0){?>
   <h1>Selamat Datang Di Aplikasi Donasi Panti.</h1>
   <h2>Akun Anda Belum Aktif</h2> 
+  <?php echo $this->session->flashdata('pesan')?>
 <?php } else { ?>
     <h1>Selamat Datang Di Aplikasi Donasi Panti.</h1>
     <h1>Anda Login Sebagai Panti</h1> 

@@ -268,60 +268,90 @@
                 $this->load->view("template/header",$data);
                 $this->load->view("panti/permintaan_verifikasi",$data);
                 $this->load->view("template/footer");
-            }else {
-                $foto = $_FILES['foto']['name'];
-                $foto_ktp = $_FILES['foto_ktp']['name'];
-                $pdf = $_FILES['surat_pengesahan']['name'];
-                $pdf2 = $_FILES['ktp_pemilik']['name'];
+            }
+            else 
+            {
+                // $foto = $_FILES['foto']['name'];
+                // //$foto_ktp = $_FILES['foto_ktp']['name'];
+                // $pdf = $_FILES['surat_pengesahan']['name'];
+                // $pdf2 = $_FILES['ktp_pemilik']['name'];
 
                 $config['allowed_types'] = 'jpg|png|gif|jpeg|pdf';
                 $config['max_size'] = '3000';
                 $config['upload_path'] = './uploads/panti/';
-                // $config['remove_spaces'] = TRUE;
-                // $config['encrypt_name'] = TRUE;
+                $config['remove_spaces'] = TRUE;
+                $config['encrypt_name'] = TRUE;
 
         
                 $this->load->library('upload' , $config);
-                if ($this->upload->do_upload('foto') && $this->upload->do_upload('ktp_pemilik') && $this->upload->do_upload('surat_pengesahan')) {
-                    $dataPost = array(
-                        'id_registrasi' =>$this->input->post('id'),
-                        'nama_panti' => $this->input->post('nama_panti'),
-                        'alamat_panti' => $this->input->post('alamat'),
-                        'id_kabupaten' => $this->input->post('kabupaten'),
-                        'id_provinsi' => $this->input->post('provinsi'),
-                        'no_telp' => $this->input->post('no_telp'),
-                        'nama_yayasanInduk' => $this->input->post('ketua_panti'),
-                        'tanggal_berdiri' => $this->input->post('tgl'),
-                        'foto' => $foto,
-                        'nama_rekening' => $this->input->post('nama_rekening'),
-                        'nama_bank' => $this->input->post('nama_bank'),
-                        'no_rekening' =>$this->input->post('nomor_rekening'),
-                        'no_ktp' => $this->input->post('no_ktp'),
-                        'email' => $this->input->post('email'),
-                        'deskripsi' => $this->input->post('deskripsi_panti'),
-                        'no_ktp' => $this->input->post('no_ktp'),
-                        'ktp_pemilik' => $pdf2,
-                        'surat_pengesahan' => $pdf,
-                        'status' => 0
-                        
-                    );
-                    if ($this->b->insertdata($dataPost)) {
-                        $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
-                        Data Berhasil Dikirim , Silahkan Tunggu Konfirmasi Dari Admin Melalui E-mail Anda Yang Terdaftar.
-                        </div>');
-                        redirect('panti');
-                    }else{
-                        $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">GAGAL</div>');
-                        redirect('panti');
-                    }					
+
+
+                if($this->upload->do_upload('ktp_pemilik') && $this->upload->do_upload('surat_pengesahan') && $this->upload->do_upload('foto'))
+                {
+                        if(!empty($_FILES['foto']))
+                        {
+                            //$this->load->library('upload' , $config);
+                            $this->upload->do_upload('foto');
+                            $data1 = $this->upload->data();
+                            $file1 = $data1['file_name'];
+                        }
+
+                        if(!empty($_FILES['surat_pengesahan']))
+                        {
+                            //$this->load->library('upload' , $config);
+                            $this->upload->do_upload('surat_pengesahan');
+                            $data2 = $this->upload->data();
+                            $file2 = $data2['file_name'];
+                        }
+
+                        if(!empty($_FILES['ktp_pemilik']))
+                        {
+                            //$this->load->library('upload' , $config);
+                            $this->upload->do_upload('ktp_pemilik');
+                            $data3 = $this->upload->data();
+                            $file3 = $data3['file_name'];
+                        }
+
+
+                    if ($this->form_validation->run()) {
+                        $dataPost = array(
+                            'id_registrasi' =>$this->input->post('id'),
+                            'nama_panti' => $this->input->post('nama_panti'),
+                            'alamat_panti' => $this->input->post('alamat'),
+                            'id_kabupaten' => $this->input->post('kabupaten'),
+                            'id_provinsi' => $this->input->post('provinsi'),
+                            'no_telp' => $this->input->post('no_telp'),
+                            'nama_yayasanInduk' => $this->input->post('ketua_panti'),
+                            'tanggal_berdiri' => $this->input->post('tgl'),
+                            'foto' => $file1,
+                            'nama_rekening' => $this->input->post('nama_rekening'),
+                            'nama_bank' => $this->input->post('nama_bank'),
+                            'no_rekening' =>$this->input->post('nomor_rekening'),
+                            'ktp_pemilik' => $file3,
+                            'no_ktp' => $this->input->post('no_ktp'),
+                            'surat_pengesahan' => $file2,
+                            'email' => $this->input->post('email'),
+                            'deskripsi' => $this->input->post('deskripsi_panti'),
+                            'status' => 0
+                            
+                        );
+                        if ($this->b->insertdata($dataPost)) {
+                            $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">
+                            Data Berhasil Dikirim , Silahkan Tunggu Konfirmasi Dari Admin Melalui E-mail Anda Yang Terdaftar.
+                            </div>');
+                            redirect('panti');
+                        }else{
+                            $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">GAGAL</div>');
+                            redirect('panti');
+                        }					
+                    }
                 }
-                else{
+                else
+                {
                     $this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">'
-                        . $this->upload->display_errors() .
-                        '</div>');
-                        redirect('panti');
+                    . $this->upload->display_errors() .'</div>');
+                    redirect('panti'); 
                 }
-    
             }
         }
     
