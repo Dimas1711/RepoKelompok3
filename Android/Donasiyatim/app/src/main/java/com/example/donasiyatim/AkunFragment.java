@@ -233,7 +233,7 @@ public class AkunFragment extends Fragment {
         // set pesan dari dialog
         alertDialogBuilder
                 .setMessage("Klik Ya untuk logout!")
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.mipmap.ic_panti)
                 .setCancelable(false)
                 .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {

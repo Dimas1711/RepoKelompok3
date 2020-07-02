@@ -75,7 +75,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            app:passwordToggleEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
@@ -86,13 +87,14 @@
                 android:fontFamily="@font/segoe_ui"
                 android:hint="Password"
                 android:inputType="textPassword"
-                app:passwordToggleEnabled="true"/>
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            app:passwordToggleEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_konfrimasi"
                 android:layout_width="match_parent"
@@ -103,7 +105,7 @@
                 android:fontFamily="@font/segoe_ui"
                 android:hint="Konfirmasi Password"
                 android:inputType="textPassword"
-                app:passwordToggleEnabled="true"/>
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

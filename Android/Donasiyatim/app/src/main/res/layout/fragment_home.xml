@@ -20,7 +20,7 @@
                 android:id="@+id/constraintLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@drawable/grad"
+                android:background="@drawable/bottom_sheet_background_home"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -115,19 +115,32 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.synnapps.carouselview.CarouselView
-                android:id="@+id/Banner"
+<!--            <com.synnapps.carouselview.CarouselView-->
+<!--                android:id="@+id/Banner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:layout_marginTop="188dp"-->
+<!--                app:fillColor="#fff"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.495"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/constraintLayout2"-->
+<!--                app:slideInterval="5000"-->
+<!--                app:strokeColor="#030303" />-->
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="188dp"
-                app:fillColor="#fff"
+                android:layout_height="150dp"
+                android:clipToPadding="false"
+                android:foregroundGravity="center"
+                android:overScrollMode="never"
+                android:layout_marginTop="170dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout2"
-                app:radius="8dp"
-                app:slideInterval="5000"
-                app:strokeColor="#030303" />
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
+
+            </androidx.viewpager.widget.ViewPager>
 
             <TextView
                 android:id="@+id/textView4"
@@ -141,7 +154,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Banner" />
+                app:layout_constraintTop_toBottomOf="@+id/viewpager" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
