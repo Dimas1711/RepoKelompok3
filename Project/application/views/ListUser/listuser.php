@@ -10,6 +10,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Nama</th>
                         <th>Email</th>
                         <th>No Telp</th>
                         <th>Aksi</th> 
@@ -62,7 +63,7 @@
                             <!-- <a href="<?php echo site_url("listuser/delete/".$row->id_user);?>" class="btn btn-sm btn-danger btn-circle"
                                      data-toggle="modal" data-target="#hapusModal">
                                     <i class="fa fa-trash"></i></a> -->
-                            <a href="<?php echo site_url("ListUser/delete/". $row->id_user);?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus ini?')">Hapus</a>
+                            <!-- <a href="<?php echo site_url("ListUser/delete/". $row->id_user);?>" class="btn btn-danger" onclick="return confirm('Anda yakin akan menghapus ini?')">Hapus</a> -->
                               </td>
         
                           </tr>
