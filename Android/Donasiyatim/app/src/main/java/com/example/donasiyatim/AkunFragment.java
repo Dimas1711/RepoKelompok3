@@ -60,7 +60,7 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class AkunFragment extends Fragment {
     ImageView img_profil;
-    TextView btn_ganti_foto, btnEditProfil, nama_user, btnEditData, btnLogout, nama_email;
+    TextView btn_ganti_foto, btnEditProfil, nama_user, btnEditData, btnLogout, nama_email, tentangkami;
     String id_regis,pass, email, gambar, nama, alamat,no_telp, no_rek, nama_rek, nama_bank, tanggal_lahir, jenis_kelamin, tempat_lahir, nik, pekerjaan, finansial;
 
 
@@ -76,9 +76,18 @@ public class AkunFragment extends Fragment {
         btnEditProfil = v.findViewById(R.id.editProfil);
         btnEditData = v.findViewById(R.id.editData);
         btnLogout = v.findViewById(R.id.btn_logout);
+        tentangkami = v.findViewById(R.id.tentangkami);
         id_regis = authdata.getInstance(getActivity()).getKodeUser();
 
         Log.e("asdfgh", "onCreateView: "+ id_regis);
+
+        tentangkami.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), Tentang.class);
+                startActivity(intent);
+            }
+        });
 
         btnEditProfil.setOnClickListener(new View.OnClickListener() {
             @Override
