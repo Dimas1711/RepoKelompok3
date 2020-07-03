@@ -21,11 +21,6 @@ class Dede extends CI_Model
             return $this->db->delete("user");
         }
 
-        // public function hapusdata($id){
-        //     $this->db->where('id_panti' , $id);
-        //     return $this->db->delete('panti');
-        // }
-
         function get_data_stok()
         {
             $query = $this->db->query("select count(is_active) from kasus WHERE is_active = 2 UNION ALL select count(is_active) from kasus WHERE is_active = 1 UNION ALL select count(is_active) from kasus WHERE is_active = 0

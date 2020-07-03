@@ -38,7 +38,7 @@
   </div>
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="<?= base_url("listuser")?>">
+    <a class="nav-link" href="<?= base_url("ListUser")?>">
       <i class="fas fa-fw fa-table"></i>
       <span>List User</span></a>
   </li>

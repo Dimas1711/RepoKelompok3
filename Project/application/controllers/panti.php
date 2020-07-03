@@ -42,7 +42,7 @@
         $id_registrasi = $this->session->userdata('id_registrasi');
         $data['totkasus'] = $this->db->query("SELECT COUNT(kasus.id_kasus) AS jmlkasus FROM kasus JOIN panti ON kasus.id_panti= panti.id_panti 
         join registrasi ON panti.id_registrasi= registrasi.id_registrasi WHERE panti.id_panti = kasus.id_panti 
-        AND panti.id_registrasi = '$id_registrasi' AND kasus.status = 1")->result_array();
+        AND panti.id_registrasi = '$id_registrasi'")->result_array();
         $this->load->view("template/sidebar2",$data);
         $this->load->view("template/header",$data);
         $this->load->view("template/dashboard_panti", $data);
