@@ -329,7 +329,7 @@ public class EditprofilActivity extends AppCompatActivity {
 
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
 
@@ -408,7 +408,7 @@ public class EditprofilActivity extends AppCompatActivity {
             protected Map<String, DataPart> getByteData() throws AuthFailureError {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
-                params.put("profil", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+                params.put("profil", new DataPart(imagename + ".JPEG", getFileDataFromDrawable(bitmap)));
                 Log.e("asd",""+imagename);
                 return params;
             }

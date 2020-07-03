@@ -127,7 +127,8 @@ public class UploadFotoActivity extends AppCompatActivity {
 
     private void loadbank()//ini buat nampilin saldo
     {
-        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_Finansial/index_get?id_akun="+1,
+        StringRequest senddata = new StringRequest(Request.Method.GET, ServerApi.IPServer + "Account_Finansial/index_get?id_akun="
+                +getIntent().getStringExtra("id_akun"),
                 new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response) {
@@ -294,7 +295,7 @@ public class UploadFotoActivity extends AppCompatActivity {
             protected Map<String, DataPart> getByteData() throws AuthFailureError {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
-                    params.put("foto", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+                    params.put("foto", new DataPart(imagename + ".JPEG", getFileDataFromDrawable(bitmap)));
                 Log.e("asd",""+imagename);
                 return params;
             }
@@ -342,7 +343,7 @@ public class UploadFotoActivity extends AppCompatActivity {
 
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
 }
