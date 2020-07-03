@@ -163,6 +163,7 @@
         app:layout_constraintTop_toBottomOf="@+id/privacy" />
 
     <TextView
+        android:id="@+id/tentangkami"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tentang Kami"
