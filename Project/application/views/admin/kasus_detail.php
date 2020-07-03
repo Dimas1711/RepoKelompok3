@@ -22,6 +22,7 @@
           <?php foreach ($kasus as $row) {
           ?>
           <input type="hidden" name="id_kasus" value="<?= $row['id_kasus']?>">
+          <input type="hidden" id="email" name="email" value="<?= $row['email']?>">
             <div class="card-body">
               <div class="row">
                 <div class="my-auto col-sm-2">
