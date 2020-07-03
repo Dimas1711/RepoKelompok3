@@ -130,12 +130,13 @@
                 android:id="@+id/va_e"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
                 android:text="No Rekening e"
                 android:textColor="#f70202"
+                android:layout_marginTop="8dp"
+                app:layout_goneMarginStart="3dp"
                 app:layout_constraintStart_toEndOf="@+id/textView21"
-                app:layout_constraintTop_toBottomOf="@+id/bank" />
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <ImageView
                 android:id="@+id/img_foto"

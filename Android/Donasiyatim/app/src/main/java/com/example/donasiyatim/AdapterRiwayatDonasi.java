@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.donasiyatim.configfile.ServerApi;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRiwayatDonasi extends RecyclerView.Adapter<AdapterRiwayatDonasi.HolderData> {
     private List<ModelRiwayatDonasi> mItems;
     private Context context;
+
 
     public AdapterRiwayatDonasi(Context context, List<ModelRiwayatDonasi> modelDataList)
     {

@@ -108,8 +108,9 @@ public class RiwayatFragment extends Fragment {
 
 
                         modelDataList.add(playerModel);
+                        setupListView();
                     }
-                    setupListView();
+
 
                 }
                 catch (JSONException e)
