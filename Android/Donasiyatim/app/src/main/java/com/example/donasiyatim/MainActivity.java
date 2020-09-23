@@ -7,33 +7,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.donasiyatim.configfile.AppController;
-import com.example.donasiyatim.configfile.ServerApi;
-import com.example.donasiyatim.configfile.Util;
+import com.example.donasiyatim.botNav.AkunFragment;
+import com.example.donasiyatim.botNav.DonasiFragment;
+import com.example.donasiyatim.botNav.HomeFragment;
+import com.example.donasiyatim.botNav.NotificationFragment;
+import com.example.donasiyatim.botNav.RiwayatFragment;
 import com.example.donasiyatim.configfile.authdata;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -80,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case R.id.nav_riwayat :
                             selectedFragment = new RiwayatFragment();
+                            break;
+                        case R.id.notif :
+                            selectedFragment = new NotificationFragment();
                             break;
                         case R.id.nav_akun :
                             selectedFragment = new AkunFragment();

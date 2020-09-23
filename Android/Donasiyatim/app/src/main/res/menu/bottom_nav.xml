@@ -10,6 +10,10 @@
         android:title="Donasi"
         android:icon="@drawable/give"/>
     <item
+        android:id="@+id/notif"
+        android:title="Notification"
+       />
+    <item
         android:id="@+id/nav_riwayat"
         android:title="Riwayat"
         android:icon="@drawable/invoice"/>

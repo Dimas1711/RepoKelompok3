@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "974390242142",
+    "firebase_url": "https://donasipanti-2e9be.firebaseio.com",
+    "project_id": "donasipanti-2e9be",
+    "storage_bucket": "donasipanti-2e9be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974390242142:android:5f8cc792d8de26c5af3dcf",
+        "android_client_info": {
+          "package_name": "com.example.donasiyatim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974390242142-k7g0llm3qjthsgg40o62asdh4caf1haf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.donasiyatim",
+            "certificate_hash": "c0d846cfc932548d526d21f243f0da2dc4abfd1e"
+          }
+        },
+        {
+          "client_id": "974390242142-uvg1ej7em71t6mho20m0dads95tnvoeq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBysgwbGqQ7tLc0JBocmrWx27KATx0HIyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974390242142-uvg1ej7em71t6mho20m0dads95tnvoeq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_background"
     android:padding="10dp"
-    tools:context=".ProsesDonasiActivity">
+    tools:context=".konten.ProsesDonasiActivity">
 
     <LinearLayout
         android:id="@+id/BottomSheetDial"

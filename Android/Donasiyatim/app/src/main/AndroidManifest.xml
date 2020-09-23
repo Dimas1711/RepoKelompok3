@@ -15,31 +15,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Tentang"></activity>
-        <activity android:name=".SplashScreen">
+        <activity android:name=".konten.Tentang"></activity>
+        <activity android:name=".konten.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ResetPassActivity" />
-        <activity android:name=".GantiPassActivity" />
-        <activity android:name=".EditDataActivity" />
-        <activity android:name=".EditprofilActivity" />
-        <activity android:name=".UploadFotoActivity" />
-        <activity android:name=".ProsesDonasiActivity" />
-        <activity android:name=".TopupActivity" />
-        <activity android:name=".DompetActivity" />
-        <activity android:name=".BeritaActivity" />
-        <activity android:name=".DetailBeritaActivity" />
-        <activity android:name=".DetailDonasiActivity" />
-        <activity android:name=".DonasiActivity" />
-        <activity android:name=".LupaPass" />
+        <activity android:name=".auth.ResetPassActivity" />
+        <activity android:name=".auth.GantiPassActivity" />
+        <activity android:name=".konten.EditDataActivity" />
+        <activity android:name=".konten.EditprofilActivity" />
+        <activity android:name=".konten.UploadFotoActivity" />
+        <activity android:name=".konten.ProsesDonasiActivity" />
+        <activity android:name=".konten.TopupActivity" />
+        <activity android:name=".konten.DompetActivity" />
+        <activity android:name=".konten.BeritaActivity" />
+        <activity android:name=".detail.DetailBeritaActivity" />
+        <activity android:name=".detail.DetailDonasiActivity" />
+        <activity android:name=".konten.DonasiActivity" />
+        <activity android:name=".auth.LupaPass" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegistrasiActivity" />
-        <activity android:name=".DonasiFragment" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".auth.RegistrasiActivity" />
+        <activity android:name=".botNav.DonasiFragment" />
+        <activity android:name=".auth.LoginActivity" />
     </application>
 
 </manifest>
