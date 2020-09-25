@@ -25,6 +25,7 @@ import com.example.donasiyatim.adapter.ListAdapter;
 import com.example.donasiyatim.configfile.ServerApi;
 import com.example.donasiyatim.configfile.Util;
 import com.example.donasiyatim.configfile.authdata;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +39,7 @@ public class DonasiFragment extends Fragment {
     ImageView img;
     List<ModelData> modelDataList;
     ListAdapter listAdapter;
-
+    ShimmerFrameLayout shimmerFrameLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_donasi, container, false);
@@ -49,6 +50,8 @@ public class DonasiFragment extends Fragment {
         Log.e("val","testes" + val);
         //nama_user.setText(jenenge);
         retrieveJSON();
+        shimmerFrameLayout = v.findViewById(R.id.shimmerLayout);
+        shimmerFrameLayout.startShimmer();
         return v;
 
     }
@@ -74,9 +77,11 @@ public class DonasiFragment extends Fragment {
                         playerModel.setID_Kasus(dataobj.getString("id_kasus"));
 
                         modelDataList.add(playerModel);
+
                     }
                     setupListView();
-
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
                 }
                 catch (JSONException e)
                 {
