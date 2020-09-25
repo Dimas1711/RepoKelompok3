@@ -27,6 +27,9 @@ class User_Model extends CI_Model
         return $cek;
         
     }
+    public function detail($id){
+            return $this->db->get_where('registrasi' , ['id_registrasi' => $id])->row_array();
+    }
     public function buat_kode(){
         $this->db->select('RIGHT(registrasi.id_registrasi,3) as kode',FALSE);
         $this->db->order_by('id_registrasi', 'DESC');

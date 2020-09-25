@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment  {
         //carouselView.setPageCount(sampleImage.length);
         showAllKasus = v.findViewById(R.id.btn_showAll_kasus);
         showAllBerita = v.findViewById(R.id.btn_showAll_berita);
-        Log.e("firebase" ,"ff"+ FirebaseInstanceId.getInstance().getToken());
+        Log.e("firebase" ,""+ FirebaseInstanceId.getInstance().getToken());
         loaddetail();
         loadgambar();
         retrieveJSON();

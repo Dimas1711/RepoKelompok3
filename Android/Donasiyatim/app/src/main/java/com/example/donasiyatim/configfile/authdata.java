@@ -14,6 +14,7 @@ public class authdata {
     private static final String nama_user = "nama_user";
     private static final String akses_data = "akses_data";
     private static final String token = "token";
+    private static final String last_token = "last_token";
 
 
 
@@ -66,6 +67,11 @@ public class authdata {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         return sharedPreferences.getString(token, null);
+    }
+    public String getLast_token() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString(last_token, null);
     }
     public String getAksesData() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.donasiyatim">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -40,6 +41,21 @@
         <activity android:name=".auth.RegistrasiActivity" />
         <activity android:name=".botNav.DonasiFragment" />
         <activity android:name=".auth.LoginActivity" />
+        <service
+            android:name=".configfile.MyFirebaseInstanceIdService"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".configfile.MyFirebaseMessagingService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

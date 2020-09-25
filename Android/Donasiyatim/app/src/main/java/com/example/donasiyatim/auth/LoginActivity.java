@@ -27,6 +27,7 @@ import com.example.donasiyatim.MainActivity;
 import com.example.donasiyatim.R;
 import com.example.donasiyatim.configfile.ServerApi;
 import com.example.donasiyatim.configfile.authdata;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -171,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("email", email.getText().toString());
                 params.put("password", password.getText().toString());
-
+                params.put("token", FirebaseInstanceId.getInstance().getToken());
                 return params;
             }
         };

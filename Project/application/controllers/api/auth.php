@@ -17,6 +17,7 @@ class Auth extends REST_Controller{
     }
 
     public function index_post(){
+        $this->form_validation->set_rules('token', 'Token', 'required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[100]');
 
@@ -32,7 +33,7 @@ class Auth extends REST_Controller{
             $output = $this->UserModel->user_login($this->input->post('email'),$this->input->post('password'));
 
             if (!empty($output) AND $output != FALSE) {
-
+                
                 //load token
                 $this->load->library('Authorization_Token');
                 //generate
@@ -43,8 +44,19 @@ class Auth extends REST_Controller{
                 $token_data['nama'] = $output->nama;
                 $token_data['create_at'] = $output->create_at;
                 $token_data['status'] = $output->status;
-
+                $token_data['last_token'] = $output->last_token;    
                 $tokenku = $this->authorization_token->generateToken($token_data);
+
+                $id_user =  $output->id_registrasi;
+                $getDetail = $this->UserModel->detail($id_user);
+                $www = $getDetail['last_token'];
+
+                $last_tokennya = $this->input->post('token');
+
+                $this->db->set('last_token' , $last_tokennya);
+                $this->db->where('id_registrasi' , $id_user);
+                $this->db->update('registrasi');
+
                 $return_data = [
                     'id_registrasi' => $output->id_registrasi,
                     'email' => $output->email,
@@ -54,7 +66,9 @@ class Auth extends REST_Controller{
                     'create_at' => $output->create_at,
                     'status' => $output->status,
                     'token' => $tokenku,
+                    'last_token' =>$last_tokennya,
                     'pesan' => 'Selamat Datang di Aplikasi Donasi',
+                   
                 ];
 
                 $message = [

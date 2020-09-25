@@ -253,7 +253,42 @@ class Admin extends CI_Controller
         $this->load->view("admin/kasus_detail",$data);
         $this->load->view("template/footer");
     }
-
+    public function sendNotification($id , $pesan , $title){
+        $registrationIds = array($id);
+        $msg = array
+        (
+            'message'   => $pesan,
+            'title'     => $title,
+            'subtitle'  => 'This is a subtitle. subtitle',
+            'tickerText'    => 'Ticker text here...Ticker text here...Ticker text here',
+            'vibrate'   => 1,
+            'sound'     => 1,
+            'largeIcon' => 'large_icon',
+            'smallIcon' => 'small_icon'
+        );
+        $fields = array
+        (
+            'registration_ids'  => $registrationIds,
+            'data'          => $msg
+        );
+          
+        $headers = array
+        (
+            'Authorization: key= AAAA4t4vK14:APA91bFEftRAURBsiCFryQYsslg_vI4xH_IV1OS67_jgIX4mT0UKWDt6ZDjysMyIdDy22aIYZpgOnU07YJiBDkaupjO6bsb9FhJZk8pUUjsQZ6EF459M4lLqkXkDBi8I_y-S7GCVPc9y',
+            'Content-Type: application/json'
+        );
+          
+        $ch = curl_init();
+        curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+        curl_setopt( $ch,CURLOPT_POST, true );
+        curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+        curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+        curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+        $result = curl_exec($ch );
+        curl_close( $ch );
+        echo $result;
+    }
     public function verif_topup_detail($id)
     {
         $data['registrasi'] = $this->db->get_where('registrasi',
@@ -263,11 +298,17 @@ class Admin extends CI_Controller
 
         if(isset($_POST['setuju']))
         {
-            $this->Verif_Model->ubah_status_setuju_topup($id);
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-                Persetujuan top up donatur diterima !
-            </div>');
-            redirect('admin/verif_topup');
+            // $this->Verif_Model->ubah_status_setuju_topup($id);
+            // $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+            //     Persetujuan top up donatur diterima !
+            // </div>');
+            // 
+            // echo $id;
+            $query = $this->db->query("SELECT * FROM dompet , user , registrasi WHERE dompet.id_user = user.id_user AND registrasi.id_registrasi = user.id_registrasi AND dompet.id_dompet = '$id'")->row_array();
+            // return $query;
+            echo $query['last_token'];
+            $this->sendNotification($query['last_token'] , 'Verifikasi Sukses' , 'Verifikasi Sukses');
+            // redirect('admin/verif_topup');
         }
         else if(isset($_POST['tolak']))
         {
@@ -275,6 +316,10 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                         Persetujuan top up donatur ditolak !
                         </div>');
+                        $query = $this->db->query("SELECT * FROM dompet , user , registrasi WHERE dompet.id_user = user.id_user AND registrasi.id_registrasi = user.id_registrasi AND dompet.id_dompet = '$id'")->row_array();
+                        // return $query;
+                        echo $query['last_token'];
+                        $this->sendNotification($query['last_token'] , 'Verifikasi Gagal' , 'NICE');
             redirect('admin/verif_topup');
         }
 
